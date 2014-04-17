@@ -1,4 +1,4 @@
 cite
 ====
 
-A new way to cite your work before it's published
+This repository is not ready to be used.
