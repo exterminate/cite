@@ -1,25 +1,18 @@
 <?php
-session_start();
+//session_start();
 
-$GLOBALS['config'] = array(
-	'mysql'    => array(
-		'host'     => '127.0.0.1',
-		'username' => 'root',
-		'password' => 'root',
-		'db'       => 'database'
-	),
-	'remember' => array(
-		'cookie_name'   => 'hash',
-		'cookie_expiry' =>	604800
-	),
-	'session'  => array(
-		'session_name' => 'user',
-		'token_name' => 'token'
-	)
-);
+try {
+	$handler = new PDO('mysql:host=127.0.0.1;dbname=cite', 'root', 'root');
+	$handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+	echo $e->getMessage();
+	die("sorry, database problem");
+}
 
+/*
 spl_autoload_register(function($class) {
 	require_once 'classes/' . $class . '.php';
 });
-
-require_once 'includes/functions.php';
+*/
+//require_once 'includes/functions.php';
+?>
