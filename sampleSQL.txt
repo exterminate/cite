@@ -1,0 +1,77 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.9
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost:8889
+-- Generation Time: May 05, 2014 at 07:46 PM
+-- Server version: 5.5.34
+-- PHP Version: 5.5.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `cite`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guestbook`
+--
+
+CREATE TABLE `guestbook` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `message` text NOT NULL,
+  `posted` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `guestbook`
+--
+
+INSERT INTO `guestbook` (`id`, `name`, `message`, `posted`) VALUES
+(1, 'Ian COates', 'love it', '0000-00-00 00:00:00'),
+(2, 'Dave Smith', 'great', '0000-00-00 00:00:00'),
+(3, 'Josh', 'mint', '2014-04-22 19:07:33'),
+(4, 'Josdfsdfh', 'mint', '2014-04-22 19:13:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `links`
+--
+
+CREATE TABLE `links` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `deeplink` varchar(8) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `orcid` varchar(20) NOT NULL,
+  `description` text NOT NULL,
+  `datesubmitted` datetime NOT NULL,
+  `doi` varchar(150) NOT NULL,
+  `datedoi` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `deeplink` (`deeplink`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `links`
+--
+
+INSERT INTO `links` (`id`, `deeplink`, `name`, `email`, `orcid`, `description`, `datesubmitted`, `doi`, `datedoi`) VALUES
+(1, 'fJcKJpPk', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+(2, 'MDqJP24i', '', '', '', '', '2014-04-26 09:12:08', '', '0000-00-00 00:00:00'),
+(3, 'POGCbYJs', '', '', '', '', '2014-04-26 09:21:48', '', '0000-00-00 00:00:00'),
+(4, '1kyQxGmv', '', '', '', '', '2014-04-26 09:25:35', '', '0000-00-00 00:00:00'),
+(5, 'Tnw7M3CL', '', '', '', '', '2014-05-05 15:09:05', '', '0000-00-00 00:00:00'),
+(6, 'gtK9sKRD', '', '', '', '', '2014-05-05 15:09:08', '', '0000-00-00 00:00:00'),
+(7, 'qKpm8fwh', 'ooooo', 'ian.coates@gmail.com', 'ddfsfsdfnojfnogdf', 'sdsdf', '2014-05-05 15:17:11', '', '0000-00-00 00:00:00'),
+(8, '1UFowO5D', 'ooooo', 'ian.coates@gmail.com', 'ddfsfsdfnojfnogdf', 'sdsdf', '2014-05-05 15:18:52', '', '0000-00-00 00:00:00'),
+(9, 'YBmtBfNi', 'nr  nghngn', 'ian.coates@gmail.com', 'nfngnghnghngnghng', 'hgnghn', '2014-05-05 15:27:25', '', '0000-00-00 00:00:00'),
+(10, 'bgGSVOFS', 'nf hfghnfghn', 'ian.coates@gmail.com', 'ddfsfsdfnojfnogdf', 'mint', '2014-05-05 15:31:02', '', '0000-00-00 00:00:00'),
+(11, 'ngGJDz9y', '888', 'ian.coates@gmail.com', 'ddfsfsdfnojfnogdf', 'mint', '2014-05-05 15:31:34', '', '0000-00-00 00:00:00'),
+(12, '6EtlHlhE', 'gdfgdf', 'ian.coates@gmail.com', 'ddfsfsdfnojfnogdf', 'mint', '2014-05-05 15:35:57', '10.1039/C3DT53133C', '0000-00-00 00:00:00');
