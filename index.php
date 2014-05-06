@@ -4,9 +4,9 @@ require 'classes/Validate.php';
 require 'classes/Stub.php';
 require 'includes/functions.php';
 
-require 'head.php';
-require 'header.php';
-
+include 'head.php';
+include 'header.php';
+echo "HI";
 // if there is a deeplink { show stub }
 if(isset($_GET['stub']) && !empty($_GET['stub'])) { 
 
@@ -21,8 +21,10 @@ if(isset($_GET['stub']) && !empty($_GET['stub'])) {
 	$stub = new Stub($handler);
 	if($stub->count($_GET['stub']) == 0) { 	// no such stub
 		die("This stub does not exist.");
-	} else // show stub or redirect
+	} else { // show stub or redirect
+		$stub->addViews($_GET['stub']);
 		$stub->redirect($_GET['stub']);
+	}
 	
 	
 	
@@ -34,6 +36,6 @@ else {
 
 
 
-require 'footer.php';
-
+include 'footer.php';
+echo "BYE";
 ?>

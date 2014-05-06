@@ -29,7 +29,6 @@ class Stub {
 	}
 
 	public function redirect($code) {
-		//$code = mysql_real_escape_string($code);
 		$query = $this->handler->query("SELECT * FROM links WHERE deeplink = '$code'");
 		while ($r = $query->fetch(PDO::FETCH_OBJ)) {
 			if(strlen($r->doi) != 0) {
@@ -37,15 +36,19 @@ class Stub {
 			} else {
 				// return a message to say that "this stub does not have 
 				// a DOI associated with it. Update it with your deeplink"
-				return "\$message";
+				return "\$this";
 			}
 
 		}
-		/*
-		if(code_exists($code)){
-			$url_query = mysql_query("SELECT url FROM urls WHERE code= '$code'");;
-			$url = mysql_result($url_query, 0, 'url');
-			header('Location: '.$url);
-		}*/
 	}
+	public function addViews($code) {
+
+		$query = $this->handler->query("SELECT views FROM links WHERE deeplink = '$code'");
+		$r = $query->fetch(PDO::FETCH_OBJ);
+		$newViews = $r->views + 1;		
+		$sql = "UPDATE links SET views = ? WHERE deeplink = ?";
+		$query = $this->handler->prepare($sql);
+		$query->execute(array($newViews,$code));
+	}
+
 }
