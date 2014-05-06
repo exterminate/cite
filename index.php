@@ -4,6 +4,9 @@ require 'classes/Validate.php';
 require 'classes/Stub.php';
 require 'includes/functions.php';
 
+require 'head.php';
+require 'header.php';
+
 // if there is a deeplink { show stub }
 if(isset($_GET['stub']) && !empty($_GET['stub'])) { 
 
@@ -31,6 +34,6 @@ else {
 
 
 
-
+require 'footer.php';
 
 ?>
