@@ -2,7 +2,9 @@
 
 class Stub {
 	public $id, $deeplink, $name, $email, $orcid, 
-		$datesubmitted, $doi, $datedoi, $description;
+		$datesubmitted, $doi, $datedoi, $description, $r;
+
+
 	public function __construct($handler) {
 		$this->handler = $handler;		
 	}
@@ -36,19 +38,22 @@ class Stub {
 			} else {
 				// return a message to say that "this stub does not have 
 				// a DOI associated with it. Update it with your deeplink"
-				return "\$this";
+				return $this->r = $r;
 			}
 
 		}
 	}
 	public function addViews($code) {
-
 		$query = $this->handler->query("SELECT views FROM links WHERE deeplink = '$code'");
 		$r = $query->fetch(PDO::FETCH_OBJ);
 		$newViews = $r->views + 1;		
 		$sql = "UPDATE links SET views = ? WHERE deeplink = ?";
 		$query = $this->handler->prepare($sql);
 		$query->execute(array($newViews,$code));
+	}
+
+	public function showBits($input) {
+		return $this->r->$input;
 	}
 
 }
