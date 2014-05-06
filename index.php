@@ -21,7 +21,7 @@ if(isset($_GET['stub']) && !empty($_GET['stub'])) {
 	$stub = new Stub($handler);
 	if($stub->count($_GET['stub']) == 0) { 	// no such stub
 		die("This stub does not exist.");
-	} else  								// show stub or redirect
+	} else // show stub or redirect
 		$stub->redirect($_GET['stub']);
 	
 	
