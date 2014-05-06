@@ -4,8 +4,8 @@ require 'classes/Validate.php';
 require 'classes/Stub.php';
 require 'includes/functions.php';
 
-include 'head.php';
-include 'header.php';
+include 'layout/head.php';
+include 'layout/header.php';
 
 // if there is a deeplink { show stub }
 if(isset($_GET['stub']) && !empty($_GET['stub'])) { 
@@ -46,11 +46,11 @@ if(isset($_GET['stub']) && !empty($_GET['stub'])) {
 }
 // else if there is no deeplink { show homepage }
 else {
-	echo "<br>no stub home<br>";
+	include 'layout/homepage.php';
 }
 
 
 
-include 'footer.php';
-echo "<hr>HOME";
+include 'layout/footer.php';
+
 ?>
