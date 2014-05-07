@@ -15,14 +15,14 @@ class User {
 			$r = $query->fetch(PDO::FETCH_OBJ);
 			if($r->password == $this->password) { 
 				//password ok
-				if($r->password.$r->clue == $this->password.md5($this->username) { 
+				
+				if($r->password.$r->clue == $this->password.md5($this->user)) { 
 					//great let's start the session
 					$sql = "UPDATE users SET lastlogin = NOW() WHERE username = ?";
 					$query = $this->handler->prepare($sql);
-					$query->execute(array($this->username));
+					$query->execute(array($this->user));
 					session_start();
-					$_SESSION['username'] = $this->username;
-					return $_SESSION['username'];
+					$_SESSION['username'] = $this->user;
 				}
 			} else {
 				//password fail
@@ -35,4 +35,5 @@ class User {
 		}
 	}
 
+	
 }

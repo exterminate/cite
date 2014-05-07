@@ -14,18 +14,23 @@ if(Input::exists()) {
 		echo $e->getMessage();
 		die("sorry, database problem");
 	}
-
-	$user = new User(Input::get('username'),Input::get('password'));
+	
+	$user = new User($handler, Input::get('username'), Input::get('password'));
 	$user->login();
-}
+	
+} 
 // login to admin so we can delete spam,
 // fix broken links etc.
+
+if(isset($_SESSION['username'])) {
+	echo $_SESSION['username'] . " is logged in";
+}
 
 ?>
 
 
 <p>Quick form to text validation and User class</p>
-
+<p><a href="logout.php">Logout</a></p>
 <form action="" method="post">
 	<div class="field">
 		<label for="username">Name</label>
@@ -33,9 +38,9 @@ if(Input::exists()) {
 	</div>
 
 	<div class="field">
-		<label for="password">E-mail</label>
+		<label for="password">Password</label>
 		<input type="password" name="password" id="password">
 	</div>
-	
+
 	<input type="submit" name="submit" value="Submit">
 </form>
