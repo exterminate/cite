@@ -22,6 +22,7 @@ class User {
 					$query->execute(array($this->username));
 					session_start();
 					$_SESSION['username'] = $this->username;
+					return $_SESSION['username'];
 				}
 			} else {
 				//password fail
