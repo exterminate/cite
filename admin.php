@@ -3,7 +3,7 @@ session_start();
 require 'classes/User.php';
 //require 'classes/Stub.php';
 require 'classes/Input.php';
-require 'classes/Validate.php';
+//require 'classes/Validate.php';
 require 'includes/functions.php';
 
 if(Input::exists()) {
@@ -24,7 +24,17 @@ if(Input::exists()) {
 
 if(isset($_SESSION['username'])) {
 	echo $_SESSION['username'] . " is logged in";
+
+	$stub = new Stub($handler);
+	$stub->showStubs();
+	/*while($r = $stub->showStubs()) {
+		echo $r->description;
+		echo "<br>";
+	}*/
+	die();
 }
+
+
 
 ?>
 

@@ -56,4 +56,12 @@ class Stub {
 		return $this->r->$input;
 	}
 
+	public function showStubs() {
+		echo "STUBS";
+		$query = $this->handler->query("SELECT views FROM links");
+		while ($r = $query->fetch(PDO::FETCH_OBJ)) {
+			echo $r->description;
+		}
+	}
+
 }
