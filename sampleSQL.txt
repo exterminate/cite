@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: May 06, 2014 at 08:13 PM
+-- Generation Time: May 08, 2014 at 06:00 PM
 -- Server version: 5.5.34
 -- PHP Version: 5.5.10
 
@@ -76,3 +76,26 @@ INSERT INTO `links` (`id`, `deeplink`, `name`, `email`, `orcid`, `description`, 
 (10, 'bgGSVOFS', 'nf hfghnfghn', 'ian.coates@gmail.com', 'ddfsfsdfnojfnogdf', 'mint', '2014-05-05 15:31:02', '', '0000-00-00 00:00:00', 0),
 (11, 'ngGJDz9y', '888', 'ian.coates@gmail.com', 'ddfsfsdfnojfnogdf', 'mint', '2014-05-05 15:31:34', '', '0000-00-00 00:00:00', 41),
 (12, '6EtlHlhE', 'gdfgdf', 'ian.coates@gmail.com', 'ddfsfsdfnojfnogdf', 'mint', '2014-05-05 15:35:57', '10.1039/C3DT53133C', '0000-00-00 00:00:00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(10) NOT NULL,
+  `lastlogin` datetime NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `clue` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `lastlogin`, `password`, `clue`) VALUES
+(1, 'iancoates', '2014-05-07 19:13:43', 'e8f025b16d7577470b65e526755fc8b8', 'e7ece74edfcf59a9c24645c5643f7a98');
