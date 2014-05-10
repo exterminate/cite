@@ -8,3 +8,11 @@ header {
 	background: #730329;
 	color: white;
 }
+
+.mainContent{
+	padding: 5px;
+}
+
+label {
+	text-align:right;
+}

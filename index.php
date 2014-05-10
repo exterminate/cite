@@ -11,7 +11,7 @@ include 'layout/header.php';
 if(isset($_GET['stub']) && !empty($_GET['stub'])) { 
 
 	try {
-		$handler = new PDO('mysql:host=127.0.0.1;dbname=cite', 'root', 'root');
+		$handler = new PDO('mysql:host=localhost;dbname=cite', 'root', '');
 		$handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	} catch(PDOException $e) {
 		echo $e->getMessage();
@@ -47,6 +47,7 @@ if(isset($_GET['stub']) && !empty($_GET['stub'])) {
 // else if there is no deeplink { show homepage }
 else {
 	include 'layout/homepage.php';
+	echo '<a href="submit.php">Submit</a>';
 }
 
 
