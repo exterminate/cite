@@ -1,19 +1,9 @@
 <?php
 session_start();
-require 'classes/User.php';
-require 'classes/Stub.php';
-require 'classes/Input.php';
-//require 'classes/Validate.php';
-require 'includes/functions.php';
+require 'core/init.php';
+
 
 if(Input::exists()) {
-	try {
-		$handler = new PDO('mysql:host=127.0.0.1;dbname=cite', 'root', '');
-		$handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	} catch(PDOException $e) {
-		echo $e->getMessage();
-		die("sorry, database problem");
-	}
 	
 	$user = new User($handler, Input::get('username'), Input::get('password'));
 	$user->login();

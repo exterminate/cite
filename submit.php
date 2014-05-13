@@ -1,22 +1,10 @@
 <?php
-require 'classes/Input.php';
-require 'classes/Validate.php';
-require 'classes/Stub.php';
-require 'includes/functions.php';
+require 'core/init.php';
 
-include 'layout/head.php';
-include 'layout/header.php';
+$URL = "/git/cite/";
+
 
 if(Input::exists()) {
-
-	try {
-		$handler = new PDO('mysql:host=127.0.0.1;dbname=cite', 'root', '');
-		$handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	} catch(PDOException $e) {
-		echo $e->getMessage();
-		die("sorry, database problem");
-	}
-
 
 	$validate = new Validate();
 	$validate->check($_POST, array( 
@@ -62,10 +50,18 @@ if(Input::exists()) {
 
 			// Send deeplink for email
 			// combine deeplink and orcid into md5 
-
+			$from = "citeitnow@gmail.com"; // sender
+		    $subject = "Stub submitted successfully";
+		    $message = "Thank you for submitting your stub.\nTo add a DOI at a later date please save this email and click the link when ready.\n
+		    <a href='http://localhost/git/cite/update.php'>http://localhost/git/cite/update.php/deeplink</a>";
+		    
+		    // send mail
+		    if(!mail(trim(escape(Input::get('email'))),$subject,$message,"From: $from\n")) {
+		    	echo "Mail fail!";
+		    }
 
 			// Redirect to stub page
-			header("Location: ".$deeplinkValidate);
+			header("Location: ". $URL.$deeplinkValidate);
 			exit();
 
 			
@@ -81,10 +77,12 @@ if(Input::exists()) {
 }
 
 //id, linkid, name, email, orcid (required), datesubmitted, doi, datedoi
+
+
+include 'layout/head.php';
+include 'layout/header.php';
 ?>
-<html>
-	<head>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		
 		<script>
 
 			$(document).ready(function(){
@@ -170,8 +168,7 @@ if(Input::exists()) {
 		return pattern.test(emailAddress);
 	};
 		</script>
-	</head>
-	<body>
+
 		<div class='mainContent'>
 			<form action="" method="post">
 				<table>
@@ -205,5 +202,6 @@ if(Input::exists()) {
 				</table>
 			</form>
 		</div>
-	</body>
-</html>
+<?php
+include 'layout/footer.php';
+?>

@@ -1,5 +1,10 @@
 <?php
-//session_start();
+
+require 'classes/User.php';
+require 'classes/Stub.php';
+require 'classes/Input.php';
+require 'includes/functions.php';
+require 'classes/Validate.php';
 
 try {
 	$handler = new PDO('mysql:host=127.0.0.1;dbname=cite', 'root', 'root');
@@ -9,10 +14,5 @@ try {
 	die("sorry, database problem");
 }
 
-/*
-spl_autoload_register(function($class) {
-	require_once 'classes/' . $class . '.php';
-});
-*/
-//require_once 'includes/functions.php';
+
 ?>

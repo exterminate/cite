@@ -1,8 +1,5 @@
 <?php
-require 'classes/Input.php';
-require 'classes/Validate.php';
-require 'classes/Stub.php';
-require 'includes/functions.php';
+require 'core/init.php';
 
 include 'layout/head.php';
 include 'layout/header.php';
@@ -10,13 +7,13 @@ include 'layout/header.php';
 // if there is a deeplink { show stub }
 if(isset($_GET['stub']) && !empty($_GET['stub'])) { 
 
-	try {
+	/*try {
 		$handler = new PDO('mysql:host=localhost;dbname=cite', 'root', '');
 		$handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	} catch(PDOException $e) {
 		echo $e->getMessage();
 		die("sorry, database problem");
-	}
+	}*/
 
 	$stub = new Stub($handler);
 	if($stub->count($_GET['stub']) == 0) { 	// no such stub

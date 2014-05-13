@@ -26,10 +26,8 @@ class Stub {
 
 
 	public function count($deeplink) {
-		echo "count";
 		$query = $this->handler->query("SELECT * FROM links WHERE deeplink = '$deeplink'");
 		return $query->rowCount();
-		echo " me in";
 	}
 
 	public function redirect($code) {
