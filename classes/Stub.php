@@ -66,7 +66,7 @@ class Stub {
 
 	public function countStubsType($table,$column) {
 		$sql = "SELECT " . $column . " FROM " . $table;		
-		$query = $this->handler->query("SELECT views FROM links");
+		$query = $this->handler->query($sql);
 		return $query->rowCount();
 	}
 
