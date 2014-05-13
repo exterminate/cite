@@ -73,7 +73,6 @@ if(Input::exists()) {
 			echo $error . "<br>";
 		}
 	}
-
 }
 
 //id, linkid, name, email, orcid (required), datesubmitted, doi, datedoi
@@ -82,11 +81,22 @@ if(Input::exists()) {
 include 'layout/head.php';
 include 'layout/header.php';
 ?>
-		
 		<script>
-	/*
 			$(document).ready(function(){
 			
+				var orcidRaw =
+					<?php 
+						if(Input::exists()){
+							echo json_encode($validate->getOrcidProfile());
+						} else{
+							echo null;
+						}
+					?>;
+					
+					var orcidJSON = $.parseJSON(orcidRaw);
+				$('#orcidOut').html(JSON.stringify(orcidJSON));
+			});
+			/*
 				$("#submit").attr("disabled", true);
 					
 					var valid = [false, false, false, false];
@@ -204,6 +214,7 @@ include 'layout/header.php';
 				</table>
 			</form>
 		</div>
+		<div id='orcidOut'></div>
 <?php
 include 'layout/footer.php';
 ?>

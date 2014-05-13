@@ -4,7 +4,8 @@ class Validate {
 
 	private $_passed = false,
 			$_errors = array(),
-			$_db = null;
+			$_db = null,
+			$_orcidProfile = null;
 
 	public function check($source, $items = array()) {
 		foreach($items as $item => $rules) {
@@ -26,10 +27,8 @@ class Validate {
 				curl_setopt($ch, CURLOPT_HTTPHEADER, array("Accept: application/orcid+json"));
 				
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				$orcidProfile = curl_exec($ch);				
+				$this->setOrcidProfile(curl_exec($ch));
 				curl_close($ch);
-				
-				echo $orcidProfile."<br/><br/>";
 			}
 		
 			foreach($rules as $rule => $rule_value) {
@@ -70,6 +69,10 @@ class Validate {
 	private function addError($error) {
 		$this->_errors[] = $error;
 	}
+	
+	private function setOrcidProfile($str){
+		$this->_orcidProfile = $str;
+	}
 
 	public function errors() {
 		return $this->_errors;
@@ -78,6 +81,12 @@ class Validate {
 	public function passed() {
 		return $this->_passed;
 	}
+	
+	public function getOrcidProfile(){
+		return $this->_orcidProfile;
+	}
+	
+	
 
 	public function checkDB($handler, $deeplink) { //delete?
 		//GETTING ROW COUNT
