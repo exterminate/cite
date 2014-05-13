@@ -58,7 +58,6 @@ class Stub {
 	}
 
 	public function showStubs() {
-		echo "STUBS";
 		$query = $this->handler->query("SELECT views FROM links");
 		while ($r = $query->fetch(PDO::FETCH_OBJ)) {
 			echo $r->description;
@@ -66,8 +65,7 @@ class Stub {
 	}
 
 	public function countStubsType($table,$column) {
-		$sql = "SELECT " . $column . " FROM " . $table;
-		
+		$sql = "SELECT " . $column . " FROM " . $table;		
 		$query = $this->handler->query("SELECT views FROM links");
 		return $query->rowCount();
 	}

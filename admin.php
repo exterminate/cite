@@ -12,29 +12,22 @@ if(Input::exists()) {
 // login to admin so we can delete spam,
 // fix broken links etc.
 
+include 'layout/head.php';
+include 'layout/header.php';
+
 if(isset($_SESSION['username'])) {
 	echo $_SESSION['username'] . " is logged in";
 
 	$stub = new Stub($handler);
-	//echo "<p>" . $stub->countStubsType("links", "deeplink") . "Stubs have been created</p>";
-	
-	$stub->count('ngGJDz9y');
-	
-	//$stub->showStubs();
-	/*while($r = $stub->showStubs()) {
-		echo $r->description;
-		echo "<br>";
-	}*/
-	//die();
-}
+	echo "<p>" . $stub->countStubsType("links", "deeplink") . " stubs have been created</p>";
 
-
-
+	echo "<p><a href='logout.php'>Logout</a></p>";
+} else {
 ?>
 
 
 <p>Quick form to text validation and User class</p>
-<p><a href="logout.php">Logout</a></p>
+
 <form action="" method="post">
 	<div class="field">
 		<label for="username">Name</label>
@@ -48,3 +41,10 @@ if(isset($_SESSION['username'])) {
 
 	<input type="submit" name="submit" value="Submit">
 </form>
+
+<?php
+
+}
+
+include 'layout/footer.php';
+?>
