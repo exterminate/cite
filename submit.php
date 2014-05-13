@@ -21,7 +21,7 @@ if(Input::exists()) {
 		'orcid' => array(
 			'required' 	=> true,
 			'min' => 16,
-			'max' => 20			
+			'max' => 20	
 			),
 		'description' => array(
 			'required' 	=> true,
@@ -84,7 +84,7 @@ include 'layout/header.php';
 ?>
 		
 		<script>
-
+	/*
 			$(document).ready(function(){
 			
 				$("#submit").attr("disabled", true);
@@ -117,6 +117,7 @@ include 'layout/header.php';
 							}
 						} else if($(e.target).attr("id") == "orcid"){
 							//check if orcid id is valid
+							
 							if($(e.target).val().length == 16){
 								valid[2] = true;
 								currentValid = true;
@@ -167,6 +168,7 @@ include 'layout/header.php';
 		var pattern = new RegExp(/^(("[\w-+\s]+")|([\w-+]+(?:\.[\w-+]+)*)|("[\w-+\s]+")([\w-+]+(?:\.[\w-+]+)*))(@((?:[\w-+]+\.)*\w[\w-+]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][\d]\.|1[\d]{2}\.|[\d]{1,2}\.))((25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\.){2}(25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\]?$)/i);
 		return pattern.test(emailAddress);
 	};
+	*/
 		</script>
 
 		<div class='mainContent'>

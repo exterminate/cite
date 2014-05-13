@@ -8,6 +8,30 @@ class Validate {
 
 	public function check($source, $items = array()) {
 		foreach($items as $item => $rules) {
+		
+			if($item == "orcid"){
+				$orcidId = trim($source[$item]);
+
+				$orcidURL = "http://pub.orcid.org/";
+				
+				$ch = curl_init($orcidURL.$orcidId);
+				
+				//use this option for xml
+				//curl_setopt($ch, CURLOPT_HTTPHEADER, array("Accept: application/orcid+xml"));
+				
+				//use this option for html
+				//curl_setopt($ch, CURLOPT_HTTPHEADER, array("Accept: application/orcid+html"));
+				
+				//use this option for json
+				curl_setopt($ch, CURLOPT_HTTPHEADER, array("Accept: application/orcid+json"));
+				
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				$orcidProfile = curl_exec($ch);				
+				curl_close($ch);
+				
+				echo $orcidProfile."<br/><br/>";
+			}
+		
 			foreach($rules as $rule => $rule_value) {
 				$value = trim($source[$item]);
 				$item = escape($item);
