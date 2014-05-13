@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'classes/User.php';
-//require 'classes/Stub.php';
+require 'classes/Stub.php';
 require 'classes/Input.php';
 //require 'classes/Validate.php';
 require 'includes/functions.php';
@@ -26,12 +26,16 @@ if(isset($_SESSION['username'])) {
 	echo $_SESSION['username'] . " is logged in";
 
 	$stub = new Stub($handler);
-	$stub->showStubs();
+	//echo "<p>" . $stub->countStubsType("links", "deeplink") . "Stubs have been created</p>";
+	
+	$stub->count('ngGJDz9y');
+	
+	//$stub->showStubs();
 	/*while($r = $stub->showStubs()) {
 		echo $r->description;
 		echo "<br>";
 	}*/
-	die();
+	//die();
 }
 
 

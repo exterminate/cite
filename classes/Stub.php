@@ -1,8 +1,8 @@
 <?php
 
 class Stub {
-	public $id, $deeplink, $name, $email, $orcid, 
-		$datesubmitted, $doi, $datedoi, $description, $r;
+	//public $id, $deeplink, $name, $email, $orcid, 
+	//	$datesubmitted, $doi, $datedoi, $description, $r;
 
 
 	public function __construct($handler) {
@@ -26,8 +26,10 @@ class Stub {
 
 
 	public function count($deeplink) {
+		echo "count";
 		$query = $this->handler->query("SELECT * FROM links WHERE deeplink = '$deeplink'");
 		return $query->rowCount();
+		echo " me in";
 	}
 
 	public function redirect($code) {
@@ -43,6 +45,7 @@ class Stub {
 
 		}
 	}
+
 	public function addViews($code) {
 		$query = $this->handler->query("SELECT views FROM links WHERE deeplink = '$code'");
 		$r = $query->fetch(PDO::FETCH_OBJ);
@@ -51,7 +54,7 @@ class Stub {
 		$query = $this->handler->prepare($sql);
 		$query->execute(array($newViews,$code));
 	}
-
+	
 	public function showBits($input) {
 		return $this->r->$input;
 	}
@@ -62,6 +65,13 @@ class Stub {
 		while ($r = $query->fetch(PDO::FETCH_OBJ)) {
 			echo $r->description;
 		}
+	}
+
+	public function countStubsType($table,$column) {
+		$sql = "SELECT " . $column . " FROM " . $table;
+		
+		$query = $this->handler->query("SELECT views FROM links");
+		return $query->rowCount();
 	}
 
 }
