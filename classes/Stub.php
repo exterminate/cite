@@ -57,10 +57,26 @@ class Stub {
 		return $this->r->$input;
 	}
 
-	public function showStubs() {
+	public function showStubs() { // is this being used?
 		$query = $this->handler->query("SELECT views FROM links");
 		while ($r = $query->fetch(PDO::FETCH_OBJ)) {
 			echo $r->description;
+		}
+	}
+
+	public function showAllStubs() {
+		$query = $this->handler->query("SELECT * FROM links");
+		while($r = $query->fetch(PDO::FETCH_OBJ)) {
+			echo "<tr title='".$r->description."'>";
+				echo "<td>".$r->deeplink."</td>";
+				echo "<td>".$r->name."</td>";
+				echo "<td>".$r->email."</td>";
+				echo "<td>".$r->orcid."</td>";
+				$now = new DateTime(date("Y-m-d H:i:s"));
+				$stubPosted = new DateTime($r->datesubmitted);
+				$interval = $now->diff($stubPosted);
+				echo "<td title='".$r->datesubmitted."'>".$interval->format('%y year, %m month and %d days ago')."</td>";
+			echo "</tr>";
 		}
 	}
 

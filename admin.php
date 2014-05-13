@@ -21,6 +21,17 @@ if(isset($_SESSION['username'])) {
 	$stub = new Stub($handler);
 	echo "<p>" . $stub->countStubsType("links", "deeplink") . " stubs have been created</p>";
 
+	echo "<table width='100%'>";
+	echo "<tr>";
+		echo "<th>deeplink</th>";
+		echo "<th>name</th>";
+		echo "<th>email</th>";
+		echo "<th>orcid</th>";
+		echo "<th>datesubmitted</th>";
+	echo "</tr>";	
+	$stub->showAllStubs();
+	echo "</table>";
+
 	echo "<p><a href='logout.php'>Logout</a></p>";
 } else {
 ?>
