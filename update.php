@@ -56,12 +56,10 @@ if(Input::exists()) {
 		    We look forward to your next submission.\n";
 		    
 		    // send mail
-		    $email = Input::get('email');
+		    $stub->redirect(trim(escape(Input::get('deeplink')))); // shouldn't redirect!!!
+		    $email = $stub->showBits('email');
 		    if(!mail($email,$subject,$message,"From: $from\n")) {
-		    	echo "Mail fail!";
-		    	echo $from."<br>";
-		    	echo $subject."<br>";
-		    	echo $message."<br>";
+		    	echo "Mail fail!<br>";
 		    }
 
 			// Redirect to stub page
