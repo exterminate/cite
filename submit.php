@@ -31,7 +31,7 @@ if(Input::exists()) {
 		)
 	);
 
-	//if successful then die()
+	
 	if($validate->passed()) {
 		
 		// add to database
@@ -55,7 +55,8 @@ if(Input::exists()) {
 			$from = "citeitnow@gmail.com"; // sender
 		    $subject = "Stub submitted successfully";
 		    $message = "Thank you for submitting your stub.\nTo add a DOI at a later date please save this email and click the link when ready.\n
-		    <a href='http://localhost/git/cite/update.php'>http://localhost/git/cite/update/deeplink</a>";
+		    <a href='http://localhost/git/cite/update.php'>http://localhost/git/cite/update/" . $deeplink . "</a>\n
+		    When you are prompted, add your DOI and this unique code to update: " . $uniquecode . "\n";
 		    
 		    // send mail
 		    if(!mail(trim(escape(Input::get('email'))),$subject,$message,"From: $from\n")) {

@@ -53,6 +53,11 @@ class Validate {
 							if(filter_var($value, FILTER_VALIDATE_EMAIL) == false) {
 								$this->addError("{$value} is not a valid email address.");
 							}
+						case 'doi':
+							// Validate DOI
+							/*if(filter_var($value, FILTER_VALIDATE_EMAIL) == false) {
+								$this->addError("{$value} is not a valid email address.");
+							}*/	
 						break;
 
 					}
