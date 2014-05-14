@@ -41,21 +41,19 @@ if(Input::exists()) {
 			$stub = new Stub($handler);
 			// update databse
 			
-			$stub->addStub(
-				$deeplinkValidate,
-				trim(escape(Input::get('name'))),
-				trim(escape(Input::get('email'))),
-				trim(escape(Input::get('orcid'))),
-				trim(escape(Input::get('description'))),
-				$uniquecode);
+			$stub->updateStub(
+				trim(escape(Input::get('doi'))),
+				trim(escape(Input::get('deeplink'))),
+				trim(escape(Input::get('unique_code')))
+				);
 
 			// Send "You have updated you stub it will now redirect to your article"
 			
 			$from = "citeitnow@gmail.com"; // sender
-		    $subject = "Stub submitted successfully";
-		    $message = "Thank you for submitting your stub.\nTo add a DOI at a later date please save this email and click the link when ready.\n
-		    <a href='http://localhost/git/cite/update.php'>http://localhost/git/cite/update/" . $deeplink . "</a>\n
-		    When you are prompted, add your DOI and this unique code to update: " . $uniquecode . "\n";
+		    $subject = "Stub submitted updated";
+		    $message = "Thank you for updating your stub.\n
+		    Clicking on <a href='http://localhost".$URL.trim(escape(Input::get('deeplink')))"'>http://localhost".$URL.trim(escape(Input::get('deeplink'))). "</a> will send you to your article\n
+		    We look forward to your next submission.\n";
 		    
 		    // send mail
 		    if(!mail(trim(escape(Input::get('email'))),$subject,$message,"From: $from\n")) {

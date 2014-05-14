@@ -25,6 +25,12 @@ class Stub {
 
 	}
 
+	public function updateStub($doi,$deeplink,$uniquecode) {
+		$sql = "UPDATE links SET doi = ?, datedoi = NOW() WHERE deeplink = ? AND uniquecode = ?";
+		$query = $this->handler->prepare($sql);
+		$query->execute(array($doi,$deeplink,$uniquecode));
+	}
+
 
 	public function count($deeplink) {
 		$query = $this->handler->query("SELECT * FROM links WHERE deeplink = '$deeplink'");
