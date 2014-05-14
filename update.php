@@ -39,9 +39,8 @@ if(Input::exists()) {
 		try {
 			
 			$stub = new Stub($handler);
-			//add to database
-			$deeplinkValidate = $validate->checkDB($handler,create_deeplink(8));
-			$uniquecode = $validate->checkDB($handler,create_deeplink(12));
+			// update databse
+			
 			$stub->addStub(
 				$deeplinkValidate,
 				trim(escape(Input::get('name'))),
@@ -50,8 +49,8 @@ if(Input::exists()) {
 				trim(escape(Input::get('description'))),
 				$uniquecode);
 
-			// Send deeplink for email
-			// combine deeplink and orcid into md5 
+			// Send "You have updated you stub it will now redirect to your article"
+			
 			$from = "citeitnow@gmail.com"; // sender
 		    $subject = "Stub submitted successfully";
 		    $message = "Thank you for submitting your stub.\nTo add a DOI at a later date please save this email and click the link when ready.\n

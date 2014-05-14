@@ -51,7 +51,7 @@ if(Input::exists()) {
 				$uniquecode);
 
 			// Send deeplink for email
-			// combine deeplink and orcid into md5 
+			
 			$from = "citeitnow@gmail.com"; // sender
 		    $subject = "Stub submitted successfully";
 		    $message = "Thank you for submitting your stub.\nTo add a DOI at a later date please save this email and click the link when ready.\n
