@@ -52,7 +52,7 @@ if(Input::exists()) {
 			$from = "citeitnow@gmail.com"; // sender
 		    $subject = "Stub submitted updated";
 		    $message = "Thank you for updating your stub.\n
-		    Clicking on <a href='http://localhost".$URL.trim(escape(Input::get('deeplink')))"'>http://localhost".$URL.trim(escape(Input::get('deeplink'))). "</a> will send you to your article\n
+		    Clicking on <a href='http://localhost".$URL.trim(escape(Input::get('deeplink')))."'>http://localhost".$URL.trim(escape(Input::get('deeplink'))). "</a> will send you to your article\n
 		    We look forward to your next submission.\n";
 		    
 		    // send mail
