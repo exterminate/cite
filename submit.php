@@ -54,10 +54,7 @@ if(Input::exists()) {
 			
 			$from = "citeitnow@gmail.com"; // sender
 		    $subject = "Stub submitted successfully";
-		    $message = "Thank you for submitting your stub.\nTo add a DOI at a later date please save this email and click the link when ready.\n
-		    <a href='http://localhost/git/cite/update.php'>http://localhost/git/cite/update/" . $deeplink . "</a>\n
-		    When you are prompted, add your DOI and this unique code to update: " . $uniquecode . "\n
-		    You can check your DOI is valid by going to http://dx.doi.org/[your DOI]";
+		    $message = "Thank you for submitting your stub.\nTo add a DOI at a later date please save this email and click the link when ready.\nhttp://localhost/git/cite/update/" . $deeplinkValidate . "\nWhen you are prompted, add your DOI and this unique code to update: " . $uniquecode . "\nYou can check your DOI is valid by going to http://dx.doi.org/[your DOI]";
 		    
 		    // send mail
 		    if(!mail(trim(escape(Input::get('email'))),$subject,$message,"From: $from\n")) {
