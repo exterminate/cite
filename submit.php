@@ -41,19 +41,21 @@ if(Input::exists()) {
 			$stub = new Stub($handler);
 			//add to database
 			$deeplinkValidate = $validate->checkDB($handler,create_deeplink(8));
+			$uniquecode = $validate->checkDB($handler,create_deeplink(12));
 			$stub->addStub(
 				$deeplinkValidate,
 				trim(escape(Input::get('name'))),
 				trim(escape(Input::get('email'))),
 				trim(escape(Input::get('orcid'))),
-				trim(escape(Input::get('description'))));
+				trim(escape(Input::get('description'))),
+				$uniquecode);
 
 			// Send deeplink for email
 			// combine deeplink and orcid into md5 
 			$from = "citeitnow@gmail.com"; // sender
 		    $subject = "Stub submitted successfully";
 		    $message = "Thank you for submitting your stub.\nTo add a DOI at a later date please save this email and click the link when ready.\n
-		    <a href='http://localhost/git/cite/update.php'>http://localhost/git/cite/update.php/deeplink</a>";
+		    <a href='http://localhost/git/cite/update.php'>http://localhost/git/cite/update/deeplink</a>";
 		    
 		    // send mail
 		    if(!mail(trim(escape(Input::get('email'))),$subject,$message,"From: $from\n")) {

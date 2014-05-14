@@ -1,2 +1,3 @@
 RewriteEngine On
 RewriteRule ^([a-zA-Z0-9]+)$ index.php?stub=$1
+RewriteRule ^update/([a-zA-Z0-9]+)$ update.php?stub=$1

@@ -9,9 +9,9 @@ class Stub {
 		$this->handler = $handler;		
 	}
 
-	public function addStub($deeplink,$name,$email,$orcid,$description) {
-		$sql = "INSERT INTO links (deeplink, name, email, orcid, description, datesubmitted) 
-			VALUES (:deeplink, :name, :email, :orcid, :description, NOW())";
+	public function addStub($deeplink,$name,$email,$orcid,$description,$uniquecode) {
+		$sql = "INSERT INTO links (deeplink, name, email, orcid, description, datesubmitted, uniquecode) 
+			VALUES (:deeplink, :name, :email, :orcid, :description, NOW(), :uniquecode)";
 			
 		$query = $this->handler->prepare($sql);
 		$query->execute(array(
@@ -19,7 +19,8 @@ class Stub {
 			':name' 		=> $name,
 			':email' 		=> $email,
 			':orcid'		=> $orcid,
-			':description' 	=> $description
+			':description' 	=> $description,
+			':uniquecode'	=> $uniquecode
 		));
 
 	}
