@@ -56,8 +56,12 @@ if(Input::exists()) {
 		    We look forward to your next submission.\n";
 		    
 		    // send mail
-		    if(!mail(trim(escape(Input::get('email'))),$subject,$message,"From: $from\n")) {
+		    $email = Input::get('email');
+		    if(!mail($email,$subject,$message,"From: $from\n")) {
 		    	echo "Mail fail!";
+		    	echo $from."<br>";
+		    	echo $subject."<br>";
+		    	echo $message."<br>";
 		    }
 
 			// Redirect to stub page
