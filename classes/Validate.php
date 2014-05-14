@@ -11,25 +11,9 @@ class Validate {
 		foreach($items as $item => $rules) {
 		
 			if($item == "orcid"){
-				$orcidId = trim($source[$item]);
-
-				$orcidURL = "http://pub.orcid.org/";
-				
-				$ch = curl_init($orcidURL.$orcidId);
-				
-				//use this option for xml
-				//curl_setopt($ch, CURLOPT_HTTPHEADER, array("Accept: application/orcid+xml"));
-				
-				//use this option for html
-				//curl_setopt($ch, CURLOPT_HTTPHEADER, array("Accept: application/orcid+html"));
-				
-				//use this option for json
-				curl_setopt($ch, CURLOPT_HTTPHEADER, array("Accept: application/orcid+json"));
-				
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				$this->setOrcidProfile(curl_exec($ch));
-				curl_close($ch);
+				//validate orcid here
 			}
+			
 		
 			foreach($rules as $rule => $rule_value) {
 				$value = trim($source[$item]);
@@ -74,10 +58,6 @@ class Validate {
 	private function addError($error) {
 		$this->_errors[] = $error;
 	}
-	
-	private function setOrcidProfile($str){
-		$this->_orcidProfile = $str;
-	}
 
 	public function errors() {
 		return $this->_errors;
@@ -86,12 +66,6 @@ class Validate {
 	public function passed() {
 		return $this->_passed;
 	}
-	
-	public function getOrcidProfile(){
-		return $this->_orcidProfile;
-	}
-	
-	
 
 	public function checkDB($handler, $deeplink) { //delete?
 		//GETTING ROW COUNT

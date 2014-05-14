@@ -83,19 +83,26 @@ include 'layout/head.php';
 include 'layout/header.php';
 ?>
 		<script>
-			$(document).ready(function(){
-			
-				var orcidRaw =
-					<?php 
-						if(Input::exists()){
-							echo json_encode($validate->getOrcidProfile());
-						} else{
-							echo null;
-						}
-					?>;
+			$(document).ready(function(){			
+				$('#orcidValidate').click(function(){
+					var orcidId = $('#orcid').val();
 					
-					var orcidJSON = $.parseJSON(orcidRaw);
-				$('#orcidOut').html(JSON.stringify(orcidJSON));
+					$.post("classes/OrcidId.php", {id : orcidId}, function(data){
+						alert("success");
+						var json = $.parseJSON(data)
+						$('#orcidOut').append(JSON.stringify(json));
+						var firstName = json['orcid-profile']['orcid-bio']['personal-details']['given-names']['value'];
+						var surname = json['orcid-profile']['orcid-bio']['personal-details']['family-name']['value'];
+						$('#name').val(firstName + " " + surname);
+						
+						
+						var email = json['orcid-profile']['orcid-bio']['contact-details']['email']['0']['value'];
+						$('#email').val(email);
+
+					}).fail(function(){
+						alert("Orcid data not received from server");
+					});
+				});
 			});
 			/*
 				$("#submit").attr("disabled", true);
@@ -215,6 +222,7 @@ include 'layout/header.php';
 				</table>
 			</form>
 		</div>
+		<button id='orcidValidate'>Fill from Orcid Profile</button>
 		<div id='orcidOut'></div>
 <?php
 include 'layout/footer.php';
