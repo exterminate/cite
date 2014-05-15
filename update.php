@@ -39,32 +39,36 @@ if(Input::exists()) {
 		try {
 			
 			$stub = new Stub($handler);
+			$stub->obtainData(trim(escape(Input::get('deeplink'))));
 			// update databse
-			
-			$stub->updateStub(
-				trim(escape(Input::get('doi'))),
-				trim(escape(Input::get('deeplink'))),
-				trim(escape(Input::get('unique_code')))
-				);
+			if(!strlen($stub->showBits('doi')) > 0) { // does this stub already have a DOI?
 
-			// Send "You have updated you stub it will now redirect to your article"
-			
-			$from = "citeitnow@gmail.com"; // sender
-		    $subject = "Stub submitted updated";
-		    $message = "Thank you for updating your stub.\n
-		    Clicking on <a href='http://localhost".$URL.trim(escape(Input::get('deeplink')))."'>http://localhost".$URL.trim(escape(Input::get('deeplink'))). "</a> will send you to your article\n
-		    We look forward to your next submission.\n";
-		    
-		    // send mail
-		    $stub->redirect(trim(escape(Input::get('deeplink')))); // shouldn't redirect!!!
-		    $email = $stub->showBits('email');
-		    if(!mail($email,$subject,$message,"From: $from\n")) {
-		    	echo "Mail fail!<br>";
-		    }
+				
+				$stub->updateStub(
+					trim(escape(Input::get('doi'))),
+					trim(escape(Input::get('deeplink'))),
+					trim(escape(Input::get('unique_code')))
+					);
 
-			// Redirect to stub page
-			header("Location: ". $URL.$deeplinkValidate);
-			exit();
+				// Send "You have updated you stub it will now redirect to your article"
+				
+				$from = "citeitnow@gmail.com"; // sender
+			    $subject = "Stub submitted updated";
+			    $message = "Thank you for updating your stub.\nClicking on http://localhost".$URL.trim(escape(Input::get('deeplink'))). " will send you to your article\nWe look forward to your next submission.\n";
+			    
+			    // send mail
+			    $stub->obtainData(trim(escape(Input::get('deeplink'))));
+			    $email = $stub->showBits('email');
+			    if(!mail($email,$subject,$message,"From: $from\n")) {
+			    	echo "Mail fail!<br>".$mail;
+			    }
+
+				// Redirect to stub page
+				header("Location: ". $URL.trim(escape(Input::get('deeplink'))));
+				exit();
+			} else {
+				die("Dude, there's aready a DOI for this stub!");
+			}
 
 			
 		} catch(Exception $e) {

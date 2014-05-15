@@ -1,8 +1,7 @@
 <?php
 require 'core/init.php';
 
-include 'layout/head.php';
-include 'layout/header.php';
+
 
 // if there is a deeplink { show stub }
 if(isset($_GET['stub']) && !empty($_GET['stub'])) { 
@@ -13,6 +12,9 @@ if(isset($_GET['stub']) && !empty($_GET['stub'])) {
 	} else { // show stub or redirect
 		$stub->addViews($_GET['stub']);
 		$stub->redirect($_GET['stub']);
+
+	include 'layout/head.php';
+	include 'layout/header.php';
 ?>
 	<div>
 		<ul>
@@ -35,6 +37,8 @@ if(isset($_GET['stub']) && !empty($_GET['stub'])) {
 }
 // else if there is no deeplink { show homepage }
 else {
+	include 'layout/head.php';
+	include 'layout/header.php';
 	include 'layout/homepage.php';
 	echo '<a href="submit.php">Submit</a>';
 }

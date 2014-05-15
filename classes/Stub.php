@@ -51,6 +51,13 @@ class Stub {
 		}
 	}
 
+	public function obtainData($code) {
+		$query = $this->handler->query("SELECT * FROM links WHERE deeplink = '$code'");
+		while ($r = $query->fetch(PDO::FETCH_OBJ)) {
+			return $this->r = $r;
+		}
+	}
+
 	public function addViews($code) {
 		$query = $this->handler->query("SELECT views FROM links WHERE deeplink = '$code'");
 		$r = $query->fetch(PDO::FETCH_OBJ);
