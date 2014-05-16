@@ -82,20 +82,31 @@ if(Input::exists()) {
 include 'layout/head.php';
 include 'layout/header.php';
 ?>
+	<script src="lib/jquery.maskedinput.js" type="text/javascript"></script>
 		<script>
 
 			$(document).ready(function(){			
-				$('#orcidValidate').click(function(){
-					var orcidId = $('#orcid').val();
-					
-					$.post("classes/OrcidId.php", {id : orcidId}, function(data){
+				$('#orcid').mask("9999-9999-9999-9999", {placeholder : ".", completed: function(){
+					searchOrcid(this.val());
+				}});
+				$('#orcidValidateButton').click(function(){
+					searchOrcid($('#orcid').val());
+				});
+
+			});
+			
+			function searchOrcid(id){
+				$.post("classes/OrcidId.php", {id : id}, function(data){
+					if(data['error'] != undefined){
+						alert(data['error']);
+					} else{
 						$('#name').val(data.name);
 						$('#email').val(data.email);
-					}).fail(function(x,s,e){
+					}
+				}).fail(function(x,s,e){
 						alert("Error retrieving data from server: " + s + e);
-					});
 				});
-			});
+			}
 			/*
 				$("#submit").attr("disabled", true);
 					
@@ -214,8 +225,8 @@ include 'layout/header.php';
 				</table>
 			</form>
 		</div>
-		<button id='orcidValidate'>Fill from Orcid Profile</button>
-		<div id='orcidOut'></div>
+		<button id='orcidValidateButton'>Fill from Orcid Profile</button>
+		<div id=out></div>
 <?php
 include 'layout/footer.php';
 ?>
