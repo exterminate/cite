@@ -43,6 +43,12 @@ class Validate {
 								$this->addError("{$value} is not a valid email address.");
 							}*/	
 						break;
+						case 'orcid':
+							// Validate DOI
+							/*if(filter_var($value, FILTER_VALIDATE_EMAIL) == false) {
+								$this->addError("{$value} is not a valid email address.");
+							}*/	
+						break;
 
 					}
 				}

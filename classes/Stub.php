@@ -51,9 +51,9 @@ class Stub {
 		}
 	}
 
-	public function obtainData($code) {
-		$query = $this->handler->query("SELECT * FROM links WHERE deeplink = '$code'");
-		while ($r = $query->fetch(PDO::FETCH_OBJ)) {
+	public function obtainData($field, $code) { // changed to require another field to make it more versatile :Ian
+		$query = $this->handler->query("SELECT * FROM links WHERE $field = '$code'");
+		while ($r = $query->fetchAll()) {
 			return $this->r = $r;
 		}
 	}
