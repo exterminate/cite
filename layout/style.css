@@ -1,7 +1,11 @@
-* { padding: 0; margin: 0; }
+* { padding: 0; margin: 0; font-weight: normal; }
 
 html {
 	font-family: 'Open Sans', sans-serif;
+}
+
+body {	
+	text-align: left;
 }
 
 header {
@@ -13,23 +17,64 @@ header {
 	padding: 5px;
 }
 
+.wrapper, .headerwrap {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.wrapper {
+	padding-top: 20px;
+	background: #eee
+}
+
 label {
 	text-align:right;
 }
 
 h1 {
 	font-weight: 300;
+	color: white;
 }
 
-table {
+header h1 {
+	padding: 20px 0;
+}
+
+table, td, tr, label {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+.table {
 	border-collapse: collapse;
   	width: 100%;
 }
-th, td {
+.table th, .table td {
   	padding: 0.25em;
   	text-align: left;
   	border: 1px solid #ccc;
 }
-tbody tr:nth-child(odd) {
+.table tbody tr:nth-child(odd) {
   	background: #efefef;
+}
+
+
+
+input[type="text"], input[type="password"], input[type="email"] {
+	padding: 5px;
+	border: 1px solid #ddd;
+	font-size: 100%;
+}
+
+input[type="submit"] {
+	background: #b52936;
+	color: white;
+	padding: 10px 20px;
+	border: 0;
+	font-size: 100%;
+}
+
+input[type="submit"]:hover {
+	background: #730329;
 }

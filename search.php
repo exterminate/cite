@@ -35,7 +35,7 @@ if(Input::exists()) {
 		    $results = $stub->obtainData('orcid', trim(escape(Input::get('orcid')))); //fetches array(?) :Ian
 
 ?>
-<table>
+<table class="table">
 	<tr>
 		<th>Description</th>
 		<th>Date submitted</th>
