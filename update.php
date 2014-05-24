@@ -39,8 +39,9 @@ if(Input::exists()) {
 		try {
 			
 			$stub = new Stub($handler);
-			$stub->obtainData(trim(escape(Input::get('deeplink'))));
+			print_r($stub->obtainData('deeplink', trim(escape(Input::get('deeplink')))));
 			// update databse
+
 			if(!strlen($stub->showBits('doi')) > 0) { // does this stub already have a DOI?
 
 				
@@ -57,8 +58,7 @@ if(Input::exists()) {
 			    $message = "Thank you for updating your stub.\nClicking on http://localhost".$URL.trim(escape(Input::get('deeplink'))). " will send you to your article\nWe look forward to your next submission.\n";
 			    
 			    // send mail
-			    $stub->obtainData('deeplink', trim(escape(Input::get('deeplink')))); // check this works since I changed the way obtaineData works <= should work if I'm only fetching one result :Ian
-			    $email = $stub->showBits('email'); // This isn't going to work :Ian
+			    $email = $stub->showBits('email'); // This isn't going to work :Ian		
 			    if(!mail($email,$subject,$message,"From: $from\n")) {
 			    	echo "Mail fail!<br>".$mail;
 			    }

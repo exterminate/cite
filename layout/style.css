@@ -78,3 +78,7 @@ input[type="submit"] {
 input[type="submit"]:hover {
 	background: #730329;
 }
+
+ul {
+	list-style-type: none;
+}

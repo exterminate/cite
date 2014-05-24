@@ -40,7 +40,7 @@ else {
 	include 'layout/head.php';
 	include 'layout/header.php';
 	include 'layout/homepage.php';
-	echo '<a href="submit.php">Submit</a>';
+	echo '<a href="submit/">Submit</a>';
 }
 
 

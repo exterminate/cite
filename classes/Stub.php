@@ -68,7 +68,10 @@ class Stub {
 	}
 	
 	public function showBits($input) {
-		return $this->r->$input;
+		//foreach($this->r as $oneItem) {
+		//	return $oneItem->$input;
+		//}
+		return $this->r[0][$input];
 	}
 
 	public function showStubs() { // is this being used?
