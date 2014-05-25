@@ -39,7 +39,7 @@ if(Input::exists()) {
 		try {
 			
 			$stub = new Stub($handler);
-			print_r($stub->obtainData('deeplink', trim(escape(Input::get('deeplink')))));
+			$stub->obtainData('deeplink', trim(escape(Input::get('deeplink'))));
 			// update databse
 
 			if(!strlen($stub->showBits('doi')) > 0) { // does this stub already have a DOI?

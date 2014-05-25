@@ -12,6 +12,7 @@ if(isset($_GET['stub']) && !empty($_GET['stub'])) {
 	} else { // show stub or redirect
 		$stub->addViews($_GET['stub']);
 		$stub->redirect($_GET['stub']);
+		$stub->obtainData('deeplink', trim(escape(Input::get('stub'))));
 
 	include 'layout/head.php';
 	include 'layout/header.php';
