@@ -24,7 +24,6 @@ header {
 
 .wrapper {
 	padding-top: 20px;
-	background: #eee
 }
 
 label {
@@ -36,8 +35,17 @@ h1 {
 	color: white;
 }
 
+a {
+	text-decoration: none;
+}
+
+.welcome h1 {
+	color: #730329;
+}
+
 header h1 {
 	padding: 20px 0;
+	font-size: 300%;
 }
 
 table, td, tr, label {
@@ -99,8 +107,8 @@ nav {
 }
 
 nav a {
-	text-decoration: none;
 	color: white;
+	font-weight: 300;
 }
 
 nav a:nth-child(n+2)::before { 

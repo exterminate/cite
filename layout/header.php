@@ -1,10 +1,11 @@
 <header>
 	<div class="headerwrap">
-	    <h1 class="header">Cite</h1>
-		
+	    <a href="<?php echo $rootURL; ?>">
+	    	<h1 class="header">Cite</h1>
+		</a>
 		<nav>
-		    <a href="submit/">Submit stub</a>
-		    <a href="search/">Search</a>
+		    <a href="<?php echo $rootURL; ?>submit/">Submit stub</a>
+		    <a href="<?php echo $rootURL; ?>search/">Search</a>
 		</nav>
 	</div>
 </header>

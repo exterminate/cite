@@ -60,7 +60,6 @@ if(Input::exists()) {
 		    if(!mail(trim(escape(Input::get('email'))),$subject,$message,"From: $from\n")) {
 		    	echo "Mail fail!";
 		    }
-
 			// Redirect to stub page
 			header("Location: ". $URL.$deeplinkValidate);
 			exit();

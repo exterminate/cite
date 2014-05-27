@@ -9,10 +9,17 @@ include 'layout/header.php';
 ?>
 
 <form action="" method="post">
-<label for='search'>Enter ORCID</label>
-<input type='text' name='orcid' id='search'>
-<!-- Add human checking tool -->
-<input type='submit' name='submit' id='submit' value='Search'>
+<table>
+	<tr>
+		<td><label for='search'>Enter ORCID</label></td>
+		<td><input type='text' name='orcid' id='search'></td>
+		<!-- Add human checking tool -->
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><input type='submit' name='submit' id='submit' value='Search'></td>
+	</td>
+</table>
 </form>
 
 <?php
