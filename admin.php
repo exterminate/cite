@@ -4,7 +4,13 @@ require 'core/init.php';
 
 
 if(Input::exists()) {
-	
+/*
+	if(Input::get('delete')) {
+		$stub->deleteStub(trim(escape(Input::get('delete'))));
+		header("Location: admin.php");
+		exit;
+	}
+*/	
 	$user = new User($handler, Input::get('username'), Input::get('password'));
 	$user->login();
 	
@@ -28,11 +34,14 @@ if(isset($_SESSION['username'])) {
 		echo "<th>email</th>";
 		echo "<th>orcid</th>";
 		echo "<th>datesubmitted</th>";
+		echo "<th>delete</th>";
 	echo "</tr>";	
 	$stub->showAllStubs();
 	echo "</table>";
 
 	
+
+
 } else {
 ?>
 

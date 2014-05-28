@@ -31,6 +31,11 @@ class Stub {
 		$query->execute(array($doi,$deeplink,$uniquecode));
 	}
 
+	public function deleteStub($deeplink) {
+		$sql = "DELETE FROM links WHERE deeplink = ?";
+		$query = $this->handler->prepare($sql);
+		$query->execute(array($deeplink));
+	}
 
 	public function count($deeplink) {
 		$query = $this->handler->query("SELECT * FROM links WHERE deeplink = '$deeplink'");
@@ -68,9 +73,6 @@ class Stub {
 	}
 	
 	public function showBits($input) {
-		//foreach($this->r as $oneItem) {
-		//	return $oneItem->$input;
-		//}
 		return $this->r[0][$input];
 	}
 
@@ -93,6 +95,7 @@ class Stub {
 				$stubPosted = new DateTime($r->datesubmitted);
 				$interval = $now->diff($stubPosted);
 				echo "<td title='".$r->datesubmitted."'>".$interval->format('%y year, %m month and %d days ago')."</td>";
+				echo "<td style='text-align:center'><a href='?delete=" .$r->deeplink."'>X</a></td>"; // replace with image later
 			echo "</tr>";
 		}
 	}
