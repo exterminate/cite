@@ -4,11 +4,17 @@ html {
 	font-family: 'Open Sans', sans-serif;
 }
 
+html, body { height: 100%; }
+
 body {	
 	text-align: left;
 }
 
-header {
+.headerwrap, header {
+	height: 140px;
+}
+
+header, th {
 	background: #730329;
 	color: white;
 }
@@ -17,13 +23,50 @@ header {
 	padding: 5px;
 }
 
+.ultimatewrap {
+	min-height: 100%;
+	margin-bottom: -40px;
+}
+
+footer {
+	background-color: #730329;
+	height: 40px;
+	color: white;
+	text-align: center;
+	font-weight: 300;
+}
+
+.headerwrap {
+	position: relative;
+}
+
+nav {
+	background: #b52936;
+	padding: 5px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
 .wrapper, .headerwrap {
 	max-width: 960px;
 	margin: 0 auto;
 }
 
+
+
 .wrapper {
 	padding-top: 20px;
+}
+
+.wrapper:after {
+	content: "";
+	display: block;
+}
+
+.wrapper:after {
+	height: -140px;
 }
 
 label {
@@ -67,7 +110,9 @@ table, td, tr, label {
   	background: #efefef;
 }
 
-
+tr > td {
+	vertical-align:top
+}
 
 input[type="text"], input[type="password"], input[type="email"], textarea {
 	padding: 5px;
@@ -87,10 +132,6 @@ input[type="submit"]:hover {
 	background: #730329;
 }
 
-tr > td {
-	vertical-align:top
-}
-
 textarea {
 	width: 500px;
 	height: 300px;
@@ -101,10 +142,7 @@ ul {
 	list-style-type: none;
 }
 
-nav {
-	background: #b52936;
-	padding: 5px;
-}
+
 
 nav a {
 	color: white;

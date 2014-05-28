@@ -16,12 +16,12 @@ include 'layout/head.php';
 include 'layout/header.php';
 
 if(isset($_SESSION['username'])) {
-	echo $_SESSION['username'] . " is logged in";
+	echo "<p>" . $_SESSION['username'] . " is logged in - <a href='logout.php'>Logout</a></p>";
 
 	$stub = new Stub($handler);
 	echo "<p>" . $stub->countStubsType("links", "deeplink") . " stubs have been created</p>";
 
-	echo "<table width='100%'>";
+	echo "<table class='table' width='100%'>";
 	echo "<tr>";
 		echo "<th>deeplink</th>";
 		echo "<th>name</th>";
@@ -32,7 +32,7 @@ if(isset($_SESSION['username'])) {
 	$stub->showAllStubs();
 	echo "</table>";
 
-	echo "<p><a href='logout.php'>Logout</a></p>";
+	
 } else {
 ?>
 
