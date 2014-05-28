@@ -56,7 +56,7 @@ if(Input::exists()) {
 		    	if(strlen($result['doi']) > 0) {
 		    		echo "<a href='http://dx.doi.org/" . $result['doi'] . "'>" . $result['doi'] . "</a>";
 		    	} else {
-		    		echo "<a href='update/" . $result['deeplink'] . "'>Update</a>";
+		    		echo "<a href='" . $rootURL . "update/" . $result['deeplink'] . "'>Update</a>";
 		    	}
 		    	echo "</td>\n\t\t<td>" . $result['views'] . "</td>";
 		    	echo "\n\t</tr>\n";

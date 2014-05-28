@@ -16,7 +16,7 @@ include 'layout/head.php';
 include 'layout/header.php';
 
 if(isset($_SESSION['username'])) {
-	echo "<p>" . $_SESSION['username'] . " is logged in - <a href='logout.php'>Logout</a></p>";
+	echo "<p>" . $_SESSION['username'] . " is logged in - <a href='" . $rootURL . "logout.php'>Logout</a></p>";
 
 	$stub = new Stub($handler);
 	echo "<p>" . $stub->countStubsType("links", "deeplink") . " stubs have been created</p>";
@@ -40,17 +40,20 @@ if(isset($_SESSION['username'])) {
 <p>Quick form to text validation and User class</p>
 
 <form action="" method="post">
-	<div class="field">
-		<label for="username">Name</label>
-		<input type="text" name="username" id="username" value="<?php echo Input::get('username'); ?>" autocomplete="off">
-	</div>
-
-	<div class="field">
-		<label for="password">Password</label>
-		<input type="password" name="password" id="password">
-	</div>
-
-	<input type="submit" name="submit" value="Submit">
+	<table>
+		<tr>
+			<td><label for="username">Name</label></td>
+			<td><input type="text" name="username" id="username" value="<?php echo Input::get('username'); ?>" autocomplete="off"></td>
+		</tr>
+		<tr>
+			<td><label for="password">Password</label></td>
+			<td><input type="password" name="password" id="password"></td>
+		<tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input type="submit" name="submit" value="Submit"></td>
+		</tr>
+	</table>		
 </form>
 
 <?php

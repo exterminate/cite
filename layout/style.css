@@ -156,3 +156,7 @@ nav a:nth-child(n+2)::before {
 nav a:hover {
 	color: #730329;
 }
+
+p {
+	padding-bottom: 10px;
+}
