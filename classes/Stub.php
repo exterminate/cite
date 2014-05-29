@@ -96,6 +96,7 @@ class Stub {
 				$interval = $now->diff($stubPosted);
 				echo "<td title='".$r->datesubmitted."'>".$interval->format('%y year, %m month and %d days ago')."</td>";
 				echo "<td style='text-align:center'><a href='?delete=" .$r->deeplink."'>X</a></td>"; // replace with image later
+				echo "<td style='text-align:center'><a href='?edit=" .$r->deeplink."'>E</a></td>"; // replace with image later
 			echo "</tr>";
 		}
 	}
