@@ -9,50 +9,60 @@ if(Input::exists()) {
 	$user->login();
 	
 } 
-// login to admin so we can delete spam,
-// fix broken links etc.
+
 
 
 
 if(isset($_SESSION['username'])) {
 	
-	include 'layout/head.php';
-	include 'layout/header.php';
 	
+	
+	// delete stub
 	if(Input::get('delete')) {
-		$stub->deleteStub(trim(escape(Input::get('delete'))));
+		$deleteStub = new Stub($handler);
+		$deleteStub->deleteStub(trim(escape(Input::get('delete'))));
 		header("Location: admin.php");
 		exit;
 	}
 	
-	/* to finish and test
+	include 'layout/head.php';
+	include 'layout/header.php';	
+	echo "<p><a href='admin.php'>Admin</a></p>";
+	
+	// edit a stub
 	if(Input::get('edit')) {
-		$stub->editStub(trim(escape(Input::get('edit'))));
-		header("Location: admin.php");
-		exit;
-	}	
-	*/
+		$editStub = new Stub($handler);
+		echo "<p>Editing stub " . Input::get('edit') . "</p>";
+		$editStub->obtainData('deeplink', trim(escape(Input::get('edit'))));
+		echo "<p>Created: " . $editStub->showBits('datesubmitted') . "</p>";
+		include 'layout/edit.php';
+
+
+		//$editStub->editStub(trim(escape(Input::get('edit'))));
+		//header("Location: admin.php");
+		//exit;
+	} else {	
 	
-	echo "<p>" . $_SESSION['username'] . " is logged in - <a href='" . $rootURL . "logout.php'>Logout</a></p>";
-
-	$stub = new Stub($handler);
-	echo "<p>" . $stub->countStubsType("links", "deeplink") . " stubs have been created</p>";
-
-	echo "<table class='table' width='100%'>";
-	echo "<tr>";
-		echo "<th>deeplink</th>";
-		echo "<th>name</th>";
-		echo "<th>email</th>";
-		echo "<th>orcid</th>";
-		echo "<th>datesubmitted</th>";
-		echo "<th>delete</th>";
-		echo "<th>edit</th>";
-	echo "</tr>";	
-	$stub->showAllStubs();
-	echo "</table>";
-
 	
+		echo "<p>" . $_SESSION['username'] . " is logged in - <a href='" . $rootURL . "logout.php'>Logout</a></p>";
 
+		$stub = new Stub($handler);
+		echo "<p>" . $stub->countStubsType("links", "deeplink") . " stubs have been created</p>";
+
+		echo "<table class='table' width='100%'>";
+		echo "<tr>";
+			echo "<th>deeplink</th>";
+			echo "<th>name</th>";
+			echo "<th>email</th>";
+			echo "<th>orcid</th>";
+			echo "<th>datesubmitted</th>";
+			echo "<th>delete</th>";
+			echo "<th>edit</th>";
+		echo "</tr>";	
+		$stub->showAllStubs();
+		echo "</table>";
+	
+	}
 
 } else {
 	include 'layout/head.php';
