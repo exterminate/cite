@@ -4,13 +4,7 @@ require 'core/init.php';
 
 
 if(Input::exists()) {
-/*
-	if(Input::get('delete')) {
-		$stub->deleteStub(trim(escape(Input::get('delete'))));
-		header("Location: admin.php");
-		exit;
-	}
-*/	
+
 	$user = new User($handler, Input::get('username'), Input::get('password'));
 	$user->login();
 	
@@ -18,10 +12,27 @@ if(Input::exists()) {
 // login to admin so we can delete spam,
 // fix broken links etc.
 
-include 'layout/head.php';
-include 'layout/header.php';
+
 
 if(isset($_SESSION['username'])) {
+	
+	include 'layout/head.php';
+	include 'layout/header.php';
+	
+	if(Input::get('delete')) {
+		$stub->deleteStub(trim(escape(Input::get('delete'))));
+		header("Location: admin.php");
+		exit;
+	}
+	
+	/* to finish and test
+	if(Input::get('edit')) {
+		$stub->editStub(trim(escape(Input::get('edit'))));
+		header("Location: admin.php");
+		exit;
+	}	
+	*/
+	
 	echo "<p>" . $_SESSION['username'] . " is logged in - <a href='" . $rootURL . "logout.php'>Logout</a></p>";
 
 	$stub = new Stub($handler);
@@ -35,6 +46,7 @@ if(isset($_SESSION['username'])) {
 		echo "<th>orcid</th>";
 		echo "<th>datesubmitted</th>";
 		echo "<th>delete</th>";
+		echo "<th>edit</th>";
 	echo "</tr>";	
 	$stub->showAllStubs();
 	echo "</table>";
@@ -43,6 +55,8 @@ if(isset($_SESSION['username'])) {
 
 
 } else {
+	include 'layout/head.php';
+	include 'layout/header.php';
 ?>
 
 
