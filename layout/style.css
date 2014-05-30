@@ -158,7 +158,7 @@ p {
 }
 
 div .error{
-	hidden;
+	opacity: 0;
 	display: inline-block;
 	border-style: outset;
 	border-width: 2px;

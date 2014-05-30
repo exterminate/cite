@@ -94,16 +94,28 @@ include 'layout/header.php';
 
 				//this button is disabled as the search currently returns poor results
 				$('#getOrcidByNameButton').click(function(){
-					searchOrcid($('#name').val(), 'name');
+					var name = $('#name').val();
+					if(name != ""){
+						searchOrcid(name, 'name');
+					}
 				});
 
 				$('#getOrcidByIdButton').click(function(){
-					searchOrcid($('#orcid').val(), 'orcid');
+					var orcid = $('#orcid').val()
+					if(orcid != ""){
+						searchOrcid(orcid, 'orcid');
+					}
 				});
 
 				$('#getOrcidByEmailButton').click(function(){
-					searchOrcid($('#email').val(), 'email');
+					var email = $('#email').val();
+					if(isValidEmailAddress(email)){
+						searchOrcid( email, 'email');
+					} else{	
+						displaySearchError("show", "Please enter a valid email address!");
+					}
 				});
+
 
 				$('#orcidSelect').change(function(){
                     var key = $('#orcidSelect').val();
@@ -118,6 +130,11 @@ include 'layout/header.php';
                 });
 
 			});
+
+			function isValidEmailAddress(emailAddress) {
+			    var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
+			    return pattern.test(emailAddress);
+			};
 
 			function clearDetails(){
                 $('#name').val("");
@@ -134,9 +151,9 @@ include 'layout/header.php';
             		$('#searchErr').html(text);
             	}
             	if(visible == "show"){
-                	$('#searchErr').show(200);
+                	$('#searchErr').css('opacity', '1');
 				} else if (visible == "hide"){
-					$('#searchErr').hide(200);
+					$('#searchErr').css('opacity', '0');
 				}
             }
 
@@ -191,18 +208,17 @@ include 'layout/header.php';
 
 		</script>
 
-		<div class='mainContent'>
+		<div class='mainContent'>		
 			<form action="" method="post">	
 				<label for="name">Name
 					<input class="input" type="text" name="name" id="name" value="<?php echo Input::get('name'); ?>" autocomplete="off">										
 					<button type='button' id='getOrcidByNameButton' disabled hidden>Search Orcid by name</button>
 				</label>
 				<br/>
-
-			
+		
 				<label for="email">E-mail
 					<input class="input" type="text" name="email" id="email" value="<?php echo Input::get('email'); ?>">						
-					<button type='button' id='getOrcidByEmailButton'>Search Orcid by email</button>
+					<button type='button' id='getOrcidByEmailButton'>Search Orcid by email</button>					
 				</label>
 				<br/>
 			
@@ -212,7 +228,7 @@ include 'layout/header.php';
 				</label>
 				<br/>
 				<select id="orcidSelect" size='10' hidden></select>
-				<div id='searchErr' class='error' hidden></div>
+				<div id='searchErr' class='error'></div>
 				<br/>
 			
 				<label for="description">Describe your work
