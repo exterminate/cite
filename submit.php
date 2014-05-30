@@ -81,150 +81,148 @@ if(Input::exists()) {
 include 'layout/head.php';
 include 'layout/header.php';
 ?>
-	<script src="lib/jquery.maskedinput.js" type="text/javascript"></script>
+	<script src="../lib/jquery.maskedinput.js" type="text/javascript"></script>	
 		<script>
 
-			$(document).ready(function(){			
+			$(document).ready(function(){
+
+				clearDetails();
+
 				$('#orcid').mask("9999-9999-9999-9999", {placeholder : ".", completed: function(){
-					searchOrcid(this.val());
+					searchOrcid(this.val(), 'orcid');
 				}});
-				$('#orcidValidateButton').click(function(){
-					searchOrcid($('#orcid').val());
+
+				//this button is disabled as the search currently returns poor results
+				$('#getOrcidByNameButton').click(function(){
+					searchOrcid($('#name').val(), 'name');
 				});
+
+				$('#getOrcidByIdButton').click(function(){
+					searchOrcid($('#orcid').val(), 'orcid');
+				});
+
+				$('#getOrcidByEmailButton').click(function(){
+					searchOrcid($('#email').val(), 'email');
+				});
+
+				$('#orcidSelect').change(function(){
+                    var key = $('#orcidSelect').val();
+                    $('#name').val(searchResults[key].fname + " " + searchResults[key].sname);
+                    $('#email').val(searchResults[key].email);
+                    $('#orcid').val(searchResults[key].id);
+                });
+                
+                $('#clear').click(function(){
+                    clearDetails();
+                    $('#input').val("");
+                });
 
 			});
-			
-			function searchOrcid(id){
-				$.post("classes/OrcidId.php", {id : id}, function(data){
-					if(data['error'] != undefined){
-						alert(data['error']);
-					} else{
-						$('#name').val(data.name);
-						$('#email').val(data.email);
-					}
-				}).fail(function(x,s,e){
-						alert("Error retrieving data from server: " + s + e);
-				});
-			}
-			/*
-				$("#submit").attr("disabled", true);
-					
-					var valid = [false, false, false, false];
-				
-					$(".input").blur(function(e){
-					
-						var currentValid = false;
-						if($(e.target).attr("id") == "name"){
-							//check if name is valid
-							
-							if($(e.target).val() != ""){
-								valid[0] = true;
-								currentValid = true;
-							} else{
-								valid[0] = false;
-								currentValid = false;
-							}
-						}
-						else if($(e.target).attr("id") == "email"){
-							//check if email is valid
 
-							if(isValidEmailAddress($(e.target).val())){
-								valid[1] = true;
-								currentValid = true;
-							} else{
-								valid[1] = false;
-								currentValid = false;
-							}
-						} else if($(e.target).attr("id") == "orcid"){
-							//check if orcid id is valid
-							
-							if($(e.target).val().length == 16){
-								valid[2] = true;
-								currentValid = true;
-							} else{
-								valid[2] = false;
-								currentValid = false;
-							}
-						} else if($(e.target).attr("id") == "description"){
-							if($(e.target).val().length >= 2){
-								valid[3] = true;
-								currentValid = true;
-							} else{
-								valid[3] = false;
-								currentValid = false;
-							}
-						}
-						
-						if(currentValid){
-							$(e.target).parents("tr").find("img").attr("src", "img/tick.png");
-						} else{
-							$(e.target).parents("tr").find("img").attr("src", "img/cross.png");
-						}
-						
-						checkSubmitButton();
-					});
-					
-					function checkSubmitButton(){
-					
-						var enabled = true;
-					
-					for(var i = 0; i < 4; i++){
-						if(!valid[i]){
-							enabled = false;
-						}
-					}
-					
-					if(enabled){
-						$("#submit").attr("disabled", false);
-					} else {
-						$("#submit").attr("disabled", true);
-					}
+			function clearDetails(){
+                $('#name').val("");
+                $('#email').val("");
+                $('#orcid').val("");
+                $('#orcidSelect').find("option").remove();
+                $('#orcidSelect').hide(200);
+                $('#error').hide(200);
+               	displaySearchError("hide");
+            }
+
+            function displaySearchError(visible, text){
+            	if(text !== undefined){
+            		$('#searchErr').html(text);
+            	}
+            	if(visible == "show"){
+                	$('#searchErr').show(200);
+				} else if (visible == "hide"){
+					$('#searchErr').hide(200);
 				}
-			});
+            }
+
+            var privateMsg = "Is the email address in your Orcid profile set to private?";
 			
+			function searchOrcid(query, type){			
+
+           		$.post("../orcid/searchOrcid.php", {query : query, type : type}, function(data){
+                    //console.log(JSON.stringify(data));
+                    searchResults = data.searchResults;
+                    
+
+                    if(data.error !== undefined){
+                    	//php script returns an error (i.e. no search hits returned)
+                        displaySearchError("show", data.error + "<br/>" + privateMsg);
+                        $('#error').html(data.error).show(200);
+                        $('#orcidSelect').hide(200);
+                    } else if(searchResults[0] == null){
+                    	//(defensive) php script has returned a blank array (should never happen)
+                    	alert("This is an non-critical error," + 
+                    		" no search results were found from your query but"+
+                    		"something has gone wrong behind the scenes! Sorry!");                        
+                    } else{
+                    	displaySearchError("hide");                    	
+                        if(Object.keys(searchResults).length == 1){
+
+                        	$('#name').val(searchResults[0].fname + " " + searchResults[0].sname);
+                        	$('#orcid').val(searchResults[0].id);
+                            if(searchResults[0].email === null){
+                            	displaySearchError("show", "We could not find an email associated with this Orcid ID."+ "<br/>" + privateMsg);
+                            } else{
+                            	$('#email').val(searchResults[0].email);
+                            }
+                        } else{
+                        
+                            $('#orcidSelect').show(200);
+                                
+                            $.each(searchResults, function(key, val){
+                                $('#orcidSelect')
+                                    .append($("<option></option>")
+                                    .attr("value", key)
+                                    .text(val.email));
+                            });
+                        }
+                    }
+                })
+	            .fail(function(a, b, c){
+	                displaySearchError("show", "Error contacting server, please try again, " + a.responseText + ", " + b + ", " + c);	               
+	            });
+            }
 			
-			
-	function isValidEmailAddress(emailAddress) {
-		var pattern = new RegExp(/^(("[\w-+\s]+")|([\w-+]+(?:\.[\w-+]+)*)|("[\w-+\s]+")([\w-+]+(?:\.[\w-+]+)*))(@((?:[\w-+]+\.)*\w[\w-+]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][\d]\.|1[\d]{2}\.|[\d]{1,2}\.))((25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\.){2}(25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\]?$)/i);
-		return pattern.test(emailAddress);
-	};
-	*/
+
 		</script>
 
 		<div class='mainContent'>
-			<form action="" method="post">
-				<table>
-					<tr>
-						<td><label for="name">Name</label></td>
-						<td><input class="input" type="text" name="name" id="name" value="<?php echo Input::get('name'); ?>" autocomplete="off"></td>
-						<td><img height='32'/></td>
-					</tr>
+			<form action="" method="post">	
+				<label for="name">Name
+					<input class="input" type="text" name="name" id="name" value="<?php echo Input::get('name'); ?>" autocomplete="off">										
+					<button type='button' id='getOrcidByNameButton' disabled hidden>Search Orcid by name</button>
+				</label>
+				<br/>
 
-
-					<tr>
-						<td><label for="email">E-mail</label></td>
-						<td><input class="input" type="text" name="email" id="email" value="<?php echo Input::get('email'); ?>"></td>
-						<td><img height='32'/></td>
-					</tr>
-
-					<tr>
-						<td><label for="orcid">ORCID ID</label></td>
-						<td><input class="input" type="text" name="orcid" id="orcid" value="<?php echo Input::get('orcid'); ?>"></td>
-						<td><img height='32'/></td>
-					</tr>
-					
-					<tr>
-						<td><label for="description">Describe your work</label></td>
-						<td><textarea class="input" name="description" id="description"><?php echo Input::get('description');?></textarea></td>
-						<td><img height='32'/></td>
-					</tr>
-					<tr>
-						<td colspan='2'><center><input type="submit" name="submit" id="submit" value="Submit"></center></td>
-					</tr>
-				</table>
+			
+				<label for="email">E-mail
+					<input class="input" type="text" name="email" id="email" value="<?php echo Input::get('email'); ?>">						
+					<button type='button' id='getOrcidByEmailButton'>Search Orcid by email</button>
+				</label>
+				<br/>
+			
+				<label for="orcid">ORCID ID
+					<input class="input" type="text" name="orcid" id="orcid" value="<?php echo Input::get('orcid'); ?>">						
+					<button type='button' id='getOrcidByIdButton'>Search Orcid by ID</button>
+				</label>
+				<br/>
+				<select id="orcidSelect" size='10' hidden></select>
+				<div id='searchErr' class='error' hidden></div>
+				<br/>
+			
+				<label for="description">Describe your work
+					<textarea class="input" name="description" id="description"><?php echo Input::get('description');?></textarea>						
+				</label>
+				<br/>
+			
+				<input type="submit" name="submit" id="submit" value="Submit">
 			</form>
-		</div>
-		<button id='orcidValidateButton'>Fill from Orcid Profile</button>
+		</div>		
 		<div id=out></div>
 <?php
 include 'layout/footer.php';

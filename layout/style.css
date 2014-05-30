@@ -69,10 +69,6 @@ nav {
 	height: -140px;
 }
 
-label {
-	text-align:right;
-}
-
 h1 {
 	font-weight: 300;
 	color: white;
@@ -159,4 +155,13 @@ nav a:hover {
 
 p {
 	padding-bottom: 10px;
+}
+
+div .error{
+	hidden;
+	display: inline-block;
+	border-style: outset;
+	border-width: 2px;
+	border-color: GoldenRod;
+	color : DeepSkyBlue;
 }
