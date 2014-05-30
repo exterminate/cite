@@ -7,19 +7,25 @@ include 'layout/head.php';
 include 'layout/header.php';
 
 ?>
+<script src="../lib/jquery.maskedinput.js" type="text/javascript"></script>
+<script>
+	$(document).ready(function(){
+		$('#orcid').mask("9999-9999-9999-9999", {placeholder : ".", completed: function(){
+			alert("finished typing orcid");
+		}});
+	});
+		
+</script>
 
 <form action="" method="post">
-<table>
-	<tr>
-		<td><label for='search'>Enter ORCID</label></td>
-		<td><input type='text' name='orcid' id='search'></td>
+
+		<label for='orcid'>Enter ORCID</label>
+		<input type='text' name='orcid' id='orcid'>
 		<!-- Add human checking tool -->
-	</tr>
-	<tr>
-		<td>&nbsp;</td>
-		<td><input type='submit' name='submit' id='submit' value='Search'></td>
-	</td>
-</table>
+
+	
+		<input type='submit' name='submit' id='submit' value='Search'>
+
 </form>
 
 <?php

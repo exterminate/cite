@@ -231,7 +231,7 @@ include 'layout/header.php';
 				<div id='searchErr' class='error'></div>
 				<br/>
 			
-				<label for="description">Describe your work
+				<label for="description">Describe your work<br/>
 					<textarea class="input" name="description" id="description"><?php echo Input::get('description');?></textarea>						
 				</label>
 				<br/>
