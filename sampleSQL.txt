@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: May 08, 2014 at 06:00 PM
+-- Generation Time: Jun 01, 2014 at 07:28 PM
 -- Server version: 5.5.34
 -- PHP Version: 5.5.10
 
@@ -55,27 +55,34 @@ CREATE TABLE `links` (
   `doi` varchar(150) NOT NULL,
   `datedoi` datetime NOT NULL,
   `views` int(11) NOT NULL,
+  `uniquecode` varchar(12) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `deeplink` (`deeplink`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `links`
 --
 
-INSERT INTO `links` (`id`, `deeplink`, `name`, `email`, `orcid`, `description`, `datesubmitted`, `doi`, `datedoi`, `views`) VALUES
-(1, 'fJcKJpPk', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', 0),
-(2, 'MDqJP24i', '', '', '', '', '2014-04-26 09:12:08', '', '0000-00-00 00:00:00', 0),
-(3, 'POGCbYJs', '', '', '', '', '2014-04-26 09:21:48', '', '0000-00-00 00:00:00', 0),
-(4, '1kyQxGmv', '', '', '', '', '2014-04-26 09:25:35', '', '0000-00-00 00:00:00', 0),
-(5, 'Tnw7M3CL', '', '', '', '', '2014-05-05 15:09:05', '', '0000-00-00 00:00:00', 0),
-(6, 'gtK9sKRD', '', '', '', '', '2014-05-05 15:09:08', '', '0000-00-00 00:00:00', 0),
-(7, 'qKpm8fwh', 'ooooo', 'ian.coates@gmail.com', 'ddfsfsdfnojfnogdf', 'sdsdf', '2014-05-05 15:17:11', '', '0000-00-00 00:00:00', 0),
-(8, '1UFowO5D', 'ooooo', 'ian.coates@gmail.com', 'ddfsfsdfnojfnogdf', 'sdsdf', '2014-05-05 15:18:52', '', '0000-00-00 00:00:00', 0),
-(9, 'YBmtBfNi', 'nr  nghngn', 'ian.coates@gmail.com', 'nfngnghnghngnghng', 'hgnghn', '2014-05-05 15:27:25', '', '0000-00-00 00:00:00', 0),
-(10, 'bgGSVOFS', 'nf hfghnfghn', 'ian.coates@gmail.com', 'ddfsfsdfnojfnogdf', 'mint', '2014-05-05 15:31:02', '', '0000-00-00 00:00:00', 0),
-(11, 'ngGJDz9y', '888', 'ian.coates@gmail.com', 'ddfsfsdfnojfnogdf', 'mint', '2014-05-05 15:31:34', '', '0000-00-00 00:00:00', 41),
-(12, '6EtlHlhE', 'gdfgdf', 'ian.coates@gmail.com', 'ddfsfsdfnojfnogdf', 'mint', '2014-05-05 15:35:57', '10.1039/C3DT53133C', '0000-00-00 00:00:00', 0);
+INSERT INTO `links` (`id`, `deeplink`, `name`, `email`, `orcid`, `description`, `datesubmitted`, `doi`, `datedoi`, `views`, `uniquecode`) VALUES
+(5, 'Tnw7M3CL', '', '', '', '', '2014-05-05 15:09:05', '', '0000-00-00 00:00:00', 0, ''),
+(6, 'gtK9sKRD', '', '', '', '', '2014-05-05 15:09:08', '', '0000-00-00 00:00:00', 0, ''),
+(12, '6EtlHlhE', 'gdfgdf', 'ian.coates@gmail.com', '0000-0001-5875-8744', 'mint', '2014-05-05 15:35:57', '10.1039/C3DT53133C', '0000-00-00 00:00:00', 0, ''),
+(13, 'joUqixhP', 'iancoates', 'ian.coates@gmail.com', '0000000158758744', 'Mint', '2014-05-13 18:40:40', '', '0000-00-00 00:00:00', 0, ''),
+(14, 'UcZVq4O4', 'iancoates', 'ian.coates@gmail.com', '1234567890123456', 'Mint', '2014-05-13 18:47:05', '', '0000-00-00 00:00:00', 0, ''),
+(15, 'nAiCP2Kr', 'iancoaydsad', 'ian.coates@gmail.com', '1234567890123456', 'Mintasdasd ad', '2014-05-13 18:50:50', '', '0000-00-00 00:00:00', 0, ''),
+(16, 'eB7pPKe1', 'dsasd', 'ian.coates@gmail.com', '1234567890123456', 'dfsdfsdfsdf', '2014-05-13 18:52:45', '', '0000-00-00 00:00:00', 1, ''),
+(17, 'wT1D8MXe', 'bljgkg', 'ian.coates@gmail.com', '1234567890123456', 'dfsdfsdfsdf', '2014-05-13 18:54:24', '', '0000-00-00 00:00:00', 1, ''),
+(18, 'PnQDyMKr', 'uiashdiasdas', 'ian.coates@gmail.com', '1234-4444-4444-4444', 'dfsdkfnsldkfsd', '2014-05-14 18:37:03', '10.1039/C4CC90166E', '2014-05-14 19:29:46', 2, 'W3rz5UYvXGeI'),
+(19, 'XUQrZZp5', 'Ianc oates', 'ian.coates@gmail.com', '1234-4444-4444-4444', 'Cracking', '2014-05-14 19:12:39', '', '0000-00-00 00:00:00', 6, 'xgPIqmVZPDYG'),
+(20, '40oQSs77', 'ian', 'ian.coates@gmail.com', '0000-0000-0000-0000', 'mint 1234', '2014-05-15 16:37:35', '10.1039/C4CC90166E', '2014-05-15 19:12:19', 2, 'ZtUiZsTQ9fdc'),
+(22, 'zvvcg3sD', 'dave', 'ian.coates@gmail.com', '0000-0000-0000-0000', 'wicked', '2014-05-15 19:18:33', '10.1039/C3DT53133C', '2014-05-15 19:26:51', 14, 'NArvBo4QSQAt'),
+(23, 'rS0ojpop', 'Ian Coates', 'ian.coates@gmail.com', '0000-0003-3540-6353', 'mint', '2014-05-24 08:15:49', '10.1039/C3DT53133C', '2014-05-24 08:46:13', 4, 'gJGz0H72kSP6'),
+(24, 'pLkpiNij', 'Ian', 'ian.coates@gmail.com', '0000-0003-3540-6353', 'mintttt', '2014-05-25 08:47:14', '', '0000-00-00 00:00:00', 5, '1qrSZcd6MBlM'),
+(25, 'rl0SIHWk', 'Ian Coates', 'ian.coates@gmail.com', '0000-0003-3540-6353', 'quality', '2014-05-25 08:52:31', '', '0000-00-00 00:00:00', 1, 'luRQ0TPjWNgM'),
+(26, 'ByP0Qpn7', 'ian coates', 'ian.coates@gmail.com', '0000-0003-3540-6353', 'quality work', '2014-05-27 19:05:08', '', '0000-00-00 00:00:00', 1, 'FEkDJFGilA77'),
+(27, '63uxjn5C', 'Ian coates', 'ian.coates@gmail.com', '0000-0003-3540-6353', 'quality work', '2014-05-27 19:07:18', '', '0000-00-00 00:00:00', 0, 'TzuMd8cUbDSM'),
+(28, 'b9s0aJPq', 'davo', 'ian.coates@gmail.com', '0000-0003-3540-6353', 'quality work', '2014-05-27 19:12:38', '10.1039/C3DT53133C', '2014-05-27 19:14:02', 2, '8559Y7Ct84qB');
 
 -- --------------------------------------------------------
 
@@ -98,4 +105,4 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `lastlogin`, `password`, `clue`) VALUES
-(1, 'iancoates', '2014-05-07 19:13:43', 'e8f025b16d7577470b65e526755fc8b8', 'e7ece74edfcf59a9c24645c5643f7a98');
+(1, 'iancoates', '2014-05-28 19:11:32', 'e8f025b16d7577470b65e526755fc8b8', 'e7ece74edfcf59a9c24645c5643f7a98');
