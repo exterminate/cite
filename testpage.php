@@ -25,4 +25,14 @@ echo "<br>";
 // returns the number of items in range
 // (table, column, specific)
 echo $db->count('links','deeplink','b9s0aJPq');
+
+echo "<br>";
+
+$db->write(
+	'links', array(
+		
+		)
+	);
+
+
 ?>
