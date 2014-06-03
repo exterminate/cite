@@ -27,6 +27,8 @@ class DB {
 				}
 			}
 			// remove trailing commas
+			$insert = rtrim($insert, ",");
+			$values = rtrim($values, ",");
 
 		}
 		$sql = "INSERT INTO links ($insert) VALUES ($values)";
@@ -34,6 +36,11 @@ class DB {
 		//example $sql = "INSERT INTO links (deeplink, name, email, orcid, description, datesubmitted, uniquecode) 
 		// VALUES (:deeplink, :name, :email, :orcid, :description, NOW(), :uniquecode)";
 		echo $sql;
+		
+		// this should work
+		$query->execute($sql);
+		
+		
 		/*	
 		$query = $this->handler->prepare($sql);
 		$query->execute(array(
