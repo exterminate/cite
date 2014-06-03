@@ -7,82 +7,73 @@ include 'layout/head.php';
 include 'layout/header.php';
 
 ?>
-<script src="../lib/jquery.maskedinput.js" type="text/javascript"></script>
-<script>
-	$(document).ready(function(){
-		$('#orcid').mask("9999-9999-9999-9999", {placeholder : ".", completed: function(){
-			alert("finished typing orcid");
-		}});
-	});
-		
-</script>
 
-<form action="" method="post">
+	<script src="../lib/jquery.maskedinput.js" type="text/javascript"></script>
+	<script>
+		$(document).ready(function(){
+			$('#orcid').mask("9999-9999-9999-9999", {placeholder : ".", completed: function(){
+				//alert("finished typing orcid");
+			}});
 
-		<label for='orcid'>Enter ORCID</label>
-		<input type='text' name='orcid' id='orcid'>
-		<!-- Add human checking tool -->
+			$('#submit').click(function(){
 
-	
-		<input type='submit' name='submit' id='submit' value='Search'>
+				var query = $('#orcid').val();				
 
-</form>
+				$.post("../searchSQL.php", {query : query, type : "orcid"}, function(data){
+					console.log(data);
+					$('#output').empty();
+					printJSONToTable(data, $('#output'));	
+				})
+				.fail(function(a,b,c){
+					console.log("Error contacting server: " + a.responseText + b + ", " + c);
+				});
+			});
+		});
 
-<?php
+		function printJSONToTable(data, outputElement){
+			var table = $('<table>').attr("class", "table").attr("id", "resultsTable");
 
-if(Input::exists()) {
-  
-  	$validate = new Validate();
-	$validate->check($_POST, array( 
-		'orcid' => array(
-			'required' 	=> true,
-			'orcid' => true
-			)
-		)
-	);
-	
-	if($validate->passed()) {
-	  	try {
-		    // let's get some search results!
-		    $stub = new Stub($handler);
-		    $results = $stub->obtainData('orcid', trim(escape(Input::get('orcid')))); //fetches array(?) :Ian
+			var length = Object.keys(data).length;
 
-?>
-<table class="table">
-	<tr>
-		<th>Description</th>
-		<th>Date submitted</th>
-		<th>DOI</th>
-		<th>Views</th>
-	</tr>
-<?		   
-		    foreach($results as $result) {
-		    	echo "\t<tr>";
-		    	echo "\n\t\t<td>" . $result['description'] . "</td>\n\t\t<td>" . $result['datesubmitted'] . "</td>\n\t\t<td>";
-		    	if(strlen($result['doi']) > 0) {
-		    		echo "<a href='http://dx.doi.org/" . $result['doi'] . "'>" . $result['doi'] . "</a>";
-		    	} else {
-		    		echo "<a href='" . $rootURL . "update/" . $result['deeplink'] . "'>Update</a>";
-		    	}
-		    	echo "</td>\n\t\t<td>" . $result['views'] . "</td>";
-		    	echo "\n\t</tr>\n";
-		    }
-		    
-	            
-?>
+			//populate the header rows
+			var headerRow = $("<tr>");
+			$.each(data[0], function(key, val){				
+				$(headerRow).append($("<th>").text(key));
+			})
 
-</table>
+			$(table).append($(headerRow));
 
-<?php
-	     
-		} catch(Exception $e) {
-			die($e->getMessage());
+			//populate the body rows
+			for(var i = 0; i < length; i++){
+				var row = $("<tr>");
+
+				$.each(data[i], function(key, val){
+					var cell = $("<td>").text(val);
+					$(row).append($(cell));
+				});				
+
+				$(table).append($(row))
+			}
+
+
+			$(outputElement).append($(table));		
 		}
-	 
-	}
-	
-}
+			
+	</script>
 
-include 'layout/footer.php';
+	<div>
+		<label for='orcid'>Enter ORCID
+			<input type='text' name='orcid' id='orcid'>
+		</label>		
+
+		<button id='submit'>Submit</button>
+	</div>
+
+	<div id='output'>
+	</div>
+
+<?php   	
+
+	include 'layout/footer.php';
 
 ?>

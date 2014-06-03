@@ -1,7 +1,7 @@
 <?php
 require 'core/init.php';
 
-$URL = "/git/cite/";
+$URL = "/cite/";
 
 
 if(Input::exists()) {
@@ -81,7 +81,7 @@ if(Input::exists()) {
 include 'layout/head.php';
 include 'layout/header.php';
 ?>
-	<script src="../lib/jquery.maskedinput.js" type="text/javascript"></script>	
+	<script src="lib/jquery.maskedinput.js" type="text/javascript"></script>	
 		<script>
 
 			$(document).ready(function(){
@@ -89,6 +89,7 @@ include 'layout/header.php';
 				clearDetails();
 
 				$('#orcid').mask("9999-9999-9999-9999", {placeholder : ".", completed: function(){
+					
 					searchOrcid(this.val(), 'orcid');
 				}});
 
@@ -161,7 +162,7 @@ include 'layout/header.php';
 			
 			function searchOrcid(query, type){			
 
-           		$.post("../orcid/searchOrcid.php", {query : query, type : type}, function(data){
+           		$.post("orcid/searchOrcid.php", {query : query, type : type}, function(data){
                     //console.log(JSON.stringify(data));
                     searchResults = data.searchResults;
                     
