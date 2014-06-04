@@ -14,7 +14,7 @@ class DB {
 	}	
 
 
-	public function write($table, $conditions = array()) {
+	public function put($table, $conditions = array()) {
 		if(count($conditions) % 2 == 0) {
 			$insert = "";
 			$values = "";
@@ -54,21 +54,21 @@ class DB {
 		*/
 	}
 
-	public function read($table, $field, $code) {	
+	public function get($table, $field, $code) {	
 		$query = $this->handler->query("SELECT * FROM $table WHERE $field = '$code'");
 		while ($r = $query->fetchAll(PDO::FETCH_ASSOC)) {
 			return $this->r = $r;
 		}
 	}
 
-	public function first($object) {
+	public function getFirst($object) {
 		return $this->r[0][$object];
 	}
-/*
-	public function edit($table, $conditions = array()) {
+
+	public function change($table, $conditions = array()) {
 		
 	}
-*/
+
 	public function count($table, $field, $code) {
 		$query = $this->handler->query("SELECT * FROM $table WHERE $field = '$code'");
 		return $query->rowCount();
