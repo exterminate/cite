@@ -28,7 +28,7 @@ echo $db->count('links','deeplink','b9s0aJPq');
 
 echo "<br>";
 
-$db->write(
+$db->put(
 	'links', array(
 		
 		)
