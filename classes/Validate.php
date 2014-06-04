@@ -39,15 +39,17 @@ class Validate {
 							}
 						case 'doi':
 							// Validate DOI
-							/*if(filter_var($value, FILTER_VALIDATE_EMAIL) == false) {
-								$this->addError("{$value} is not a valid email address.");
-							}*/	
+							$pattern = '\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'<>])\S)+)\b';
+							if(preg_match($pattern, $value)) {
+								$this->addError("{$value} is not a valid DOI.");
+							}	
 						break;
 						case 'orcid':
-							// Validate DOI
-							/*if(filter_var($value, FILTER_VALIDATE_EMAIL) == false) {
-								$this->addError("{$value} is not a valid email address.");
-							}*/	
+							// Validate ORCID
+							$pattern = "[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}";
+							if(preg_match($pattern, $value)) {
+								$this->addError("{$value} is not a valid ORCID.");
+							}	
 						break;
 
 					}
