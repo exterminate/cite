@@ -1,9 +1,12 @@
 <?php
 
 class DB {
-
-	public function __construct() {
+	private $this->handler;
+	public function __construct($handler) { 
+		$this->handler = $handler;
+		/* Make sure this is in init file.
 		try {
+			
 			// ian's version $this->handler = new PDO('mysql:host=127.0.0.1;dbname=cite', 'root', 'root');
 			$this->handler = new PDO('mysql:host=127.0.0.1;dbname=cite', 'root', 'root');
 			$this->handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -11,6 +14,7 @@ class DB {
 			echo $e->getMessage();
 			die("sorry, database problem");
 		}
+		*/
 	}	
 
 
@@ -54,13 +58,21 @@ class DB {
 		*/
 	}
 
-	public function get($table, $field, $code) {	
+	/* 
+	* The get() method limited to just one search field at the moment. 
+	* Perhaps we will need more in the future
+	*/
+	public function get($table, $field, $code) { 
 		$query = $this->handler->query("SELECT * FROM $table WHERE $field = '$code'");
 		while ($r = $query->fetchAll(PDO::FETCH_ASSOC)) {
 			return $this->r = $r;
 		}
 	}
 
+
+	/*
+	* You need to run get() method before running the getFirst() method
+	*/
 	public function getFirst($object) {
 		return $this->r[0][$object];
 	}
@@ -69,6 +81,10 @@ class DB {
 		
 	}
 
+	/*
+	* Count the number of records from a declared search.
+	* Limited to one search field.
+	*/
 	public function count($table, $field, $code) {
 		$query = $this->handler->query("SELECT * FROM $table WHERE $field = '$code'");
 		return $query->rowCount();
@@ -77,9 +93,6 @@ class DB {
 
 }
 /* 
-*  COLUMNS NEEDED
-*  id, linkid, name, email, orcid (required), datesubmitted, doi, datedoi
-*  any more?
-*/
+
 
 ?>
