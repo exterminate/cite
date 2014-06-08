@@ -47,7 +47,7 @@ class DB {
 	*/
 	public function getStub($field, $code) {
 
-		$query = $this->handler->query("SELECT * FROM $table WHERE $field = '$code'");
+		$query = $this->handler->query("SELECT * FROM 'links' WHERE $field = '$code'");
 
 		while ($r = $query->fetchAll(PDO::FETCH_ASSOC)) {
 			PC::debug($r);

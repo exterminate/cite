@@ -32,12 +32,13 @@ if(Input::exists()) {
 	);
 
 	if($validate->passed()) {
-		
+		$stub = new Stub($dbHandler->getStub('stubId', Input::get('stubId')));
+			PC::debug($stub);
 		// add to database
 		
 		try {
 			
-			$stub = new Stub($dbHandler->getStub('stubId', $_GET['stub']));
+			$stub = new Stub($dbHandler->getStub('stubId', Input::get('stubId')));
 			PC::debug($stub);
 			// update databse
 
@@ -48,7 +49,7 @@ if(Input::exists()) {
 
 					$stub->doi = trim(escape(Input::get('doi')));
 					$stub->datedoi = date('Y-m-d H:i:s');
-					$dbHandler->change('links', $stub);
+					//$dbHandler->change('links', $stub);
 
 					// send mail
 					require 'classes/EmailHandler.php';
