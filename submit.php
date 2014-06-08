@@ -56,7 +56,7 @@ if(Input::exists()) {
 		PC::debug($stub);
 
 		// add to database
-		//PC::debug($stub);
+		PC::debug($stub);
 		try {
 
 			//add to database			
