@@ -60,7 +60,7 @@ if(Input::exists()) {
 			$dbHandler->put('links', $stub);
 
 			// Send deeplink for email
-			require_once 'classes/EmailHandler.php';
+			require 'classes/EmailHandler.php';
 			$email = new EmailHandler();
 			$email->sendMail(
 				trim(escape(Input::get('email'))),
@@ -90,7 +90,7 @@ if(Input::exists()) {
 include 'layout/head.php';
 include 'layout/header.php';
 ?>
-	<script src="lib/jquery.maskedinput.js" type="text/javascript"></script>	
+	<script src="<? echo $rootURL; ?>lib/jquery.maskedinput.js" type="text/javascript"></script>	
 		<script>
 
 			$(document).ready(function(){
@@ -173,7 +173,7 @@ include 'layout/header.php';
 			
 			function searchOrcid(query, type){			
 
-           		$.post("orcid/searchOrcid.php", {query : query, type : type}, function(data){
+           		$.post("<?php echo $rootURL; ?>orcid/searchOrcid.php", {query : query, type : type}, function(data){
                     //console.log(JSON.stringify(data));
                     searchResults = data.searchResults;
                     
