@@ -2,14 +2,10 @@
 
 class EmailHandler {
 	
-	function __construct($from, $subject, $message) {
-		$this->from = $from;
-		$this->subject = $subject;
-		$this->message = $message;
-	}
+	private $email = "citeitnow@gmail.com";
 
-	public function sendMail() {
-		if(!mail(trim(escape(Input::get('email'))),$this->subject,$this->message,"From: $this->from\n")) {
+	public function sendMail($to, $subject, $message) {
+		if(!mail($to, $subject, $message,"From: $email\n")) {
 		    	echo "Mail fail!";
 		}
 	}
