@@ -56,21 +56,18 @@ if(Input::exists()) {
 		
 		try {
 
-			$dbHandler->put('links', $stub);
-			
-			
 			//add to database			
+			$dbHandler->put('links', $stub);
 
 			// Send deeplink for email
+			require_once 'classes/EmailHandler.php';
+			$email = new EmailHandler();
+			$email->sendMail(
+				trim(escape(Input::get('email'))),
+				"Stub submitted successfully",
+				"Thank you for submitting your stub.\nTo add a DOI at a later date please save this email and click the link when ready.\nhttp://localhost/git/cite/update/" . $deeplinkValidate . "\nWhen you are prompted, add your DOI and this unique code to update: " . $uniquecode . "\nYou can check your DOI is valid by going to http://dx.doi.org/[your DOI]"
+				);
 			
-			$from = "citeitnow@gmail.com"; // sender
-		    $subject = "Stub submitted successfully";
-		    $message = "Thank you for submitting your stub.\nTo add a DOI at a later date please save this email and click the link when ready.\nhttp://localhost/git/cite/update/" . $deeplinkValidate . "\nWhen you are prompted, add your DOI and this unique code to update: " . $uniquecode . "\nYou can check your DOI is valid by going to http://dx.doi.org/[your DOI]";
-		    
-		    // send mail
-		    if(!mail(trim(escape(Input::get('email'))),$subject,$message,"From: $from\n")) {
-		    	echo "Mail fail!";
-		    }
 
 			// Redirect to stub page
 			header("Location: ". $rootURL.$stub->stubId);
