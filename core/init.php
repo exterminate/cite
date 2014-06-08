@@ -17,5 +17,6 @@ try {
 	die("sorry, database problem");
 }
 
+$dbHandler = new DB($handler);
 
 ?>
