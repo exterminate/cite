@@ -55,7 +55,7 @@ class DB {
 		}	
 	}
 
-	public function change($table, $conditions = array()) {
+	public function change($table, $stub) {
 		
 	}
 
