@@ -47,7 +47,7 @@ if(Input::exists()) {
 				'orcid' => Input::get('orcid'),
 				'description' => Input::get('description'),
 				'deepLink' => $dbHandler->getUniqueCode('deepLink'),
-				'datesubmitted' => strtotime('now')				
+				'datesubmitted' => date('Y-m-d H:i:s')			
 			);
 
 		$stub = new Stub($inputArray);

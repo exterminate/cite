@@ -9,18 +9,19 @@ class DB {
 
 	public function put($table, $stub) {
 
-		 $sql = "INSERT INTO links (deeplink, name, email, orcid, description, datesubmitted, uniquecode) 
-		 VALUES (:deeplink, :name, :email, :orcid, :description, :datesubmitted, :uniquecode)";
+		 $sql = "INSERT INTO links (stubId, firstName, surname, email, orcid, description, datesubmitted, deepLink) 
+		 VALUES (:stubId, :firstName, :surname, :email, :orcid, :description, :datesubmitted, :deepLink)";
 	
 		$query = $this->handler->prepare($sql);
 		$query->execute(array(
-			':deeplink' 	=> $stub->deeplink,
-			':name' 		=> $stub->name,
+			':stubId' 		=> $stub->stubId,
+			':firstName' 	=> $stub->firstName,
+			':surname' 		=> $stub->surname,
 			':email' 		=> $stub->email,
 			':orcid'		=> $stub->orcid,
 			':description' 	=> $stub->description,
 			':datesubmitted'=> $stub->datesubmitted,
-			':uniquecode'	=> $stub->uniquecode
+			':deepLink'		=> $stub->deepLink
 		));	
 	}
 

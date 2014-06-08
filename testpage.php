@@ -1,5 +1,7 @@
 <?php
 
+echo date('Y-m-d H:i:s');
+/*
 // test page // delete later
 
 require 'classes/DB.php';
@@ -34,5 +36,5 @@ $db->put(
 		)
 	);
 
-
+*/
 ?>
