@@ -61,7 +61,7 @@ if(Input::exists()) {
 
 			//add to database			
 			$dbHandler->put('links', $stub);
-/*
+
 			// Send deeplink for email
 			require 'classes/EmailHandler.php';
 			$email = new EmailHandler();
@@ -71,10 +71,10 @@ if(Input::exists()) {
 				"Thank you for submitting your stub.\nTo add a DOI at a later date please save this email and click the link when ready.\nhttp://localhost/git/cite/update/" . $deeplinkValidate . "\nWhen you are prompted, add your DOI and this unique code to update: " . $uniquecode . "\nYou can check your DOI is valid by going to http://dx.doi.org/[your DOI]"
 				);
 			
-*/			
+			
 			// Redirect to stub page
-			//header("Location: ". $rootURL."stubId");//$stub->stubId
-			//exit();
+			header("Location: ". $rootURL.$stub->stubId);
+			exit();
 
 			
 		} catch(Exception $e) {
