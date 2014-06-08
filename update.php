@@ -1,5 +1,6 @@
 <?php
-
+    require_once('lib/php-console-master/src/PhpConsole/__autoload.php');
+    PhpConsole\Helper::register();
 require 'core/init.php';
 
 if(isset($_GET['stub'])) {
@@ -36,27 +37,28 @@ if(Input::exists()) {
 		
 		try {
 			
-			$stub = new Stub($dbHandler->get('links', 'stubId', $_GET['stub']));
-			
+			$stub = new Stub($dbHandler->getStub('stubId', $_GET['stub']));
+			PC::debug($stub);
 			// update databse
 
 			if(!strlen($stub->doi) > 0) { // does this stub already have a DOI?
 
-				
-				$stub->updateStub(
-					trim(escape(Input::get('doi'))),
-					trim(escape(Input::get('deeplink'))),
-					trim(escape(Input::get('unique_code')))
-					);
+				//does the deeplink match with the one in the database
+				if(trim(escape(Input::get('doi'))) == $stub->deepLink) {
 
-				// send mail
-				require 'classes/EmailHandler.php';
-				$email = new EmailHandler();
-				$email->sendMail(
-					$stub->email, // send to
-				    "Stub submitted updated",
-				    "Thank you for updating your stub.\nClicking on ".$rootURL.trim(escape(Input::get('stubId'))). " will send you to your article\nWe look forward to your next submission.\n"
-			    );
+					$stub->doi = trim(escape(Input::get('doi')));
+					$stub->datedoi = date('Y-m-d H:i:s');
+					$dbHandler->change('links', $stub);
+
+					// send mail
+					require 'classes/EmailHandler.php';
+					$email = new EmailHandler();
+					$email->sendMail(
+						$stub->email, // send to
+					    "Stub submitted updated",
+					    "Thank you for updating your stub.\nClicking on ".$rootURL.trim(escape(Input::get('stubId'))). " will send you to your article\nWe look forward to your next submission.\n"
+				    );
+				}
 			    
 
 				// Redirect to stub page
@@ -68,6 +70,7 @@ if(Input::exists()) {
 
 			
 		} catch(Exception $e) {
+			echo "error here";
 			die($e->getMessage());
 		}
 	} else {  
