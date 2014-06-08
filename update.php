@@ -2,10 +2,8 @@
 
 require 'core/init.php';
 
-$URL = "/git/cite/";
-
 if(isset($_GET['stub'])) {
-	$deepLink = $_GET['stub'];
+	$stubId = $_GET['stub'];
 } else {
 	die("Nothing to update here...");
 }
@@ -13,7 +11,7 @@ if(isset($_GET['stub'])) {
 if(Input::exists()) {
 	$validate = new Validate();
 	$validate->check($_POST, array( 
-		'deeplink' => array(
+		'stubId' => array(
 			'required' 	=> true,
 			'min' => 8,
 			'max' => 8
@@ -24,7 +22,7 @@ if(Input::exists()) {
 			'min' => 10,
 			'doi' => true			
 			),
-		'unique_code' => array(
+		'deepLink' => array(
 			'required' 	=> true,
 			'min' => 12,
 			'max' => 12	
@@ -38,11 +36,11 @@ if(Input::exists()) {
 		
 		try {
 			
-			$stub = new Stub($handler);
-			$stub->obtainData('deeplink', trim(escape(Input::get('deeplink'))));
+			$stub = new Stub($dbHandler->get('links', 'stubId', $_GET['stub']));
+			
 			// update databse
 
-			if(!strlen($stub->showBits('doi')) > 0) { // does this stub already have a DOI?
+			if(!strlen($stub->doi) > 0) { // does this stub already have a DOI?
 
 				
 				$stub->updateStub(
@@ -51,23 +49,21 @@ if(Input::exists()) {
 					trim(escape(Input::get('unique_code')))
 					);
 
-				// Send "You have updated you stub it will now redirect to your article"
-				
-				$from = "citeitnow@gmail.com"; // sender
-			    $subject = "Stub submitted updated";
-			    $message = "Thank you for updating your stub.\nClicking on http://localhost".$URL.trim(escape(Input::get('deeplink'))). " will send you to your article\nWe look forward to your next submission.\n";
+				// send mail
+				require 'classes/EmailHandler.php';
+				$email = new EmailHandler();
+				$email->sendMail(
+					$stub->email, // send to
+				    "Stub submitted updated",
+				    "Thank you for updating your stub.\nClicking on ".$rootURL.trim(escape(Input::get('stubId'))). " will send you to your article\nWe look forward to your next submission.\n"
+			    );
 			    
-			    // send mail
-			    $email = $stub->showBits('email'); // This isn't going to work :Ian		
-			    if(!mail($email,$subject,$message,"From: $from\n")) {
-			    	echo "Mail fail!<br>".$mail;
-			    }
 
 				// Redirect to stub page
-				header("Location: ". $URL.trim(escape(Input::get('deeplink'))));
+				header("Location: ". $rootURL.trim(escape(Input::get('stubId'))));
 				exit();
 			} else {
-				die("Dude, there's aready a DOI for this stub!");
+				die("There's aready a DOI for this stub!");
 			}
 
 			
@@ -93,8 +89,8 @@ include 'layout/header.php';
 			<form action="" method="post">
 				<table>
 					<tr>
-						<td><label for="deeplink">Stub ID</label></td>
-						<td><input class="input" type="text" name="deeplink" id="deeplink" value="<?php echo $deepLink; ?>" autocomplete="off"></td>
+						<td><label for="stubId">Stub ID</label></td>
+						<td><input class="input" type="text" name="stubId" id="stubId" value="<?php echo $stubId; ?>" autocomplete="off"></td>
 						<td><img height='32'/></td>
 					</tr>
 					<tr>
@@ -103,8 +99,8 @@ include 'layout/header.php';
 						<td><img height='32'/></td>
 					</tr>
 					<tr>
-						<td><label for="unique_code">Enter unique code</label></td>
-						<td><input class="input" type="text" name="unique_code" id="unique_code" value="<?php echo Input::get('unique_code'); ?>"></td>
+						<td><label for="deepLink">Enter unique code</label></td>
+						<td><input class="input" type="text" name="deepLink" id="deepLink" value="<?php echo Input::get('deepLink'); ?>"></td>
 						<td><img height='32'/></td>
 					</tr>
 					<tr>

@@ -67,7 +67,7 @@ if(Input::exists()) {
 			$email->sendMail(
 				trim(escape(Input::get('email'))),
 				"Stub submitted successfully",
-				"Thank you for submitting your stub.\nTo add a DOI at a later date please save this email and click the link when ready.\nhttp://localhost/git/cite/update/" . $deeplinkValidate . "\nWhen you are prompted, add your DOI and this unique code to update: " . $uniquecode . "\nYou can check your DOI is valid by going to http://dx.doi.org/[your DOI]"
+				"Thank you for submitting your stub.\nTo add a DOI at a later date please save this email and click the link when ready.\nhttp://localhost/git/cite/update/" . $stub->stubId . "\nWhen you are prompted, add your DOI and this unique code to update: " . $stub->deepLink . "\nYou can check your DOI is valid by going to http://dx.doi.org/[your-DOI]"
 				);
 			
 			
