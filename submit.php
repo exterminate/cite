@@ -53,7 +53,8 @@ if(Input::exists()) {
 			);
 
 		$stub = new Stub($inputArray);
-		
+		PC::debug($stub);
+
 		// add to database
 		//PC::debug($stub);
 		try {
@@ -92,7 +93,7 @@ if(Input::exists()) {
 include 'layout/head.php';
 include 'layout/header.php';
 ?>
-	<script src="<? echo $rootURL; ?>lib/jquery.maskedinput.js" type="text/javascript"></script>	
+	<script src="<?php echo $rootURL; ?>lib/jquery.maskedinput.js" type="text/javascript"></script>	
 		<script>
 
 			$(document).ready(function(){
