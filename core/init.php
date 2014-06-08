@@ -1,6 +1,7 @@
 <?php
 
 require 'classes/User.php';
+require 'classes/DB.php';
 require 'classes/Stub.php';
 require 'classes/Input.php';
 require 'includes/functions.php';
