@@ -85,7 +85,7 @@ include 'layout/header.php';
 				<button id='searchButton' type='button'>Search</button>
 				<select id='typeSelect'>
 					<option value='email'>Email</option>
-					<option value='name'>Name</option>
+					<option value='surname'>Surname</option>
 					<option value='orcid'>Orcid</option>
 					<option value='deeplink'>Stub ID</option>					
 				</select>

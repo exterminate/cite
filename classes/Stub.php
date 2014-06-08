@@ -1,4 +1,5 @@
 <?php 	
+
 	class Stub{
 		
 		public $stubId = "";
@@ -51,12 +52,32 @@
 			}
 
 			if(array_key_exists("deepLink", $array)){
-				$this->deeplink = $array['deepLink'];
+				$this->deepLink = $array['deepLink'];
 			}
 
 			if(array_key_exists("views", $array)){
-				$this->views = $views['views'];
+				$this->views = $array['views'];
 			}
+		}
+
+		function toArray(){
+
+			$array = array(
+				'stubId' => $this->stubId,
+				'firstName' => $this->firstName,
+				'surname' => $this->surname,
+				'email' => $this->email,
+				'orcid' => $this->orcid,
+				'description' => $this->description,
+				'datesubmitted' => $this->datesubmitted,
+				'doi' => $this->doi,
+				'datedoi' => $this->datedoi,
+				'deepLink' => $this->deepLink,
+				'views' => $this->views
+				);
+
+			PC::debug($array);
+			return $array;
 		}
 	}
 ?>

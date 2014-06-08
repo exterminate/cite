@@ -1,5 +1,4 @@
 <?php
-
 class DB {
 	private $handler;
 	public function __construct($handler) { 
@@ -29,10 +28,16 @@ class DB {
 	* The get() method limited to just one search field at the moment. 
 	* Perhaps we will need more in the future
 	*/
-	public function get($table, $field, $code) { 
+	public function getStubs($table, $field, $code){ 		
 		$query = $this->handler->query("SELECT * FROM $table WHERE $field = '$code'");
 		while ($r = $query->fetchAll(PDO::FETCH_ASSOC)) {
-			return $this->r = $r;
+			PC::debug($r);
+			$stubs = array();
+			foreach($r as $stub){
+				array_push($stubs, new Stub($stub));
+			}		
+			PC::debug($stubs);
+			return $stubs;
 		}
 	}
 
@@ -40,8 +45,14 @@ class DB {
 	/*
 	* You need to run get() method before running the getFirst() method
 	*/
-	public function getFirst($object) {
-		return $this->r[0][$object];
+	public function getStub($field, $code) {
+
+		$query = $this->handler->query("SELECT * FROM $table WHERE $field = '$code'");
+
+		while ($r = $query->fetchAll(PDO::FETCH_ASSOC)) {
+			PC::debug($r);
+			return new Stub($r[0]);			
+		}	
 	}
 
 	public function change($table, $conditions = array()) {
