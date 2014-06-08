@@ -1,30 +1,62 @@
 <?php 	
 	class Stub{
 		
-		public $stubId;
-		public $firstName;
-		public $surname;
-		public $email;
-		public $orcid;
-		public $description;
-		public $dateSubmitted;
-		public $doi;
-		public $dateDoi;
-		public $deepLink;
-		public $views;
+		public $stubId = "";
+		public $firstName = "";
+		public $surname = "";
+		public $email = "";
+		public $orcid = "";
+		public $description = "";
+		public $dateSubmitted = "";
+		public $doi = "";
+		public $dateDoi = "";
+		public $deepLink = "";
+		public $views = "";
 
 		function __construct($array){
-			$this->stubId = $array['stubId'];
-			$this->firstName = $array['firstName'];
-			$this->surname = $array['surname'];
-			$this->email = $array['email'];
-			$this->orcid = $array['orcid'];
-			$this->description = $array['description'];
-			$this->dateSubmitted = $array['dateSubmitted'];
-			$this->doi = $array['doi'];
-			$this->dateDoi = $array['dateDoi'];
-			$this->deeplink = $array['deepLink'];
-			$this->views = $views['views'];
+			if(array_key_exists("stubId", $array)){
+				$this->stubId = $array['stubId'];
+			}
+
+			if(array_key_exists("firstName", $array)){
+				$this->firstName = $array['firstName'];
+			}
+
+			if(array_key_exists("surname", $array)){
+				$this->surname = $array['surname'];
+			}
+
+			if(array_key_exists("email", $array)){
+				$this->email = $array['email'];
+			}
+
+			if(array_key_exists("orcid", $array)){
+				$this->orcid = $array['orcid'];
+			}
+
+			if(array_key_exists("description", $array)){
+				$this->description = $array['description'];
+			}
+
+			if(array_key_exists("dateSubmitted", $array)){
+				$this->dateSubmitted = $array['dateSubmitted'];
+			}
+
+			if(array_key_exists("doi", $array)){
+				$this->doi = $array['doi'];
+			}
+
+			if(array_key_exists("dateDoi", $array)){
+				$this->dateDoi = $array['dateDoi'];
+			}
+
+			if(array_key_exists("deepLink", $array)){
+				$this->deeplink = $array['deepLink'];
+			}
+
+			if(array_key_exists("views", $array)){
+				$this->views = $views['views'];
+			}
 		}
 	}
 ?>
