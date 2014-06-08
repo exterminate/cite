@@ -31,12 +31,12 @@ class DB {
 	public function getStubs($table, $field, $code){ 		
 		$query = $this->handler->query("SELECT * FROM $table WHERE $field = '$code'");
 		while ($r = $query->fetchAll(PDO::FETCH_ASSOC)) {
-			PC::debug($r);
+			
 			$stubs = array();
 			foreach($r as $stub){
 				array_push($stubs, new Stub($stub));
 			}		
-			PC::debug($stubs);
+			
 			return $stubs;
 		}
 	}
@@ -51,7 +51,11 @@ class DB {
 
 		while ($r = $query->fetchAll(PDO::FETCH_ASSOC)) {
 			PC::debug($r);
-			return new Stub($r[0]);			
+			if($r[0] != null){
+				return new Stub($r[0]);			
+			} else{
+				return null;
+			}
 		}	
 	}
 
