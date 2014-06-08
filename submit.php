@@ -33,22 +33,28 @@ if(Input::exists()) {
 
 	
 	if($validate->passed()) {
+
+		$inputArray = array(
+				'stubId' => $dbHandler->getUniqueCode('stubId'); 
+				'firstName' => Input::get('firstName'),
+				'surname' => Input::get('surname'),
+				'email' => Input::get('email'),
+				'orcid' => Input::get('orcid'),
+				'description' => Input::get('description'),
+				'deepLink' => $dbHandler->getUniqueCode('deepLink');
+				'datesubmitted' => strtotime('now')				
+			);
+
+		$stub = new Stub($inputArray);
 		
 		// add to database
 		
 		try {
+
+			$dbHandler->put('links', $stub);
 			
-			$stub = new Stub($handler);
-			//add to database
-			$deeplinkValidate = $validate->checkDB($handler,create_deeplink(8));
-			$uniquecode = $validate->checkDB($handler,create_deeplink(12));
-			$stub->addStub(
-				$deeplinkValidate,
-				trim(escape(Input::get('name'))),
-				trim(escape(Input::get('email'))),
-				trim(escape(Input::get('orcid'))),
-				trim(escape(Input::get('description'))),
-				$uniquecode);
+			
+			//add to database			
 
 			// Send deeplink for email
 			
@@ -60,8 +66,9 @@ if(Input::exists()) {
 		    if(!mail(trim(escape(Input::get('email'))),$subject,$message,"From: $from\n")) {
 		    	echo "Mail fail!";
 		    }
+
 			// Redirect to stub page
-			header("Location: ". $URL.$deeplinkValidate);
+			header("Location: ". $rootURL.$stub->stubId);
 			exit();
 
 			
