@@ -46,7 +46,7 @@ if(Input::exists()) {
 				//does the deeplink match with the one in the database
 				if(trim(escape(Input::get('deepLink'))) == $stub->deepLink) {
 
-					$stub->doi = trim(escape(Input::get('doi')));PC::debug($stub->doi);PC::debug($stub);
+					$stub->doi = trim(escape(Input::get('doi')));
 					$stub->datedoi = date('Y-m-d H:i:s');
 					$dbHandler->update('links', 'doi', $stub);
 					$dbHandler->update('links', 'datedoi', $stub);
