@@ -8,7 +8,12 @@ if(Input::exists()) {
 
 	$validate = new Validate();
 	$validate->check($_POST, array( 
-		'name' => array(
+		'firstName' => array(
+			'required' 	=> true,
+			'min' => 2,
+			'max' => 50
+			), 
+		'surname' => array(
 			'required' 	=> true,
 			'min' => 2,
 			'max' => 50
@@ -102,9 +107,10 @@ include 'layout/header.php';
 
 				//this button is disabled as the search currently returns poor results
 				$('#getOrcidByNameButton').click(function(){
-					var name = $('#name').val();
-					if(name != ""){
-						searchOrcid(name, 'name');
+					var firstName = $('#firstName').val();
+					var surname = $('#surname').val();
+					if(firstName != "" && surname != ""){
+						searchOrcid(firstName + " " + surname, 'name');
 					}
 				});
 
@@ -127,7 +133,8 @@ include 'layout/header.php';
 
 				$('#orcidSelect').change(function(){
                     var key = $('#orcidSelect').val();
-                    $('#name').val(searchResults[key].fname + " " + searchResults[key].sname);
+                    $('#firstName').val(searchResults[key].fname);
+                    $('#surname').val(searchResults[key].sname);
                     $('#email').val(searchResults[key].email);
                     $('#orcid').val(searchResults[key].id);
                 });
@@ -188,7 +195,8 @@ include 'layout/header.php';
                     	displaySearchError("hide");                    	
                         if(Object.keys(searchResults).length == 1){
 
-                        	$('#name').val(searchResults[0].fname + " " + searchResults[0].sname);
+                        	$('#firstName').val(searchResults[0].fname);
+                        	$('#surname').val(searchResults[0].sname);
                         	$('#orcid').val(searchResults[0].id);
                             if(searchResults[0].email === null){
                             	displaySearchError("show", "We could not find an email associated with this Orcid ID."+ "<br/>" + privateMsg);
@@ -218,10 +226,14 @@ include 'layout/header.php';
 
 		<div class='mainContent'>		
 			<form action="" method="post">	
-				<label for="name">Name
-					<input class="input" type="text" name="name" id="name" value="<?php echo Input::get('name'); ?>" autocomplete="off">										
-					<button type='button' id='getOrcidByNameButton' disabled hidden>Search Orcid by name</button>
+				<label for="firstName">First Name
+					<input class="input" type="text" name="firstName" id="firstName" value="<?php echo Input::get('firstName'); ?>" autocomplete="off">										
 				</label>
+				<br/>
+				<label>Surname
+					<input class='input' type='text' name='surname' id='surname' value='<?php echo Input::get("surname"); ?>' autocomplete="off">
+				</label>
+					<button type='button' id='getOrcidByNameButton' disabled hidden>Search Orcid by name</button>
 				<br/>
 		
 				<label for="email">E-mail
