@@ -1,4 +1,6 @@
 <?php
+    require_once('lib/php-console-master/src/PhpConsole/__autoload.php');
+    PhpConsole\Helper::register();
 require 'core/init.php';
 
 $URL = "/cite/";
@@ -53,12 +55,12 @@ if(Input::exists()) {
 		$stub = new Stub($inputArray);
 		
 		// add to database
-		
+		//PC::debug($stub);
 		try {
 
 			//add to database			
 			$dbHandler->put('links', $stub);
-
+/*
 			// Send deeplink for email
 			require 'classes/EmailHandler.php';
 			$email = new EmailHandler();
@@ -68,10 +70,10 @@ if(Input::exists()) {
 				"Thank you for submitting your stub.\nTo add a DOI at a later date please save this email and click the link when ready.\nhttp://localhost/git/cite/update/" . $deeplinkValidate . "\nWhen you are prompted, add your DOI and this unique code to update: " . $uniquecode . "\nYou can check your DOI is valid by going to http://dx.doi.org/[your DOI]"
 				);
 			
-
+*/			
 			// Redirect to stub page
-			header("Location: ". $rootURL.$stub->stubId);
-			exit();
+			//header("Location: ". $rootURL."stubId");//$stub->stubId
+			//exit();
 
 			
 		} catch(Exception $e) {

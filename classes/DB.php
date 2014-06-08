@@ -11,7 +11,7 @@ class DB {
 
 		 $sql = "INSERT INTO links (stubId, firstName, surname, email, orcid, description, datesubmitted, deepLink) 
 		 VALUES (:stubId, :firstName, :surname, :email, :orcid, :description, :datesubmitted, :deepLink)";
-	
+
 		$query = $this->handler->prepare($sql);
 		$query->execute(array(
 			':stubId' 		=> $stub->stubId,

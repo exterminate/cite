@@ -7,9 +7,9 @@
 		public $email = "";
 		public $orcid = "";
 		public $description = "";
-		public $dateSubmitted = "";
+		public $datesubmitted = "";
 		public $doi = "";
-		public $dateDoi = "";
+		public $datedoi = "";
 		public $deepLink = "";
 		public $views = "";
 
@@ -38,16 +38,16 @@
 				$this->description = $array['description'];
 			}
 
-			if(array_key_exists("dateSubmitted", $array)){
-				$this->dateSubmitted = $array['dateSubmitted'];
+			if(array_key_exists("datesubmitted", $array)){
+				$this->dateSubmitted = $array['datesubmitted'];
 			}
 
 			if(array_key_exists("doi", $array)){
 				$this->doi = $array['doi'];
 			}
 
-			if(array_key_exists("dateDoi", $array)){
-				$this->dateDoi = $array['dateDoi'];
+			if(array_key_exists("datedoi", $array)){
+				$this->dateDoi = $array['datedoi'];
 			}
 
 			if(array_key_exists("deepLink", $array)){
