@@ -35,13 +35,13 @@ if(Input::exists()) {
 	if($validate->passed()) {
 
 		$inputArray = array(
-				'stubId' => $dbHandler->getUniqueCode('stubId'); 
+				'stubId' => $dbHandler->getUniqueCode('stubId'),
 				'firstName' => Input::get('firstName'),
 				'surname' => Input::get('surname'),
 				'email' => Input::get('email'),
 				'orcid' => Input::get('orcid'),
 				'description' => Input::get('description'),
-				'deepLink' => $dbHandler->getUniqueCode('deepLink');
+				'deepLink' => $dbHandler->getUniqueCode('deepLink'),
 				'datesubmitted' => strtotime('now')				
 			);
 
