@@ -4,17 +4,6 @@ class DB {
 	private $this->handler;
 	public function __construct($handler) { 
 		$this->handler = $handler;
-		/* Make sure this is in init file.
-		try {
-			
-			// ian's version $this->handler = new PDO('mysql:host=127.0.0.1;dbname=cite', 'root', 'root');
-			$this->handler = new PDO('mysql:host=127.0.0.1;dbname=cite', 'root', 'root');
-			$this->handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		} catch(PDOException $e) {
-			echo $e->getMessage();
-			die("sorry, database problem");
-		}
-		*/
 	}	
 
 
