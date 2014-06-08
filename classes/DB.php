@@ -1,7 +1,7 @@
 <?php
 
 class DB {
-	private $this->handler;
+	private $handler;
 	public function __construct($handler) { 
 		$this->handler = $handler;
 	}	
