@@ -48,7 +48,7 @@
 			}
 
 			if(array_key_exists("datedoi", $array)){
-				$this->dateDoi = $array['datedoi'];
+				$this->datedoi = $array['datedoi'];
 			}
 
 			if(array_key_exists("deepLink", $array)){

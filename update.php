@@ -32,25 +32,25 @@ if(Input::exists()) {
 	);
 
 	if($validate->passed()) {
-		$stub = new Stub($dbHandler->getStub('stubId', Input::get('stubId')));
-			PC::debug($stub);
+		
 		// add to database
 		
 		try {
 			
-			$stub = new Stub($dbHandler->getStub('stubId', Input::get('stubId')));
-			PC::debug($stub);
+			$stub = $dbHandler->getStub('stubId', Input::get('stubId'));
+			
 			// update databse
 
 			if(!strlen($stub->doi) > 0) { // does this stub already have a DOI?
 
 				//does the deeplink match with the one in the database
-				if(trim(escape(Input::get('doi'))) == $stub->deepLink) {
+				if(trim(escape(Input::get('deepLink'))) == $stub->deepLink) {
 
-					$stub->doi = trim(escape(Input::get('doi')));
+					$stub->doi = trim(escape(Input::get('doi')));PC::debug($stub->doi);PC::debug($stub);
 					$stub->datedoi = date('Y-m-d H:i:s');
-					//$dbHandler->change('links', $stub);
-
+					$dbHandler->update('links', 'doi', $stub);
+					$dbHandler->update('links', 'datedoi', $stub);
+			
 					// send mail
 					require 'classes/EmailHandler.php';
 					$email = new EmailHandler();
@@ -59,6 +59,8 @@ if(Input::exists()) {
 					    "Stub submitted updated",
 					    "Thank you for updating your stub.\nClicking on ".$rootURL.trim(escape(Input::get('stubId'))). " will send you to your article\nWe look forward to your next submission.\n"
 				    );
+				} else {
+					echo "error 1";
 				}
 			    
 

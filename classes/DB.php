@@ -47,10 +47,10 @@ class DB {
 	*/
 	public function getStub($field, $code) {
 
-		$query = $this->handler->query("SELECT * FROM 'links' WHERE $field = '$code'");
+		$query = $this->handler->query("SELECT * FROM links WHERE $field = '$code'");
 
 		while ($r = $query->fetchAll(PDO::FETCH_ASSOC)) {
-			PC::debug($r);
+			
 			if($r[0] != null){
 				return new Stub($r[0]);			
 			} else{
@@ -59,8 +59,10 @@ class DB {
 		}	
 	}
 
-	public function change($table, $stub) {
-		
+	public function update($table, $field, $stub) {
+		$sql = "UPDATE $table SET $field = ? WHERE stubId = ?";
+		$query = $this->handler->prepare($sql);PC::debug($query);
+		$query->execute(array($stub->$field,$stub->stubId));PC::debug($query);
 	}
 
 	/*
