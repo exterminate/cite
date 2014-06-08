@@ -55,7 +55,7 @@ if(Input::exists()) {
 		$stub = new Stub($inputArray);
 		
 		// add to database
-		//PC::debug($stub);
+		PC::debug($stub);
 		try {
 
 			//add to database			

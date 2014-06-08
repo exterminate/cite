@@ -39,7 +39,7 @@
 			}
 
 			if(array_key_exists("datesubmitted", $array)){
-				$this->dateSubmitted = $array['datesubmitted'];
+				$this->datesubmitted = $array['datesubmitted'];
 			}
 
 			if(array_key_exists("doi", $array)){
