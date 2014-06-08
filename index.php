@@ -3,29 +3,53 @@ require 'core/init.php';
 
 
 
+
 // if there is a deeplink { show stub }
 if(isset($_GET['stub']) && !empty($_GET['stub'])) { 
 
-	$stub = new Stub($handler);
-	if($stub->count($_GET['stub']) == 0) { 	// no such stub
-		die("This stub does not exist.");
+	$stub = $dbHandler->getStub("stubId", $_GET['stub']);
+
+	if($stub == null) { 	// no such stub
+		die("This stub does not exist.");		
 	} else { // show stub or redirect
-		$stub->addViews($_GET['stub']);
-		$stub->redirect($_GET['stub']);
-		$stub->obtainData('deeplink', trim(escape(Input::get('stub'))));
+		$dbHandler->incrementViews($stub);
+		if($stub->doi == ""){
+			/*
+				no DOI associated with the stub
+			*/
+
+		} else{
+			/*
+				redirect to the DOI indicated
+			*/
+			header("Location: http://dx.doi.org/".$stub->doi);
+		}		
 
 	include 'layout/head.php';
 	include 'layout/header.php';
 ?>
-	<div>
-		<ul>
-			<li>Unique ID: <?php echo $stub->showBits("deeplink"); ?></li>
-			<li>Stub author: <?php echo $stub->showBits("name"); ?></li>
-			<li>Author email: <?php echo $stub->showBits("email"); ?></li>
-			<li>OrcID: <?php echo $stub->showBits("orcid"); ?></li>
-			<li>Research description: <?php echo $stub->showBits("description"); ?></li>
-			<li>Views: <?php echo $stub->showBits("views"); ?></li>
-		</ul>	
+	<script src='lib/mustache.js'></script>
+	<script>
+		$(document).ready(function(){
+			var json = $.parseJSON('<?php echo json_encode($stub, JSON_FORCE_OBJECT); ?>');
+		
+			var template = 	"<ul class='stub'>{{stubTitle}}"+								
+								"<li>Name: {{firstName}} {{surname}}</li>"+
+								"<li>OrcID: {{orcid}}</li>"+
+								"<li>Stub ID: {{stubId}}</li>"+
+								"<li>Description: {{description}}</li>"+
+								"<li>Date Submitted: {{datesubmitted}}"+
+							"</ul>";
+							
+
+			var html = Mustache.to_html(template, json);
+			console.log(json);
+
+			$('#display').html(html);
+		});
+	</script>
+	<div id="display">
+		
 	</div>
 	
 

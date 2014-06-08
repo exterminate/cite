@@ -8,12 +8,13 @@ class DB {
 
 	public function put($table, $stub) {
 
-		 $sql = "INSERT INTO links (stubId, firstName, surname, email, orcid, description, datesubmitted, deepLink) 
-		 VALUES (:stubId, :firstName, :surname, :email, :orcid, :description, :datesubmitted, :deepLink)";
+		 $sql = "INSERT INTO links (stubId, stubTitle, firstName, surname, email, orcid, description, datesubmitted, deepLink) 
+		 VALUES (:stubId, :stubTitle, :firstName, :surname, :email, :orcid, :description, :datesubmitted, :deepLink)";
 
 		$query = $this->handler->prepare($sql);
 		$query->execute(array(
 			':stubId' 		=> $stub->stubId,
+			':stubTitle'	=> $stub->stubTitle,
 			':firstName' 	=> $stub->firstName,
 			':surname' 		=> $stub->surname,
 			':email' 		=> $stub->email,
@@ -100,6 +101,17 @@ class DB {
 		}
 
 	}
+
+	public function incrementViews($stub){
+		$query = $this->handler->query("SELECT views FROM links WHERE stubId = '$stub->stubId'");
+		$r = $query->fetch(PDO::FETCH_OBJ);
+		$newViews = $r->views + 1;		
+		$sql = "UPDATE links SET views = ? WHERE stubId = ?";
+		$query = $this->handler->prepare($sql);
+		$query->execute(array($newViews,$stub->stubId));
+	}
+
+
 
 }
 

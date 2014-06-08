@@ -10,6 +10,11 @@ if(Input::exists()) {
 
 	$validate = new Validate();
 	$validate->check($_POST, array( 
+		'stubTitle' => array(
+				'required' => true,
+				'min' => 10,
+				'max' => 140
+			),
 		'firstName' => array(
 			'required' 	=> true,
 			'min' => 2,
@@ -43,6 +48,7 @@ if(Input::exists()) {
 
 		$inputArray = array(
 				'stubId' => $dbHandler->getUniqueCode('stubId'),
+				'stubTitle' => Input::get('stubTitle'),
 				'firstName' => Input::get('firstName'),
 				'surname' => Input::get('surname'),
 				'email' => Input::get('email'),
@@ -99,6 +105,10 @@ include 'layout/header.php';
 
 				clearDetails();
 
+				$('#clearButton').click(function(){
+					clearDetails();
+				});
+
 				$('#orcid').mask("9999-9999-9999-9999", {placeholder : ".", completed: function(){
 					
 					searchOrcid(this.val(), 'orcid');
@@ -132,9 +142,17 @@ include 'layout/header.php';
 
 				$('#orcidSelect').change(function(){
                     var key = $('#orcidSelect').val();
-                    $('#firstName').val(searchResults[key].fname);
-                    $('#surname').val(searchResults[key].sname);
-                    $('#email').val(searchResults[key].email);
+                    $('#firstName').val(searchResults[key].firstName);
+                    $('#surname').val(searchResults[key].surname);
+
+                    var email = searchResults[key].email;
+                    if(email == ""){
+                    	$('#email').val('');
+						$('#email').attr('placeholder', "Email set to private");
+                    } else{
+                    	$('#email').val(searchResults[key].email);
+                	}
+                  
                     $('#orcid').val(searchResults[key].id);
                 });
                 
@@ -151,6 +169,7 @@ include 'layout/header.php';
 			};
 
 			function clearDetails(){
+				$('#stubTitle').val("");
                 $('#name').val("");
                 $('#email').val("");
                 $('#orcid').val("");
@@ -192,10 +211,9 @@ include 'layout/header.php';
                     		"something has gone wrong behind the scenes! Sorry!");                        
                     } else{
                     	displaySearchError("hide");                    	
-                        if(Object.keys(searchResults).length == 1){
-
-                        	$('#firstName').val(searchResults[0].fname);
-                        	$('#surname').val(searchResults[0].sname);
+                        if(Object.keys(searchResults).length == 1){                        	
+                        	$('#firstName').val(searchResults[0].firstName);
+                        	$('#surname').val(searchResults[0].surname);
                         	$('#orcid').val(searchResults[0].id);
                             if(searchResults[0].email === null){
                             	displaySearchError("show", "We could not find an email associated with this Orcid ID."+ "<br/>" + privateMsg);
@@ -210,7 +228,7 @@ include 'layout/header.php';
                                 $('#orcidSelect')
                                     .append($("<option></option>")
                                     .attr("value", key)
-                                    .text(val.email));
+                                    .text(val.firstName + " " + val.surname));
                             });
                         }
                     }
@@ -225,37 +243,44 @@ include 'layout/header.php';
 
 		<div class='mainContent'>		
 			<form action="" method="post">	
+				<label>Stub Title:
+					<input class='input' type='text' name='stubTitle' id='stubTitle' value="<?php echo Input::get('stubTitle'); ?>" autocomplete="off" required>
+				</label>
+				<br/>
 				<label for="firstName">First Name
-					<input class="input" type="text" name="firstName" id="firstName" value="<?php echo Input::get('firstName'); ?>" autocomplete="off">										
+					<input class="input" type="text" name="firstName" id="firstName" value="<?php echo Input::get('firstName'); ?>" autocomplete="off" required>										
 				</label>
 				<br/>
 				<label>Surname
-					<input class='input' type='text' name='surname' id='surname' value='<?php echo Input::get("surname"); ?>' autocomplete="off">
+					<input class='input' type='text' name='surname' id='surname' value='<?php echo Input::get("surname"); ?>' autocomplete="off" required>
 				</label>
 					<button type='button' id='getOrcidByNameButton' disabled hidden>Search Orcid by name</button>
 				<br/>
 		
 				<label for="email">E-mail
-					<input class="input" type="text" name="email" id="email" value="<?php echo Input::get('email'); ?>">						
+					<input class="input" type="email" name="email" id="email" value="<?php echo Input::get('email'); ?>" required>						
 					<button type='button' id='getOrcidByEmailButton'>Search Orcid by email</button>					
 				</label>
 				<br/>
 			
 				<label for="orcid">ORCID ID
-					<input class="input" type="text" name="orcid" id="orcid" value="<?php echo Input::get('orcid'); ?>">						
+					<input class="input" type="text" name="orcid" id="orcid" value="<?php echo Input::get('orcid'); ?>" required>						
 					<button type='button' id='getOrcidByIdButton'>Search Orcid by ID</button>
 				</label>
 				<br/>
-				<select id="orcidSelect" size='10' hidden></select>
+				<label>
+					<select id="orcidSelect" size='10' hidden></select>
+				</label>
 				<div id='searchErr' class='error'></div>
 				<br/>
 			
 				<label for="description">Describe your work<br/>
-					<textarea class="input" name="description" id="description"><?php echo Input::get('description');?></textarea>						
+					<textarea class="input" name="description" id="description" required><?php echo Input::get('description');?></textarea>						
 				</label>
 				<br/>
 			
 				<input type="submit" name="submit" id="submit" value="Submit">
+				<button type="button" id='clearButton'>Clear</button>
 			</form>
 		</div>		
 		<div id=out></div>

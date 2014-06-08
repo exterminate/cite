@@ -52,8 +52,8 @@
 
         array_push($results['searchResults'],
             array(
-                "fname" => $fname,
-                "sname" => $sname,
+                "firstName" => $fname,
+                "surname" => $sname,
                 "email" => $email,
                 "id" => $id
             )

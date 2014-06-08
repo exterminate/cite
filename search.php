@@ -9,6 +9,7 @@ include 'layout/header.php';
 ?>
 
 	<script src="../lib/jquery.maskedinput.js" type="text/javascript"></script>
+	<script src='../lib/mustache.js'></script>
 	<script>
 		$(document).ready(function(){
 			$('#typeSelect').change(function(){
@@ -33,7 +34,7 @@ include 'layout/header.php';
 			/*
 				Note this only finds exact matches at present
 			*/
-			$.post("../searchSQL.php", {query : query, type : type, admin : false}, function(data){
+			$.post("../searchSQL.php", {query : query, type : type}, function(data){
 				console.log(data);
 				$('#output').empty();
 				printJSONToTable(data, $('#output'));	
@@ -44,12 +45,26 @@ include 'layout/header.php';
 	}
 
 		function printJSONToTable(data, outputElement){
+
 			var table = $('<table>').attr("class", "table").attr("id", "resultsTable");
 
 			if(data.error != null){
 				$(outputElement).append("Error: " + data.error);
 			} else {
 				var length = Object.keys(data).length;
+
+				var template = 	"<ul class='stub'><em>{{stubTitle}}</em>"+								
+								"<li>Name: {{firstName}} {{surname}}</li>"+
+								"<li>OrcID: {{orcid}}</li>"+
+								"<li>Stub ID: {{stubId}}</li>"+
+								"<li>Description: {{description}}</li>"+
+								"<li>Date Submitted: {{datesubmitted}}"+
+							"</ul><br>";
+								
+
+			for(var i = 0; i < length; i++){
+				$(outputElement).append(Mustache.to_html(template, data[i]));
+			}
 
 				//populate the header row
 				var headerRow = $("<tr>");
@@ -87,7 +102,8 @@ include 'layout/header.php';
 					<option value='email'>Email</option>
 					<option value='surname'>Surname</option>
 					<option value='orcid'>Orcid</option>
-					<option value='deeplink'>Stub ID</option>					
+					<option value='deeplink'>Stub ID</option>	
+					<option value='stubTitle'>Stub Title</option>				
 				</select>
 			</label>	
 

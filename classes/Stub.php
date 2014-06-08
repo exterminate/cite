@@ -3,6 +3,7 @@
 	class Stub{
 		
 		public $stubId = "";
+		public $stubTitle = "";
 		public $firstName = "";
 		public $surname = "";
 		public $email = "";
@@ -17,6 +18,10 @@
 		function __construct($array){
 			if(array_key_exists("stubId", $array)){
 				$this->stubId = $array['stubId'];
+			}
+
+			if(array_key_exists("stubTitle", $array)){
+				$this->stubTitle = $array['stubTitle'];
 			}
 
 			if(array_key_exists("firstName", $array)){

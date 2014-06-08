@@ -13,9 +13,7 @@
     $stubs = $dbHandler->getStubs('links', $type, $query);
 
     if($stubs == null){  
-
     	$stubs = array("error" => "No results found matching ".$type." = ".$query);
-
     }
 
     
