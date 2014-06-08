@@ -2,7 +2,7 @@
 
 // may change the name of this file later
 
-function create_deeplink($length) {
+function create_deeplink($length) { // <- delete
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $deeplink = '';
     for ($i = 0; $i < $length; $i++) {

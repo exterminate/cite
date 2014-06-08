@@ -7,44 +7,21 @@ class DB {
 	}	
 
 
-	public function put($table, $conditions = array()) {
-		if(count($conditions) % 2 == 0) {
-			$insert = "";
-			$values = "";
-			$iterate = 1;
-			foreach ($conditions as $condition) {
-				if($iterate % 2 != 0) {
-					$insert .= $condition.",";
-				} else {
-					$values .= $condition.",";				
-				}
-			}
-			// remove trailing commas
-			$insert = rtrim($insert, ",");
-			$values = rtrim($values, ",");
+	public function put($table, $stub) {
 
-		}
-		$sql = "INSERT INTO links ($insert) VALUES ($values)";
-		 
-		//example $sql = "INSERT INTO links (deeplink, name, email, orcid, description, datesubmitted, uniquecode) 
-		// VALUES (:deeplink, :name, :email, :orcid, :description, NOW(), :uniquecode)";
-		echo $sql;
-		
-		// this should work
-		$query->execute($sql);
-		
-		
-		/*	
+		 $sql = "INSERT INTO links (deeplink, name, email, orcid, description, datesubmitted, uniquecode) 
+		 VALUES (:deeplink, :name, :email, :orcid, :description, :datesubmitted, :uniquecode)";
+	
 		$query = $this->handler->prepare($sql);
 		$query->execute(array(
-			':deeplink' 	=> $deeplink,
-			':name' 		=> $name,
-			':email' 		=> $email,
-			':orcid'		=> $orcid,
-			':description' 	=> $description,
-			':uniquecode'	=> $uniquecode
-		));
-		*/
+			':deeplink' 	=> $stub->deeplink,
+			':name' 		=> $stub->name,
+			':email' 		=> $stub->email,
+			':orcid'		=> $stub->orcid,
+			':description' 	=> $stub->description,
+			':datesubmitted'=> $stub->datesubmitted,
+			':uniquecode'	=> $stub->uniquecode
+		));	
 	}
 
 	/* 
@@ -79,6 +56,32 @@ class DB {
 		return $query->rowCount();
 	}
 
+	public function getUniqueCode($type) { //create a string, and checks it doesn't exist in database
+
+		if($type == "stubId") {
+			$length = 8;
+		} elseif($type == "deepLink") {
+			$length = 12;
+		} else {
+			die("You have not entered a valid variable.");
+		}
+
+		// generate random string
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+	    }
+
+
+		//GETTING ROW COUNT
+		$query = $this->handler->query("SELECT $type FROM links WHERE $type = '$randomString'");
+		
+		while($query->rowCount() == 0) {
+			return $randomString;
+		}
+
+	}
 
 }
 /* 
