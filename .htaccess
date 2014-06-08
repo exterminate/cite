@@ -1,7 +1,7 @@
 RewriteEngine On
 RewriteRule ^([a-zA-Z0-9]+)$ index.php?stub=$1
-RewriteRule ^update$ update.php
+RewriteRule ^update/$ update.php
 RewriteRule ^update/([a-zA-Z0-9]+)$ update.php?stub=$1
-RewriteRule ^submit$ submit.php
-RewriteRule ^search$ search.php
-RewriteRule ^about$ about.php
+RewriteRule ^submit/$ submit.php
+RewriteRule ^search/$ search.php
+RewriteRule ^about/$ about.php
