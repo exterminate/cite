@@ -22,7 +22,7 @@ if(isset($_SESSION['username'])) {
 		$array = array('doi','firstName'); // etc.
 		$stub = new Stub($stubArray);
 		$stub->stubId = trim(escape(Input::get('delete')));
-		$stubToDelete = $stub->getStub('stubId', $stub->stubId);
+		$stubToDelete = $handler->getStub('stubId', $stub->stubId);
 		foreach($array as $item) {
 			$handler->update('links', $item, $stubToDelete);//need to repeat for ea
 		}
