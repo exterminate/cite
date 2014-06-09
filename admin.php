@@ -19,8 +19,16 @@ if(isset($_SESSION['username'])) {
 	
 	// delete stub
 	if(Input::get('delete')) {
-		$deleteStub = new Stub($handler);
-		$deleteStub->deleteStub(trim(escape(Input::get('delete'))));
+		$array = array('doi','firstName'); // etc.
+		$stub = new Stub($stubArray);
+		$stub->stubId = trim(escape(Input::get('delete')));
+		$stubToDelete = $stub->getStub('stubId', $stub->stubId);
+		foreach($array as $item) {
+			$handler->update('links', $item, $stubToDelete);//need to repeat for ea
+		}
+		
+		// old - $deleteStub = new Stub($handler);
+		// old - $deleteStub->deleteStub(trim(escape(Input::get('delete'))));
 		header("Location: admin.php");
 		exit;
 	}
