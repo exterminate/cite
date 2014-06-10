@@ -32,9 +32,7 @@ if(isset($_SESSION['username'])) {
 	// edit a stub
 	if(Input::get('edit')) {
 		$stub = $dbHandler->getStub('stubId', trim(escape(Input::get('edit'))));
-		echo "<p>Editing stub " . Input::get('edit') . "</p>";
-		//$editStub->obtainData('deeplink', trim(escape(Input::get('edit'))));
-		echo "<p>Created: " . $stub->datesubmitted . "</p>";
+		echo "<p>Editing stub: " . Input::get('edit') . "<br>Created: " . $stub->datesubmitted . "</p>";
 		include 'layout/edit.php';
 
 
