@@ -5,7 +5,7 @@ require 'core/init.php';
 
 if(Input::exists()) {
 
-	$user = new User($handler, Input::get('username'), Input::get('password'));
+	$user = new User($dbHandler, Input::get('username'), Input::get('password'));
 	$user->login();
 	
 } 
@@ -19,16 +19,8 @@ if(isset($_SESSION['username'])) {
 	
 	// delete stub
 	if(Input::get('delete')) {
-		$array = array('doi','firstName'); // etc.
-		$stub = new Stub($stubArray);
-		$stub->stubId = trim(escape(Input::get('delete')));
-		$stubToDelete = $handler->getStub('stubId', $stub->stubId);
-		foreach($array as $item) {
-			$handler->update('links', $item, $stubToDelete);//need to repeat for ea
-		}
 		
-		// old - $deleteStub = new Stub($handler);
-		// old - $deleteStub->deleteStub(trim(escape(Input::get('delete'))));
+		$dbHandler->deleteStub(trim(escape(Input::get('delete'))));
 		header("Location: admin.php");
 		exit;
 	}
@@ -39,10 +31,10 @@ if(isset($_SESSION['username'])) {
 	
 	// edit a stub
 	if(Input::get('edit')) {
-		$editStub = new Stub($handler);
+		$stub = $dbHandler->getStub('stubId', trim(escape(Input::get('edit')))));
 		echo "<p>Editing stub " . Input::get('edit') . "</p>";
-		$editStub->obtainData('deeplink', trim(escape(Input::get('edit'))));
-		echo "<p>Created: " . $editStub->showBits('datesubmitted') . "</p>";
+		//$editStub->obtainData('deeplink', trim(escape(Input::get('edit'))));
+		echo "<p>Created: " . $stub->datesubmitted . "</p>";
 		include 'layout/edit.php';
 
 
