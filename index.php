@@ -33,13 +33,16 @@ if(isset($_GET['stub']) && !empty($_GET['stub'])) {
 		$(document).ready(function(){
 			var json = $.parseJSON('<?php echo json_encode($stub, JSON_FORCE_OBJECT); ?>');
 		
-			var template = 	"<ul class='stub'>{{stubTitle}}"+								
-								"<li>Name: {{firstName}} {{surname}}</li>"+
-								"<li>OrcID: {{orcid}}</li>"+
-								"<li>Stub ID: {{stubId}}</li>"+
-								"<li>Description: {{description}}</li>"+
-								"<li>Date Submitted: {{datesubmitted}}"+
-							"</ul>";
+			var template = 	"<section class='stub'>"+
+								"<h3>{{stubTitle}}</h3>"+
+								"<ul>"+								
+									"<li class='name'>{{firstName}} {{surname}}</li>"+
+									"<li class='orcid'>{{orcid}}</li>"+
+									"<li class='stubId'>{{stubId}}</li>"+
+									"<li class='description'>{{description}}</li>"+
+									"<li class='datesubmitted'>{{datesubmitted}}"+
+								"</ul>"+
+							"</section><br>";
 							
 
 			var html = Mustache.to_html(template, json);

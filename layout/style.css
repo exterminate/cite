@@ -199,3 +199,64 @@ ol.circles-list > li:before {
 	content: counter(li-counter);
 	counter-increment: li-counter;
 }
+
+/*
+	The following styles the Mustache template used for the stub class
+*/
+
+.stub{
+	background: #b52936;
+    margin:5px;
+    box-shadow: 0 2px 5px #000;
+
+}
+
+.stub:hover{
+    box-shadow: 0 4px 10px #000;
+}
+
+
+
+.stub li{
+	vertical-align: center;
+    color:white
+	
+}
+
+div.stub li:before{
+	color:white;
+	font-weight: bold;
+	width:25%;
+	display: inline-block;
+	text-align:center;
+	padding-right: 10px;
+}
+
+div.stub li.name:before {	
+	content: "Name: ";
+	
+}
+
+div.stub li.orcid:before {
+	content: "Orcid: ";
+}
+
+div.stub li.stubId:before {
+	content: "Stub ID: ";
+}
+
+div.stub li.description:before {
+	content: "Description: ";
+}
+
+div.stub li.datesubmitted:before {
+	content: "Date Submitted: ";
+	
+}
+
+ul{list-style-type:none}
+
+
+/*
+	End of Mustache template stub class styling
+*/

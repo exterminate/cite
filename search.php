@@ -53,13 +53,16 @@ include 'layout/header.php';
 			} else {
 				var length = Object.keys(data).length;
 
-				var template = 	"<ul class='stub'><em>{{stubTitle}}</em>"+								
-								"<li>Name: {{firstName}} {{surname}}</li>"+
-								"<li>OrcID: {{orcid}}</li>"+
-								"<li>Stub ID: {{stubId}}</li>"+
-								"<li>Description: {{description}}</li>"+
-								"<li>Date Submitted: {{datesubmitted}}"+
-							"</ul><br>";
+				var template = 	"<div class='stub'>"+
+									"<h3>{{stubTitle}}</h3>"+
+									"<ul>"+								
+										"<li class='name'>{{firstName}} {{surname}}</li>"+
+										"<li class='orcid'>{{orcid}}</li>"+
+										"<li class='stubId'>{{stubId}}</li>"+
+										"<li class='description'>{{description}}</li>"+
+										"<li class='datesubmitted'>{{datesubmitted}}</li>"+
+									"</ul>"+
+								"</div><br>";
 								
 
 			for(var i = 0; i < length; i++){
