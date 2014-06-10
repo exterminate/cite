@@ -25,6 +25,7 @@ if(Input::exists()) {
 		<tr>
 			<td><label for="email">Email address</label></td>
 			<td><input type="email" name="email" id="email"></td>
+			<td><a href="">Get code</a></td>
 		<tr>	
 		<tr>
 			<td><label for="deepLink">Enter code</label></td>
