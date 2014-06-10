@@ -31,7 +31,7 @@ if(isset($_SESSION['username'])) {
 	
 	// edit a stub
 	if(Input::get('edit')) {
-		$stub = $dbHandler->getStub('stubId', trim(escape(Input::get('edit')))));
+		$stub = $dbHandler->getStub('stubId', trim(escape(Input::get('edit'))));
 		echo "<p>Editing stub " . Input::get('edit') . "</p>";
 		//$editStub->obtainData('deeplink', trim(escape(Input::get('edit'))));
 		echo "<p>Created: " . $stub->datesubmitted . "</p>";
@@ -46,10 +46,11 @@ if(isset($_SESSION['username'])) {
 	
 		echo "<p>" . $_SESSION['username'] . " is logged in - <a href='" . $rootURL . "logout.php'>Logout</a></p>";
 
-		$stubs = $dbHandler->getStubs('links', 'stubId', '%');
+		$stubs = $dbHandler->getStubs('links', 'stubId', '[a-zAz0-9]');
+		print_r($stubs);
 		if($stubs == null){  
-    			$stubs = array("error" => "No results found matching ".$type." = ".$query);//nothing to output this on this page
-    		}
+    		$stubs = array("error" => "No results found matching ".$type." = ".$query);//nothing to output this on this page
+    	}
 		echo "<p>" . $dbHandler->count('links', 'stubId', '%') . " stubs have been created</p>";
 
 		echo "<table class='table' width='100%'>";
@@ -64,14 +65,13 @@ if(isset($_SESSION['username'])) {
 			echo "<th>edit</th>";
 		echo "</tr>";	
 		foreach($stubs as $stub) {
-			echo "<th>" . $stub->stubId . "</th>";
-			echo "<th>" . $stub->firstName . "</th>";
-			echo "<th>" . $stub->surname . "</th>";
-			echo "<th>" . $stub->email . "</th>";
-			echo "<th>" . $stub->orcid . "</th>";
-			echo "<th>" . $stub->datesubmitted . "</th>";
-			echo "<th><a href='?delete=" . $stub->stubId ."'>X</a></th>";
-			echo "<th><a href='?edit=" . $stub->stubId ."'>X</a></th>";
+			echo "<td>" . $stub->stubId . "</td>";
+			echo "<td>" . $stub->surname . "</td>";
+			echo "<td>" . $stub->email . "</td>";
+			echo "<td>" . $stub->orcid . "</td>";
+			echo "<td>" . $stub->datesubmitted . "</td>";
+			echo "<td><a href='?delete=" . $stub->stubId ."'>X</a></td>";
+			echo "<td><a href='?edit=" . $stub->stubId ."'>X</a></td>";
 		}
 		echo "</table>";
 	
