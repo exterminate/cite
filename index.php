@@ -1,9 +1,6 @@
 <?php
 	require 'core/init.php';
 
-
-
-
 	// if there is a deeplink { show stub }
 	if(isset($_GET['stub']) && !empty($_GET['stub'])) { 
 
@@ -62,9 +59,7 @@
 				})
 				.fail(function(a,b,c){
 					console.log("Failed to load Mustache template, " + a.responseText);
-				});				
-
-			
+				});							
 		});
 	</script>
 	<div id="display">
