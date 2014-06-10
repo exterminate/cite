@@ -112,11 +112,15 @@ class DB {
 	}
 
 	public function deleteStub($stubId) {
-		$sql = "DELETE FROM links WHERE stubId = ?";
-		$query = $this->handler->prepare($sql);
-		$query->execute(array($stubId));
-		header("Location: admin.php");
-		exit;
+		try{
+			$sql = "DELETE FROM links WHERE stubId = ?";
+			$query = $this->handler->prepare($sql);
+			$query->execute(array($stubId));
+		}catch(PDOException $e) {
+			echo $e->getMessage();
+		}
+
+		
 	}
 
 
