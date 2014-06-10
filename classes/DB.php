@@ -70,8 +70,8 @@ class DB {
 	* Count the number of records from a declared search.
 	* Limited to one search field.
 	*/
-	public function count($table, $field, $code) {
-		$query = $this->handler->query("SELECT * FROM $table WHERE $field = '$code'");
+	public function count($table, $field, $operator, $code) {
+		$query = $this->handler->query("SELECT * FROM $table WHERE $field $operator '$code'");
 		return $query->rowCount();
 	}
 

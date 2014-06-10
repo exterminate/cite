@@ -51,7 +51,7 @@ if(isset($_SESSION['username'])) {
 		/*if($stubs == null){  
     		$stubs = array("error" => "No results found matching ".$type." = ".$query);//nothing to output this on this page
     	}*/
-		echo "<p>" . $dbHandler->count('links', 'stubId', '%') . " stubs have been created</p>";
+		echo "<p>" . $dbHandler->count('links', 'stubId', 'LIKE', '%') . " stubs have been created</p>";
 
 		echo "<table class='table' width='100%'>";
 		echo "<tr>";
@@ -65,6 +65,7 @@ if(isset($_SESSION['username'])) {
 			echo "<th>edit</th>";
 		echo "</tr>";	
 		foreach($stubs as $stub) {
+			echo "<tr>";
 			echo "<td>" . $stub->stubId . "</td>";
 			echo "<td>" . $stub->surname . "</td>";
 			echo "<td>" . $stub->email . "</td>";
@@ -72,6 +73,7 @@ if(isset($_SESSION['username'])) {
 			echo "<td>" . $stub->datesubmitted . "</td>";
 			echo "<td><a href='?delete=" . $stub->stubId ."'>X</a></td>";
 			echo "<td><a href='?edit=" . $stub->stubId ."'>X</a></td>";
+			echo "</tr>";
 		}
 		echo "</table>";
 	
