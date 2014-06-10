@@ -21,6 +21,7 @@ if(isset($_SESSION['username'])) {
 	if(Input::get('delete')) {
 		
 		$dbHandler->deleteStub(trim(escape(Input::get('delete'))));
+		echo "ho";
 		header("Location: admin.php");
 		exit;
 	}
@@ -67,6 +68,7 @@ if(isset($_SESSION['username'])) {
 		foreach($stubs as $stub) {
 			echo "<tr>";
 			echo "<td>" . $stub->stubId . "</td>";
+			echo "<td>" . $stub->firstName . "</td>";
 			echo "<td>" . $stub->surname . "</td>";
 			echo "<td>" . $stub->email . "</td>";
 			echo "<td>" . $stub->orcid . "</td>";

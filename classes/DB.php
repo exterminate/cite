@@ -111,6 +111,14 @@ class DB {
 		$query->execute(array($newViews,$stub->stubId));
 	}
 
+	public function deleteStub($stubId) {
+		$sql = "DELETE FROM links WHERE stubId = ?";
+		$query = $this->handler->prepare($sql);
+		$query->execute(array($stubId));
+		header("Location: admin.php");
+		exit;
+	}
+
 
 
 }
