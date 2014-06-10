@@ -19,11 +19,9 @@ if(isset($_SESSION['username'])) {
 	
 	// delete stub
 	if(Input::get('delete')) {
-		
-
-		$dbHandler->deleteStub(Input::get('delete'));
-		
+		$dbHandler->deleteStub(trim(escape(Input::get('delete'))));
 		header("Location: admin.php");
+		die();
 		exit;
 	}
 	

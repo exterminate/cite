@@ -116,6 +116,7 @@ class DB {
 			$sql = "DELETE FROM links WHERE stubId = ?";
 			$query = $this->handler->prepare($sql);
 			$query->execute(array($stubId));
+			
 		}catch(PDOException $e) {
 			echo $e->getMessage();
 		}
