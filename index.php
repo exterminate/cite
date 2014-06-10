@@ -21,14 +21,13 @@
 	<script>
 		$(document).ready(function(){
 			var json = $.parseJSON('<?php echo json_encode($stub, JSON_FORCE_OBJECT); ?>');
+			console.log(json);
 
 			var doiURL = "http://dx.doi.org/" + json.doi;
 
-			$('#display').on('click', '.stub', function(){
-				window.location = doiURL;
-			});
+			
 
-			if(json.doi !== null){
+			if(json.doi !== ""){
 				/*
 					There is a DOI associated with this stub, so we will wait 5 secs then redirect
 				*/
@@ -46,27 +45,26 @@
 				setInterval(function(){
 					$('#message').html(message + --remainingTime);					
 				}, 1000)
+
+				/*
+					Bind a click event to the stub for manual redirect
+				*/
+				$('#display').on('click', '.stub', function(){
+					window.location = doiURL;
+				});
 			} 
-		
-		
-			var template = 	"<section class='stub'>"+
-								"<h3>{{stubTitle}}</h3>"+
-								"<ul>"+								
-									"<li class='name'>{{firstName}} {{surname}}</li>"+
-									"<li class='orcid'>{{orcid}}</li>"+
-									"<li class='stubId'>{{stubId}}</li>"+
-									"<li class='description'>{{description}}</li>"+
-									"<li class='datesubmitted'>{{datesubmitted}}</li>"+
-									"{{#doi}}<li class='doi'>{{doi}}</li>{{/doi}}"+
-									"{{#datedoi}}<li class='datedoi'>{{datedoi}}</li>{{/datedoi}}"+
-								"</ul>"+
-							"</section><br>";
-							
 
-			var html = Mustache.to_html(template, json);
-			console.log(json);
+			/*
+				Get the Mustache template from file and apply it
+			*/
+				$.get("templates/stub.mustache.html", function(template){				
+						$('#display').append(Mustache.to_html(template, json));
+				})
+				.fail(function(a,b,c){
+					console.log("Failed to load Mustache template, " + a.responseText);
+				});				
 
-			$('#display').append(html);
+			
 		});
 	</script>
 	<div id="display">

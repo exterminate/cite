@@ -63,24 +63,25 @@ include 'layout/header.php';
 			} else {
 				var length = Object.keys(data).length;
 
-				var template = 	"<div class='stub'>"+
-									"<h3>{{stubTitle}}</h3>"+
-									"<ul>"+								
-										"<li class='name'>{{firstName}} {{surname}}</li>"+
-										"<li class='orcid'>{{orcid}}</li>"+
-										"<li class='stubId'>{{stubId}}</li>"+
-										"<li class='description'>{{description}}</li>"+
-										"<li class='datesubmitted'>{{datesubmitted}}</li>"+
-										"{{#doi}}<li class='doi'>{{doi}}</li>{{/doi}}"+
-										"{{#datedoi}}<li class='datedoi'>{{datedoi}}</li>{{/datedoi}}"+
-									"</ul>"+
-								"</div><br>";
+				$.get("../templates/stub.mustache.html", function(template){
+					
+					
+					console.log(template);			
+					for(var i = 0; i < length; i++){
+						$(outputElement).append(Mustache.to_html(template, data[i]));
+					}
+
+				})
+				.fail(function(a,b,c){
+					console.log("Failed to load Mustache template, " + a.responseText);
+				});
 								
 
-			for(var i = 0; i < length; i++){
-				$(outputElement).append(Mustache.to_html(template, data[i]));
-			}
-
+				/*	
+					Obsolete table rendering code,
+					Kept cos its worked, might be good for admin stuff
+				*/
+			/************************************************
 				//populate the header row
 				var headerRow = $("<tr>");
 				$.each(data[0], function(key, val){				
@@ -102,7 +103,8 @@ include 'layout/header.php';
 				}
 
 
-				$(outputElement).append($(table));		
+				$(outputElement).append($(table));
+			**************************************************/		
 			}
 		}
 			
