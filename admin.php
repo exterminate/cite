@@ -46,20 +46,33 @@ if(isset($_SESSION['username'])) {
 	
 		echo "<p>" . $_SESSION['username'] . " is logged in - <a href='" . $rootURL . "logout.php'>Logout</a></p>";
 
-		$stub = new Stub($handler);
-		echo "<p>" . $stub->countStubsType("links", "deeplink") . " stubs have been created</p>";
+		$stubs = $dbHandler->getStubs('links', 'stubId', '%');
+		if($stubs == null){  
+    			$stubs = array("error" => "No results found matching ".$type." = ".$query);//nothing to output this on this page
+    		}
+		echo "<p>" . $dbHandler->count('links', 'stubId', '%') . " stubs have been created</p>";
 
 		echo "<table class='table' width='100%'>";
 		echo "<tr>";
-			echo "<th>deeplink</th>";
-			echo "<th>name</th>";
+			echo "<th>stubId</th>";
+			echo "<th>firstName</th>";
+			echo "<th>surname</th>";
 			echo "<th>email</th>";
 			echo "<th>orcid</th>";
 			echo "<th>datesubmitted</th>";
 			echo "<th>delete</th>";
 			echo "<th>edit</th>";
 		echo "</tr>";	
-		$stub->showAllStubs();
+		foreach($stubs as $stub) {
+			echo "<th>" . $stub->stubId . "</th>";
+			echo "<th>" . $stub->firstName . "</th>";
+			echo "<th>" . $stub->surname . "</th>";
+			echo "<th>" . $stub->email . "</th>";
+			echo "<th>" . $stub->orcid . "</th>";
+			echo "<th>" . $stub->datesubmitted . "</th>";
+			echo "<th><a href='?delete=" . $stub->stubId ."'>X</a></th>";
+			echo "<th><a href='?edit=" . $stub->stubId ."'>X</a></th>";
+		}
 		echo "</table>";
 	
 	}
