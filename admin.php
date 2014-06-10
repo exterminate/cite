@@ -47,7 +47,7 @@ if(isset($_SESSION['username'])) {
 		echo "<p>" . $_SESSION['username'] . " is logged in - <a href='" . $rootURL . "logout.php'>Logout</a></p>";
 
 		$stubs = $dbHandler->getStubs('links', 'stubId', 'LIKE', '%');
-		print_r($stubs);
+		
 		/*if($stubs == null){  
     		$stubs = array("error" => "No results found matching ".$type." = ".$query);//nothing to output this on this page
     	}*/
