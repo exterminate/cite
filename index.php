@@ -35,7 +35,7 @@
 
 				var timeout = 5000;
 				setTimeout(function(){
-					window.location = URL;
+					window.location = doiURL;
 				}, timeout);
 
 				var remainingTime = 5;
