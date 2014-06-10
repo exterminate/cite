@@ -8,7 +8,7 @@ require 'includes/functions.php';
 require 'classes/Validate.php';
 
 // modify to get links to work
-$rootURL = "http://localhost/cite/";
+$rootURL = "http://localhost/git/cite/";
 
 try {
 	$handler = new PDO('mysql:host=127.0.0.1;dbname=cite', 'root', 'root');
