@@ -6,6 +6,14 @@ require 'core/init.php';
 // add session class/table
 include 'layout/head.php';
 include 'layout/header.php';	
+
+if(Input::exists()) {
+
+	$stubs = $dbHandler->getStubs('links','email', '=', Input::get('email'));
+	echo "<pre>";
+	print_r($stubs);
+	echo "</pre>";
+}
 ?>
 
 <p>Request a one-time code. This will be sent to your inbox. </p>
@@ -16,7 +24,7 @@ include 'layout/header.php';
 	<table>
 		<tr>
 			<td><label for="email">Email address</label></td>
-			<td><input type="email" name="email" id="email" value="<?php echo $editStub->showBits('email'); ?>"></td>
+			<td><input type="email" name="email" id="email"></td>
 		<tr>	
 		<tr>
 			<td><label for="deepLink">Enter code</label></td>
