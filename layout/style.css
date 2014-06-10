@@ -200,6 +200,11 @@ ol.circles-list > li:before {
 	counter-increment: li-counter;
 }
 
+.whatsThis{
+	background-color: yellow;
+	font-weight: bold;
+}
+
 /*
 	The following styles the Mustache template used for the stub class
 */
@@ -223,7 +228,7 @@ ol.circles-list > li:before {
 	
 }
 
-div.stub li:before{
+.stub li:before{
 	color:white;
 	font-weight: bold;
 	width:25%;
@@ -232,26 +237,35 @@ div.stub li:before{
 	padding-right: 10px;
 }
 
-div.stub li.name:before {	
+.stub li.name:before {	
 	content: "Name: ";
 	
 }
 
-div.stub li.orcid:before {
+.stub li.orcid:before {
 	content: "Orcid: ";
 }
 
-div.stub li.stubId:before {
+.stub li.stubId:before {
 	content: "Stub ID: ";
 }
 
-div.stub li.description:before {
+.stub li.description:before {
 	content: "Description: ";
 }
 
-div.stub li.datesubmitted:before {
+.stub li.datesubmitted:before {
 	content: "Date Submitted: ";
 	
+}
+
+.stub li.doi:before{
+	content: "DOI: ";
+}
+
+
+.stub li.datedoi:before{
+	content: "Date Completed: ";
 }
 
 ul{list-style-type:none}

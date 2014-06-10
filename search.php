@@ -28,6 +28,16 @@ include 'layout/header.php';
 				var type = $('#typeSelect').val();
 				searchDB(query, type);
 			});
+
+			/*
+				This needs unusual syntax because the content is added dynamically
+				We have to bind the on click handler to the content after the page is created
+			*/
+			$('#output').on('click', '.stub', function(){
+				
+				console.log($(this).find('.stubId').text());
+				$(location).attr('href', "../" + $(this).find('.stubId').text());
+			});
 		});
 
 		function searchDB(query, type){
@@ -40,9 +50,9 @@ include 'layout/header.php';
 				printJSONToTable(data, $('#output'));	
 			})
 			.fail(function(a,b,c){
-				console.log("Error contacting server: " + a.responseText + b + ", " + c);
+				console.log("Error contacting server: " + a.responseText + ", " + b + ", " + c);
 			});
-	}
+		}
 
 		function printJSONToTable(data, outputElement){
 
@@ -61,6 +71,8 @@ include 'layout/header.php';
 										"<li class='stubId'>{{stubId}}</li>"+
 										"<li class='description'>{{description}}</li>"+
 										"<li class='datesubmitted'>{{datesubmitted}}</li>"+
+										"{{#doi}}<li class='doi'>{{doi}}</li>{{/doi}}"+
+										"{{#datedoi}}<li class='datedoi'>{{datedoi}}</li>{{/datedoi}}"+
 									"</ul>"+
 								"</div><br>";
 								

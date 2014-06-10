@@ -161,6 +161,10 @@ include 'layout/header.php';
                     $('#input').val("");
                 });
 
+                $('#orcidWhatsThis').click(function(){
+                	$('#orcidHelp').fadeToggle(500);
+                });
+
 			});
 
 			function isValidEmailAddress(emailAddress) {
@@ -266,6 +270,8 @@ include 'layout/header.php';
 				<label for="orcid">ORCID ID
 					<input class="input" type="text" name="orcid" id="orcid" value="<?php echo Input::get('orcid'); ?>" required>						
 					<button type='button' id='getOrcidByIdButton'>Search Orcid by ID</button>
+					<a id='orcidWhatsThis' class="whatsThis">?</a>
+					<div id='orcidHelp' class='help' hidden>Some OrcID schpiel here and a link: <a href='http://orcid.org/'>ORCID</a></div>
 				</label>
 				<br/>
 				<label>
