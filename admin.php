@@ -46,11 +46,11 @@ if(isset($_SESSION['username'])) {
 	
 		echo "<p>" . $_SESSION['username'] . " is logged in - <a href='" . $rootURL . "logout.php'>Logout</a></p>";
 
-		$stubs = $dbHandler->getStubs('links', 'stubId', '[a-zAz0-9]');
+		$stubs = $dbHandler->getStubs('links', 'stubId', 'LIKE', '%');
 		print_r($stubs);
-		if($stubs == null){  
+		/*if($stubs == null){  
     		$stubs = array("error" => "No results found matching ".$type." = ".$query);//nothing to output this on this page
-    	}
+    	}*/
 		echo "<p>" . $dbHandler->count('links', 'stubId', '%') . " stubs have been created</p>";
 
 		echo "<table class='table' width='100%'>";

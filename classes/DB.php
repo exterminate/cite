@@ -29,8 +29,8 @@ class DB {
 	* The get() method limited to just one search field at the moment. 
 	* Perhaps we will need more in the future
 	*/
-	public function getStubs($table, $field, $code){ 		
-		$query = $this->handler->query("SELECT * FROM $table WHERE $field = '$code'");
+	public function getStubs($table, $field, $operator, $code){ 		
+		$query = $this->handler->query("SELECT * FROM $table WHERE $field $operator '$code'");
 		while ($r = $query->fetchAll(PDO::FETCH_ASSOC)) {
 			
 			$stubs = array();
