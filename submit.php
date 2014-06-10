@@ -271,7 +271,7 @@ include 'layout/header.php';
 					<input class="input" type="text" name="orcid" id="orcid" value="<?php echo Input::get('orcid'); ?>" required>						
 					<button type='button' id='getOrcidByIdButton'>Search Orcid by ID</button>
 					<a id='orcidWhatsThis' class="whatsThis">?</a>
-					<div id='orcidHelp' class='help' hidden>Some OrcID schpiel here and a link: <a href='http://orcid.org/'>ORCID</a></div>
+					<div id='orcidHelp' class='help' hidden>Some OrcID spiel here and a link: <a href='http://orcid.org/' target="_blank">ORCID</a></div>
 				</label>
 				<br/>
 				<label>

@@ -10,7 +10,7 @@
     $type = Input::get('type');
 
 	// let's get some search results!
-    $stubs = $dbHandler->getStubs('links', $type, $query);
+    $stubs = $dbHandler->getStubs('links', $type, "=", $query);
 
     if($stubs == null){  
     	$stubs = array("error" => "No results found matching ".$type." = ".$query);

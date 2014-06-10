@@ -6,3 +6,4 @@ RewriteRule ^submit/$ submit.php
 RewriteRule ^search/$ search.php
 RewriteRule ^edit/$ edit.php
 RewriteRule ^about/$ about.php
+RewriteRule ^faq/$ faq.php

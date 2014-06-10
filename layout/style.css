@@ -133,12 +133,9 @@ textarea {
 	height: 300px;
 }
 
-
 ul {
 	list-style-type: none;
 }
-
-
 
 nav a {
 	color: white;
@@ -166,6 +163,10 @@ p {
 	color : DeepSkyBlue;
 }
 
+/****************************************************
+	Display numbered list bullets inside nice circles
+****************************************************/
+
 ol.circles-list {
 	list-style-type: none;
 	list-style-type: decimal !ie; /*IE 7- hack*/
@@ -174,13 +175,18 @@ ol.circles-list {
 	margin-left: 4em;
 	padding: 0;
 	counter-reset: li-counter;
+
 }
+
 ol.circles-list > li{
 	position: relative;
 	margin-bottom: 20px;
 	padding-left: 0.5em;
 	min-height: 3em;
+	padding-top:1em;
+
 }
+
 ol.circles-list > li:before {
 	position: absolute;
 	top: 0;
@@ -197,20 +203,31 @@ ol.circles-list > li:before {
 	border-radius: 50%;
 	background-color: #464646;
 	content: counter(li-counter);
-	counter-increment: li-counter;
+	counter-increment: li-counter;	
 }
 
+/*******************************************************/
+
+
+/*
+	Used for '?' next to input fields
+*/
 .whatsThis{
 	background-color: yellow;
 	font-weight: bold;
 }
 
+.help{
+	font-size: 0.8em;
+	font-style: italic;
+}
+
+
 /*
 	The following styles the Mustache template used for the stub class
 */
 
-.stub{
-	background: #b52936;
+.stub{	
     margin:5px;
     box-shadow: 0 2px 5px #000;
 
