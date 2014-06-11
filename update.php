@@ -13,12 +13,34 @@ if(isset($_GET['stub'])) {
 include 'layout/head.php';
 include 'layout/header.php';
 
+$validate = new Validate();
+
+if(isset($_POST['login'])) {
+	$validate->check($_POST, array( 
+		'email' => array(
+			'required' => true,
+			'max' => 60,
+			'email' => true			
+			),
+		'deepLink' => array(
+			'required' 	=> true,
+			'min' => 12,
+			'max' => 12	
+			)
+		)
+	);
+	if($validate->passed()) {
+		// if good let's start a sesson
+		require 'classes/author.php';
+		$author = new Author(Input::get('email'),Input::get('deepLink'));
+		$author->createLoginSession();
+	}
+}
+
 if(isset($_SESSION['username'])) {
 
-
-
 	if(Input::exists()) {
-		$validate = new Validate();
+		
 		$validate->check($_POST, array( 
 			'stubId' => array(
 				'required' 	=> true,
