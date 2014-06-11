@@ -27,7 +27,7 @@ if(isset($_POST['inputEmail']) && isset(Input::get('code'))){
 	if($validate->passed()) {
 		$getStub = $dbHandler->getStub('email', escape(trim($_POST['inputEmail'])));
 		if($getStub != null) {
-			// let's create a deeplink for the author
+			
 			$author = new Author(escape(trim($_POST['inputEmail'])), Input::get('code'), $dbHandler);
 			if(Input::get('code') === $author->deepLink) {
 				// start session
@@ -62,7 +62,8 @@ elseif(isset(Input::get('inputEmail')) && !isset(Input::get('code'))){ // send e
 		);
 	}
 
-	//if code is valid
+	//moce these eventually
+		//if code is valid
 		echo json_encode(array('login' => 'true'));
 	//else 
 		echo json_encode(array('login' => 'false'));
