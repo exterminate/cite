@@ -230,6 +230,7 @@ ol.circles-list > li:before {
 .stub{	
     margin:5px;
     box-shadow: 0 2px 5px #000;
+    background: #730329;
 
 }
 

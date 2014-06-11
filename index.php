@@ -56,7 +56,12 @@
 				$('#display').on('click', '.stub', function(){
 					window.location = doiURL;
 				});
-			} 
+			} else{
+				$('#editForm').fadeIn(500);
+				$('#editButton').click(function(){
+					$('#emailLabel').fadeIn(500);
+				});
+			}
 
 			/*
 				Get the Mustache template from file and apply it
@@ -68,9 +73,7 @@
 					console.log("Failed to load Mustache template, " + a.responseText);
 				});		
 
-				$('#editButton').click(function(){
-					$('#emailLabel').fadeIn(500);
-				});
+				
 
 				$('#emailButton').click(function(){	
 					$.post('edit.php', {stubEmail: json.email, inputEmail : $('emailInput').val()}, function(data){
@@ -95,9 +98,9 @@
 							console.log("Code is incorrect!");
 						}
 					})
-					.fail(jqXhr, b, c){
+					.fail(function(jqXhr, b, c){
 						console.log("Failed to receive data from server: " + jqXhr.responseText)
-					}
+					});
 
 				});
 

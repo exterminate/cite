@@ -63,10 +63,7 @@ include 'layout/header.php';
 			} else {
 				var length = Object.keys(data).length;
 
-				$.get("../templates/stub.mustache.html", function(template){
-					
-					
-					console.log(template);			
+				$.get("../templates/stub.mustache.html", function(template){			
 					for(var i = 0; i < length; i++){
 						$(outputElement).append(Mustache.to_html(template, data[i]));
 					}
