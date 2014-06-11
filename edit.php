@@ -1,4 +1,7 @@
 <?php
+// need new author table 
+// with fields: id, email, time, deeplink
+// Create session with time and deeplink
 
 require 'core/init.php';
 
@@ -7,7 +10,7 @@ require 'core/init.php';
 include 'layout/head.php';
 include 'layout/header.php';	
 
-if(Input::exists()) {
+if(Input::exists() && $_SESSION['time'] < strtotime("now")) {
 
 	$stubs = $dbHandler->getStubs('links','email', '=', Input::get('email'));
 	echo "<pre>";
