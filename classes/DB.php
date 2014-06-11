@@ -120,12 +120,21 @@ class DB {
 		}catch(PDOException $e) {
 			echo $e->getMessage();
 		}
-
-		
 	}
 
+	public function getRecentStubs($table, $n){
+		$query = $this->handler->query("SELECT * FROM $table ORDER BY datesubmitted LIMIT $n");
 
-
+		while ($r = $query->fetchAll(PDO::FETCH_ASSOC)) {
+			
+			$stubs = array();
+			foreach($r as $stub){
+				array_push($stubs, new Stub($stub));
+			}		
+			
+			return $stubs;
+		}
+	}
 }
 
 

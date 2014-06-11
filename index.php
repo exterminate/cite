@@ -1,10 +1,11 @@
 <?php
-
+/*
 	session_start();
 	if(strtotime("now") > $SESSION['time']) {
 		// perhaps we need a html (or JS) 60 min refresh
 		session_destroy(); // ends session, the author has had 60 mins
 	}
+	*/
 
 	require 'core/init.php';
 
@@ -17,8 +18,8 @@
 			die("This stub does not exist.");		
 		} else { // show stub or redirect
 			$dbHandler->incrementViews($stub);		
-		include 'layout/head.php';
-		include 'layout/header.php';
+			include 'layout/head.php';
+			include 'layout/header.php';
 		}
 ?>
 	<script src='lib/mustache.js'></script>
@@ -71,9 +72,7 @@
 				})
 				.fail(function(a,b,c){
 					console.log("Failed to load Mustache template, " + a.responseText);
-				});		
-
-				
+				});						
 
 				$('#emailButton').click(function(){	
 					$.post('edit.php', {stubEmail: json.email, inputEmail : $('emailInput').val()}, function(data){
@@ -123,6 +122,8 @@
 		</label>
 	</form>
 
+
+
 <?php		
 	
 	}
@@ -134,8 +135,6 @@
 		echo '<a href="submit/">Submit</a>';
 	}
 
-
-
-include 'layout/footer.php';
+	include 'layout/footer.php';
 
 ?>

@@ -56,7 +56,7 @@ include 'layout/header.php';
 
 		function printJSONToTable(data, outputElement){
 
-			var table = $('<table>').attr("class", "table").attr("id", "resultsTable");
+			
 
 			if(data.error != null){
 				$(outputElement).append("Error: " + data.error);
@@ -79,6 +79,9 @@ include 'layout/header.php';
 					Kept cos its worked, might be good for admin stuff
 				*/
 			/************************************************
+
+				var table = $('<table>').attr("class", "table").attr("id", "resultsTable");
+				
 				//populate the header row
 				var headerRow = $("<tr>");
 				$.each(data[0], function(key, val){				
