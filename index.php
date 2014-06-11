@@ -59,13 +59,59 @@
 				})
 				.fail(function(a,b,c){
 					console.log("Failed to load Mustache template, " + a.responseText);
-				});							
+				});		
+
+				$('#editButton').click(function(){
+					$('#emailLabel').fadeIn(500);
+				});
+
+				$('#emailButton').click(function(){	
+					$.post('edit.php', {email : $('emailInput').val()}, function(data){
+						if(data.emailValid == 'true'){
+							$('#codeLabel').fadeIn(500);
+							console.log('Email is valid, sending code!');
+						} else{
+							console.log("No stubs with that email address!");
+						}
+					})
+					.fail(function(jqXhr, b, c){
+						console.log("Failed to retrieve data from server: " + jqXhr.responseText);
+					});
+				});
+
+				$('#codeButton').click(function(){
+					$.post('edit.php', {code : $('#codeInput').val()}, function(data){
+						if(data.login == 'true'){
+							//start editing the stub
+							console.log('Code accepted, start editing the stub');
+						} else{
+							console.log("Code is incorrect!");
+						}
+					})
+					.fail(jqXhr, b, c){
+						console.log("Failed to receive data from server: " + jqXhr.responseText)
+					}
+
+				});
+
+
 		});
 	</script>
 	<div id="display">
 		<div id='message'></div>
 	</div>
-	
+
+	<form id='editForm' hidden>
+		<button type='button' id='editButton'>Edit</button>
+		<label id='emailLabel' hidden>
+			<input type='email' id='emailInput'>
+			<button type='button' id='emailButton'>Get code</button>
+		</label>
+		<label id='codeLabel' hidden>
+			<input type='text' id='codeInput'>
+			<button type='button' id='codeButton'>Submit code</button>
+		</label>
+	</form>
 
 <?php		
 	
