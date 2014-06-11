@@ -4,7 +4,7 @@
 
 	$stubEmail = $_POST['stubEmail'];
 
-	if(isset($_POST['inputEmail'])){
+	if(isset($_POST['inputEmail']) && !isset($_POST['code'])){
 		//if email exists in the database
 			echo json_encode(array('emailValid' => 'true'));
 		//else
