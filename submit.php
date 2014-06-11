@@ -47,7 +47,7 @@ if(Input::exists()) {
 	if($validate->passed()) {
 
 		$inputArray = array(
-				'stubId' => $dbHandler->getUniqueCode('stubId'),
+				'stubId' => $dbHandler->getUniqueCode('stubId','links'),
 				'stubTitle' => Input::get('stubTitle'),
 				'firstName' => Input::get('firstName'),
 				'surname' => Input::get('surname'),

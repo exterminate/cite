@@ -1,6 +1,7 @@
 <?php	
 
 require 'core/init.php';
+require 'classes/author.php';
 header('Content-type: application/json');
 
 $stubEmail = $_POST['stubEmail'];
@@ -23,12 +24,13 @@ if(isset($_POST['inputEmail']) && !isset(Input::get('code'))){
 	);
 
 	if($validate->passed()) {
-		$getStub = $dbHandler->getStub('email', escape(trim($_POST['inputEmail']));
+		$getStub = $dbHandler->getStub('email', escape(trim($_POST['inputEmail'])));
 		if($getStub != null) {
 			echo json_encode(array('emailValid' => 'true')); // Hey, we got the email
 			// let's create a deeplink for the author
 			
-
+			$author = new Author(escape(trim($_POST['inputEmail'])), $dbHandler->getUniqueCode('deepLink','authors'), $dbHandler);
+			$author->createLoginSession();
 		} else
 			echo json_encode(array('emailValid' => 'false')); // Uh oh, we don't got the email
 	}

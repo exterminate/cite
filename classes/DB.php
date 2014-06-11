@@ -75,7 +75,7 @@ class DB {
 		return $query->rowCount();
 	}
 
-	public function getUniqueCode($type) { //create a string, and checks it doesn't exist in database
+	public function getUniqueCode($type, $table) { //create a string, and checks it doesn't exist in database
 
 		if($type == "stubId") {
 			$length = 8;
@@ -94,7 +94,7 @@ class DB {
 
 
 		//GETTING ROW COUNT
-		$query = $this->handler->query("SELECT $type FROM links WHERE $type = '$randomString'");
+		$query = $this->handler->query("SELECT $type FROM $table WHERE $type = '$randomString'");
 		
 		while($query->rowCount() == 0) {
 			return $randomString;
