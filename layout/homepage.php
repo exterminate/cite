@@ -1,4 +1,6 @@
 <script src='lib/mustache.js'></script>
+<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/jquery.slick/1.3.6/slick.css"/>
+<script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.slick/1.3.6/slick.min.js"/></script>
 <script>
 	$(document).ready(function(){
 		var json = $.parseJSON('<?php echo json_encode($dbHandler->getRecentStubs("links", 10), JSON_FORCE_OBJECT); ?>');
@@ -10,6 +12,14 @@
 			for(var i = 0; i < length; i++){
 				$(outputElement).append(Mustache.to_html(template, json[i]));
 			}
+			$('#recentStubs').slick({
+				dots: true,
+				arrows: true,
+				speed: 500,
+				autoplay: true,
+ 				autoplaySpeed: 5000,
+ 				slidesToShow: 3
+			});
 
 		})
 		.fail(function(a,b,c){
