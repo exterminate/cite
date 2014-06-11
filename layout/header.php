@@ -9,7 +9,6 @@
 			    <a href="<?php echo $rootURL; ?>about/">About</a>
 			    <a href="<?php echo $rootURL; ?>submit/">Submit stub</a>
 			    <a href="<?php echo $rootURL; ?>search/">Search</a>
-			    <a href="<?php echo $rootURL; ?>edit/">Edit</a>
 			    <a href="<?php echo $rootURL; ?>faq/">FAQ</a>
 			</nav>
 		</div>
