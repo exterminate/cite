@@ -32,7 +32,7 @@ if(isset($_POST['login'])) {
 	if($validate->passed()) {
 		// if good let's start a sesson
 		require 'classes/author.php';
-		$author = new Author(Input::get('email'),Input::get('deepLink'));
+		$author = new Author(Input::get('email'),Input::get('deepLink'), $dbHandler);
 		$author->createLoginSession();
 	}
 }
