@@ -6,7 +6,7 @@ header('Content-type: application/json');
 
 $stubEmail = $_POST['stubEmail'];
 
-if(isset($_POST['inputEmail']) && !isset(Input::get('code'))){
+if(isset($_POST['inputEmail']) && isset(Input::get('code'))){
 	//if email exists in the database
 	$validate = new Validate();
 	$validate->check($_POST, array(  
@@ -35,7 +35,7 @@ if(isset($_POST['inputEmail']) && !isset(Input::get('code'))){
 			echo json_encode(array('emailValid' => 'false')); // Uh oh, we don't got the email
 	}
 		
-else if(isset($_POST['code'])){
+elseif(isset($_POST['inputEmail']) && !isset(Input::get('code'))){
 	//if code is valid
 		echo json_encode(array('login' => 'true'));
 	//else 
@@ -50,5 +50,6 @@ if(strtotime("now") > $SESSION['time']) {
 	// perhaps we need a html (or JS) 60 min refresh
 	session_destroy(); // ends session, the author has had 60 mins
 }*/
+echo json_encode(array('login' => 'false'));
 
 ?>
