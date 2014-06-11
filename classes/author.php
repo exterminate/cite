@@ -19,11 +19,8 @@ class Author {
             ":deepLink" => $this->deepLink,
             ":time" => strtotime("now") + 3600
         ));
-
-        session_start();
-        $_SESSION['authorEmail'] = $this->email;
-        $_SESSION['time'] = strtotime("now") + 3600;
     }
+
 
     public function getAuthorDetails($sessionEmail) { // insert session into this
         $query = $this->handler->query("SELECT * FROM author WHERE email = '$sessionEmail'");

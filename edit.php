@@ -28,15 +28,20 @@ if(isset($_POST['inputEmail']) && isset(Input::get('code'))){
 		$getStub = $dbHandler->getStub('email', escape(trim($_POST['inputEmail'])));
 		if($getStub != null) {
 			// let's create a deeplink for the author
-			$author = new Author(escape(trim($_POST['inputEmail'])), $dbHandler->getUniqueCode('deepLink','authors'), $dbHandler);
-			$author->createLoginSession();
-			
-			echo json_encode(array('emailValid' => 'true')); // Hey, we got the email
+			$author = new Author(escape(trim($_POST['inputEmail'])), Input::get('code'), $dbHandler);
+			if(Input::get('code') === $author->deepLink) {
+				// start session
+				session_start();
+		        $_SESSION['authorEmail'] = $author->email;
+		        $_SESSION['time'] = $author->time;
+
+				echo json_encode(array('emailValid' => 'true')); // Hey, we got the email
+			}
 		} else
 			echo json_encode(array('emailValid' => 'false')); // Uh oh, we don't got the email
 	}
 		
-elseif(isset(Input::get('inputEmail')) && !isset(Input::get('code'))){
+elseif(isset(Input::get('inputEmail')) && !isset(Input::get('code'))){ // send email and get code
 	$validate->check($_POST, array(  
 	'inputEmail' => array(
 		'required' => true,
@@ -53,7 +58,7 @@ elseif(isset(Input::get('inputEmail')) && !isset(Input::get('code'))){
 		$email->sendMail(
 			Input::get('email'),
 			"Code to edit your stub",
-			""
+			"Go back to the stub and use the code " . $author->deepLink . ". ";
 		);
 	}
 
