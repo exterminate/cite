@@ -2,7 +2,9 @@
 
 	header('Content-type: application/json');
 
-	if(isset($_POST['email'])){
+	$stubEmail = $_POST['stubEmail'];
+
+	if(isset($_POST['inputEmail'])){
 		//if email exists in the database
 			echo json_encode(array('emailValid' => 'true'));
 		//else
@@ -14,8 +16,6 @@
 			echo json_encode(array('login' => 'false'));
 
 	}
-
-	
 	
 
 ?>
