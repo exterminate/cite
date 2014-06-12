@@ -73,6 +73,6 @@ if(strtotime("now") > $SESSION['time']) {
 	// perhaps we need a html (or JS) 60 min refresh
 	session_destroy(); // ends session, the author has had 60 mins
 }*/
-echo json_encode(array('login' => 'false'));
+
 
 ?>
