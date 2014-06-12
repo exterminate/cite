@@ -5,18 +5,16 @@ class Author {
     public $deepLink;
     public $time;
 
-    function __construct($email, $deepLink, $handler) {
-        $this->email = $email;
-        $this->deepLink = $deepLink;
+    function __construct($handler) {
         $this->handler = $handler;
     }
 
-    public function createLoginSession() {
+    public function createLoginSession($email, $deepLink) {
         $sql = "INSERT INTO authors (email, deepLink, time) VALUES (:email, :deepLink, :time)";
         $query = $this->handler->prepare($sql);
         $query->execute(array(
-            ":email" => $this->email,
-            ":deepLink" => $this->deepLink,
+            ":email" => $email,
+            ":deepLink" => $deepLink,
             ":time" => strtotime("now") + 3600
         ));
     }
