@@ -4,6 +4,28 @@ require 'core/init.php';
 require 'classes/author.php';
 header('Content-type: application/json');
 
+$updatedStub = new Stub($_POST['input']);
+
+//check that the user is logged in
+
+//write the updated stub to the database
+
+//if written successfully
+echo json_encode(array("editSuccessful" => "true"));
+
+//if update fails
+echo json_encode(array("editSuccessful" => "false", "errorMsg" => "reason for update failure here"));
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 $validate = new Validate();
@@ -77,4 +99,4 @@ if(strtotime("now") > $SESSION['time']) {
 
 
 ?>
-*/
+

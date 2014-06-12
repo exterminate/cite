@@ -75,32 +75,64 @@
 				});						
 
 				$('#emailButton').click(function(){	
-					$.post('edit.php', {stubId: json.stubId, inputEmail : $('emailInput').val()}, function(data){
-						if(data.emailValid == 'true'){
-							$('#codeLabel').fadeIn(500);
-							console.log('Email is valid, sending code!');
-						} else{
-							console.log("No stubs with that email address!");
-						}
-					})
-					.fail(function(jqXhr, b, c){
-						console.log("Failed to retrieve data from server: " + jqXhr.responseText);
-					});
+					if(json.email == $('emailInput').val()){
+						$('#codeLabel').fadeIn(500);
+							console.log('Email matches, sending code!');
+							//send email here
+							
+							var loginHandler = $.post('loginHandler.php', {email :  $('emailInput').val()});
+							loginHandler.done(function(data){
+								if(data.emailSent == 'true'){
+									console.log("Email sent successfully");
+									$('#emailLabel').attr('disabled', true);
+								} else{
+									console.log("Email failed to send!")
+								}
+							})
+
+							loginHandler.fail(function(jqXhr, b, c){
+								console.log(jqXhr.responseText);
+							});
+										
+					} else{
+							console.log("Email doesn't match!");
+					}					
 				});
 
 				$('#codeButton').click(function(){
-					$.post('edit.php', {code : $('#codeInput').val()}, function(data){
+
+					var loginHandler = $.post('loginHandler.php', {email : $('emailInput').val(), code : $('#codeInput').val()});
+
+					loginHandler.done(function(data){
 						if(data.login == 'true'){
 							//start editing the stub
 							console.log('Code accepted, start editing the stub');
+							//make stub fields editable
+							$('#finishedEditingButton').fadeIn(500);
 						} else{
-							console.log("Code is incorrect!");
+							console.log("Login failed, error: " + data.errorMsg);
 						}
-					})
-					.fail(function(jqXhr, b, c){
+					});
+
+					loginHandler.fail(function(jqXhr, b, c){
 						console.log("Failed to receive data from server: " + jqXhr.responseText)
 					});
 
+				});
+
+				$('#finishedEditingButton').click(function(){
+					var input = "";//fill this in as an array from the newly edited stub 
+					var editHandler = $.post('edit.php', {input : input});
+
+					editHandler.done(function(data){
+						if(data.editSuccessful = "true"){
+							//edit was successful
+							console.log("Stub updated successfully");
+						} else{
+							console.log(data.errorMsg);
+						}
+
+					});
 				});
 
 
@@ -120,6 +152,7 @@
 			<input type='text' id='codeInput'>
 			<button type='button' id='codeButton'>Submit code</button>
 		</label>
+		<button type='button' id='finishedEditingButton' hidden>Finished Editing</button>
 	</form>
 
 
