@@ -7,9 +7,9 @@ header('Content-type: application/json');
 $stubEmail = $_POST['stubEmail'];
 $validate = new Validate();
 
-if(isset($_POST['inputEmail']) && isset(Input::get('code'))){
-	//if email exists in the database
+if(isset($_POST['inputEmail']) && isset(Input::get('code'))){ //email and code passed
 	
+	// validate input
 	$validate->check($_POST, array(  
 		'inputEmail' => array(
 			'required' 	=> true,
@@ -25,47 +25,43 @@ if(isset($_POST['inputEmail']) && isset(Input::get('code'))){
 	);
 
 	if($validate->passed()) {
-		$getStub = $dbHandler->getStub('email', escape(trim($_POST['inputEmail'])));
-		if($getStub != null) {
-			
-			$author = new Author(escape(trim($_POST['inputEmail'])), Input::get('code'), $dbHandler);
-			if(Input::get('code') === $author->deepLink) {
+		
+		$author = new Author($dbHandler);
+		$authorDetails = $author->getAuthorDetails(Input::get('email'), Input::get('deepLink'));
+		if($authorDetails != null) {
+			if($authorDetails->time > strtotime("now")) {
 				// start session
 				session_start();
-		        $_SESSION['authorEmail'] = $author->email;
-		        $_SESSION['time'] = $author->time;
-
+			        $_SESSION['authorEmail'] = $authorDetails->email;
+			        $_SESSION['time'] = $authorDetails->time;
 				echo json_encode(array('emailValid' => 'true')); // Hey, we got the email
 			}
 		} else
-			echo json_encode(array('emailValid' => 'false')); // Uh oh, we don't got the email
-	}
-		
-elseif(isset(Input::get('inputEmail')) && !isset(Input::get('code'))){ // send email and get code
+			echo json_encode(array('emailValid' => 'false')); // Uh oh, we don't got the email	
+	} else
+		echo json_encode(array('emailValid' => 'false')); // Uh oh, we don't got the email
+	
+}elseif(isset(Input::get('inputEmail')) && !isset(Input::get('code'))){ // send email and get code
 	$validate->check($_POST, array(  
 	'inputEmail' => array(
 		'required' => true,
 		'max' => 80,
 		'email' => true			
-	));
+	)));
 	if($validate->passed()) {
 		// let's create a deeplink for the author
-		$author = new Author(escape(trim($_POST['inputEmail'])), $dbHandler->getUniqueCode('deepLink','authors'), $dbHandler);
-		$author->createLoginSession();
+		$author = new Author($dbHandler);
+		$author->createLoginSession(escape(trim($_POST['inputEmail'])), $dbHandler->getUniqueCode('deepLink','authors'));
 			
 		
 		$email = new EmailHandler();
 		$email->sendMail(
 			Input::get('email'),
 			"Code to edit your stub",
-			"Go back to the stub and use the code " . $author->deepLink . ". ";
+			"Go back to the stub and use the code " . $author->deepLink . ". "
 		);
-	}
-
-	//moce these eventually
-		//if code is valid
 		echo json_encode(array('login' => 'true'));
-	//else 
+	} else 
 		echo json_encode(array('login' => 'false'));
 
 }
