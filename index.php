@@ -75,7 +75,7 @@
 				});						
 
 				$('#emailButton').click(function(){	
-					$.post('edit.php', {stubEmail: json.email, inputEmail : $('emailInput').val()}, function(data){
+					$.post('edit.php', {stubId: json.stubId, inputEmail : $('emailInput').val()}, function(data){
 						if(data.emailValid == 'true'){
 							$('#codeLabel').fadeIn(500);
 							console.log('Email is valid, sending code!');
