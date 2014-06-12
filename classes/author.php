@@ -20,8 +20,8 @@ class Author {
     }
 
 
-    public function getAuthorDetails($sessionEmail) { // insert session into this
-        $query = $this->handler->query("SELECT * FROM author WHERE email = '$sessionEmail'");
+    public function getAuthorDetails($sessionEmail, $deepLink) { // insert session into this
+        $query = $this->handler->query("SELECT * FROM author WHERE email = '$sessionEmail' AND deepLink = '$deepLink'");
 
         while ($r = $query->fetchAll(PDO::FETCH_ASSOC)) {
             
