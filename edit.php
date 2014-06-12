@@ -4,7 +4,8 @@ require 'core/init.php';
 require 'classes/author.php';
 header('Content-type: application/json');
 
-$stubEmail = $_POST['stubEmail'];
+
+/*
 $validate = new Validate();
 
 if(isset($_POST['inputEmail']) && isset(Input::get('code'))){ //email and code passed
@@ -76,3 +77,4 @@ if(strtotime("now") > $SESSION['time']) {
 
 
 ?>
+*/
