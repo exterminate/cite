@@ -14,6 +14,7 @@
 		public $datedoi = "";
 		public $deepLink = "";
 		public $views = "";
+		public $interestedEmails = array();
 
 		function __construct($array){
 			if(array_key_exists("stubId", $array)){
@@ -63,6 +64,10 @@
 			if(array_key_exists("views", $array)){
 				$this->views = $array['views'];
 			}
+			
+			if(array_key_exists("interestedEmails", $array)){				
+				$this->interestedEmails = explode($array['interestedEmails'], ",");
+			}
 		}
 
 		function toArray(){
@@ -78,7 +83,8 @@
 				'doi' => $this->doi,
 				'datedoi' => $this->datedoi,
 				'deepLink' => $this->deepLink,
-				'views' => $this->views
+				'views' => $this->views,
+				'interestedEmails' => $this->interestedEmails
 				);
 
 			PC::debug($array);

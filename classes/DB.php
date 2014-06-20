@@ -62,8 +62,8 @@ class DB {
 
 	public function update($table, $field, $stub) {
 		$sql = "UPDATE $table SET $field = ? WHERE stubId = ?";
-		$query = $this->handler->prepare($sql);PC::debug($query);
-		$query->execute(array($stub->$field,$stub->stubId));PC::debug($query);
+		$query = $this->handler->prepare($sql);		
+		$query->execute(array($stub->$field,$stub->stubId));
 	}
 
 	/*

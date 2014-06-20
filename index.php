@@ -25,14 +25,14 @@
 	<script src='lib/mustache.js'></script>
 	<script>
 		$(document).ready(function(){
-			var json = $.parseJSON('<?php echo json_encode($stub, JSON_FORCE_OBJECT); ?>');
-			console.log(json);
+			var stub = $.parseJSON('<?php echo json_encode($stub, JSON_FORCE_OBJECT); ?>');
+			console.log(stub);
 
-			var doiURL = "http://dx.doi.org/" + json.doi;
+			var doiURL = "http://dx.doi.org/" + stub.doi;
 
 			
 
-			if(json.doi !== ""){
+			if(stub.doi !== ""){
 				/*
 					There is a DOI associated with this stub, so we will wait 5 secs then redirect
 				*/
@@ -62,80 +62,99 @@
 				$('#editButton').click(function(){
 					$('#emailLabel').fadeIn(500);
 				});
+				
+				$('#showInterestedFormButton').fadeIn(500);
 			}
 
 			/*
 				Get the Mustache template from file and apply it
 			*/
-				$.get("templates/stub.mustache.html", function(template){				
-						$('#display').append(Mustache.to_html(template, json));
-				})
-				.fail(function(a,b,c){
-					console.log("Failed to load Mustache template, " + a.responseText);
-				});						
+			$.get("templates/stub.mustache.html", function(template){				
+					$('#display').append(Mustache.to_html(template, stub));
+			})
+			.fail(function(a,b,c){
+				console.log("Failed to load Mustache template, " + a.responseText);
+			});						
 
-				$('#emailButton').click(function(){	
-					if(json.email == $('emailInput').val()){
-						$('#codeLabel').fadeIn(500);
-							console.log('Email matches, sending code!');
-							//send email here
-							
-							var loginHandler = $.post('loginHandler.php', {email :  $('emailInput').val()});
-							loginHandler.done(function(data){
-								if(data.emailSent == 'true'){
-									console.log("Email sent successfully");
-									$('#emailLabel').attr('disabled', true);
-								} else{
-									console.log("Email failed to send!")
-								}
-							})
+			$('#emailButton').click(function(){	
+				if(stub.email == $('emailInput').val()){
+					$('#codeLabel').fadeIn(500);
+						console.log('Email matches, sending code!');
+						//send email here
+						
+						var loginHandler = $.post('loginHandler.php', {email :  $('emailInput').val()});
+						loginHandler.done(function(data){
+							if(data.emailSent == 'true'){
+								console.log("Email sent successfully");
+								$('#emailLabel').attr('disabled', true);
+							} else{
+								console.log("Email failed to send!")
+							}
+						})
 
-							loginHandler.fail(function(jqXhr, b, c){
-								console.log(jqXhr.responseText);
-							});
-										
+						loginHandler.fail(function(jqXhr, b, c){
+							console.log(jqXhr.responseText);
+						});
+									
+				} else{
+						console.log("Email doesn't match!");
+				}					
+			});
+
+			$('#codeButton').click(function(){
+
+				var loginHandler = $.post('loginHandler.php', {email : $('emailInput').val(), code : $('#codeInput').val()});
+
+				loginHandler.done(function(data){
+					if(data.login == 'true'){
+						//start editing the stub
+						console.log('Code accepted, start editing the stub');
+						//make stub fields editable
+						$('#finishedEditingButton').fadeIn(500);
 					} else{
-							console.log("Email doesn't match!");
-					}					
+						console.log("Login failed, error: " + data.errorMsg);
+					}
 				});
 
-				$('#codeButton').click(function(){
-
-					var loginHandler = $.post('loginHandler.php', {email : $('emailInput').val(), code : $('#codeInput').val()});
-
-					loginHandler.done(function(data){
-						if(data.login == 'true'){
-							//start editing the stub
-							console.log('Code accepted, start editing the stub');
-							//make stub fields editable
-							$('#finishedEditingButton').fadeIn(500);
-						} else{
-							console.log("Login failed, error: " + data.errorMsg);
-						}
-					});
-
-					loginHandler.fail(function(jqXhr, b, c){
-						console.log("Failed to receive data from server: " + jqXhr.responseText)
-					});
-
+				loginHandler.fail(function(jqXhr, b, c){
+					console.log("Failed to receive data from server: " + jqXhr.responseText)
 				});
 
-				$('#finishedEditingButton').click(function(){
-					var input = "";//fill this in as an array from the newly edited stub 
-					var editHandler = $.post('edit.php', {input : input});
+			});
 
-					editHandler.done(function(data){
-						if(data.editSuccessful = "true"){
-							//edit was successful
-							console.log("Stub updated successfully");
-						} else{
-							console.log(data.errorMsg);
-						}
+			$('#finishedEditingButton').click(function(){
+				var input = "";//fill this in as an array from the newly edited stub 
+				var editHandler = $.post('edit.php', {input : input});
 
-					});
+				editHandler.done(function(data){
+					if(data.editSuccessful == "true"){
+						//edit was successful
+						console.log("Stub updated successfully");
+					} else{
+						console.log(data.errorMsg);
+					}
+
 				});
-
-
+			});
+			
+			$('#showInterestedFormButton').click(function(){
+				$('#registerInterestForm').fadeIn(500);
+			});
+			
+			$('#registerInterestButton').click(function(){
+				var registerInterest = $.post('registerInterest.php', {stubId : stub.stubId, interestedEmail: $('#interestedInput').val()});
+				registerInterest.done(function(data){
+					if (data.interestRegistered) {
+						console.log("Interest Registered!")
+					} else{
+						console.log(data.errorMsg);
+					}
+					
+				});
+				registerInterest.fail(function(jqXhr){
+					console.log("Error contacting server: " + jqXhr.responseText);
+				});
+			});
 		});
 	</script>
 	<div id="display">
@@ -154,8 +173,16 @@
 		</label>
 		<button type='button' id='finishedEditingButton' hidden>Finished Editing</button>
 	</form>
-
-
+	<br/>
+			
+	<button type='button' id='showInterestedFormButton' hidden>This idea looks like it has potential!</button>
+	<form id='registerInterestForm' hidden>
+		<label>Get notified via email when the final article is published
+			<input type='email' id='interestedInput' placeholder='Stick your email address in here'>
+			<button type='button' id='registerInterestButton'>Alert me!</button>
+		</label>						
+	</form>
+	
 
 <?php		
 	

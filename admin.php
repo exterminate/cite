@@ -6,16 +6,10 @@ require 'core/init.php';
 if(Input::exists()) {
 
 	$user = new User($dbHandler, Input::get('username'), Input::get('password'));
-	$user->login();
-	
+	$user->login();	
 } 
 
-
-
-
 if(isset($_SESSION['username'])) {
-	
-	
 	
 	// delete stub
 	if(Input::get('delete')) {
