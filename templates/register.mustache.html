@@ -1,0 +1,21 @@
+<h2>Create an account</h2>
+<p>Please enter your details if we haven't been able to find them already to finalise your account set up</p>
+<form action='register.php' method='post'>
+    <label>
+        OrcID
+        <input type='text' id='orcid' value='{{orcid}}' name='orcid'>        
+    </label><br>
+    <label>
+        First Name
+        <input type='text' id='firstName' value='{{firstName}}' name='firstName'>
+    </label><br>
+    <label>
+        Surname
+        <input type='text' id = 'surname' value='{{surname}}' name='surname'>
+    </label><br>
+    <label>
+        Email
+        <input type='email' id='email' value='{{email}}' name='email'>
+    </label><br>
+    <input type='submit' value='Create Account'>
+</form>

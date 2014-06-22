@@ -1,6 +1,7 @@
 <script src='lib/mustache.js'></script>
 <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/jquery.slick/1.3.6/slick.css"/>
 <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.slick/1.3.6/slick.min.js"/></script>
+<script src="<?php echo $rootURL; ?>lib/jquery.maskedinput.js" type="text/javascript"></script>
 <script>
 	$(document).ready(function(){
 		var json = $.parseJSON('<?php echo json_encode($dbHandler->getRecentStubs("links", 10), JSON_FORCE_OBJECT); ?>');
@@ -24,7 +25,20 @@
 		})
 		.fail(function(a,b,c){
 			console.log("Failed to load Mustache template, " + a.responseText);
-		});	
+		});
+		
+		$('#orcid').mask("9999-9999-9999-9999", {placeholder : "."});
+		
+		
+		
+		$('#getStartedButton').click(function(evt){
+			var pass = $('#password1').val();
+		
+			if (pass != $('#password2').val()) {			
+				alert("Passwords do not match!");
+				evt.preventDefault();
+			}			
+		});
 	});	
 </script>
 
@@ -42,8 +56,25 @@
 	  	<li>Publish your seminal work</li>
 	  	<li>Complete your stub with the DOI of the new paper. The original URL will forward readers straight through!</li>
 	</ol>
-	<p>Would you like to cite future work you discuss in your current paper but have not yet written up or possibly not even done?</p>
-	<p>If you use Cite you can create a DOI-like stub that will stay online until you are ready to publish. Once you do, update your record and we will redirect the reader straight to the publisher where the paper is published.</p>
+	<br>
+	Get started now!
+	
+	
+	<form action='register.php' method='post'>
+		<label>Enter your OrcID
+			<input id='orcid' name='orcid' type='text'>
+				Don't have and OrcID? <a href='http://orcid.org'>Get one here!</a>
+		</label><br>		
+		<label>Create a password:
+			<input id='password1' name='password' type='password'>
+		</label><br>
+		<label>
+			Re-type your password:
+			<input id='password2' type='password'>
+		</label><br>
+		<input id='getStartedButton' type='submit' value='Get started!'>
+	</form>
+	<br>
 </div>
 <div id='recentStubs'>
 	Recently Submitted:<br>

@@ -1,7 +1,6 @@
 <?php
     require_once('../lib/php-console-master/src/PhpConsole/__autoload.php');
-    PhpConsole\Helper::register();
-   
+    PhpConsole\Helper::register();   
 
     header('Content-type: application/json');
     
