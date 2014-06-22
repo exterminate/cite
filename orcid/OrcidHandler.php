@@ -1,7 +1,5 @@
 <?php
 
-include('../classes/User.php');
-
     function getUser($id){
         $host = 'http://pub.orcid.org/v1.1/';
             

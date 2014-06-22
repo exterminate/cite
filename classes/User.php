@@ -2,10 +2,10 @@
 
 class User {
 	
-	public $firstName, $surname, $orcid, $accesLevel, $email;
+	public $firstName, $surname, $orcid, $accessLevel, $email;
 	
 	
-	public function __construct($firstName, $surname, $orcid, $accesLevel, $email) {
+	public function __construct($firstName, $surname, $orcid, $accessLevel, $email) {
 		$this->firstName = $firstName;
 		$this->surname = $surname;
 		$this->orcid = $orcid;
