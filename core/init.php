@@ -8,12 +8,10 @@ require 'includes/functions.php';
 require 'classes/Validate.php';
 
 // modify to get links to work
-$rootURL = "http://localhost/git/cite/";
-//require '../lib/php-console-master/src/PhpConsole/__autoload.php';
-//PhpConsole\Helper::register();
+$rootURL = "http://localhost/cite/";
 
 try {
-	$handler = new PDO('mysql:host=127.0.0.1;dbname=cite', 'root', 'root');
+	$handler = new PDO('mysql:host=127.0.0.1;dbname=cite', 'root', '');
 	$handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
 	echo $e->getMessage();

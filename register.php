@@ -20,7 +20,7 @@ $user = getUser($orcid);
     var user = $.parseJSON('<?php  echo json_encode($user, JSON_FORCE_OBJECT) ?>');
     
     $.get('templates/register.mustache.html', function(template){
-        $('#register').html(Mustache.to_html(template, user));
+        $('#content').html(Mustache.to_html(template, user));
     })
     .fail(function(jqXhr){
         console.log("Failed to load mustache template: " + jqHxr.responseText)
@@ -28,4 +28,4 @@ $user = getUser($orcid);
     
     
 </script>
-<div id='register'></div>
+<div id='content'></div>

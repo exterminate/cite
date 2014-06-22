@@ -1,4 +1,6 @@
 <?php
+    require 'lib/php-console-master/src/PhpConsole/__autoload.php';
+PhpConsole\Helper::register();
 
     function getUser($id){
         $host = 'http://pub.orcid.org/v1.1/';
@@ -11,15 +13,29 @@
         curl_close($ch);
        
         $array = json_decode($data,true);
-                   
-        $user = new User(getFirstName($array),
-                          getSurname($array),
-                          $id,
-                          "unverified",
-                          getEmail($array)                          
-                          );        
         
-        return $user;
+        PC::debug($array);
+        
+        //no OrcID found with this ID, return an empty user
+        if(array_key_exists('error-desc', $array)){
+            return new User(
+                                "",
+                                "",
+                                $id,
+                                "unverified",
+                                ""
+                            );
+        } else{
+            //we've found your orcid profile, return the user details
+            return new User(
+                           getFirstName($array),
+                           getSurname($array),
+                           $id,
+                           "unverified",
+                           getEmail($array)                          
+                       );       
+        }
+           
     }
     
     function getFirstName($orcidJson){
@@ -44,5 +60,6 @@
                 }
             }
         }
+        return "";
     }
 ?>
