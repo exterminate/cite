@@ -10,8 +10,6 @@ $user = new User(
     Input::get('email')
 );
 
-
-
 $dbHandler->registerUser($user, $_SESSION['password']);
 
 session_destroy();
