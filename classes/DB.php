@@ -174,25 +174,28 @@ class DB {
 	}
 	
 	public function registerUser($user, $password) {
-		// validate email, orcid and password before it comes here
-		$sql = "INSERT INTO user (email, lastLogin, password, deepLink, firstName, surname, orcid, accessLevel) 
-		 VALUES (:email, NOW(), :password, :deepLink, :firstName, :surname,  :orcid, :accessLevel)";
-
-		$query = $this->handler->prepare($sql);
-		$query->execute(array(
-			':email' 	=> $user->email,
-			':password'	=> md5($password),
-			':deepLink'	=> $this->handler->getUniqueCode('deepLink', 'users'),
-			':firstName' 	=> $user->firstName, // need to make this work = ORCID CLASS?
-			':surname'	=> $user->surname, // need to make this work = ORCID CLASS?
-			':orcid'	=> $user->orcid,
-			':accessLevel'	=> 'user',
-		));	
-		
+		if(getUser('email', $user->email) == null){
+			// validate email, orcid and password before it comes here
+			$sql = "INSERT INTO user (email, lastLogin, password, deepLink, firstName, surname, orcid, accessLevel) 
+			 VALUES (:email, NOW(), :password, :deepLink, :firstName, :surname,  :orcid, :accessLevel)";
+	
+			$query = $this->handler->prepare($sql);
+			$query->execute(array(
+				':email' 	=> $user->email,
+				':password'	=> md5($password),
+				':deepLink'	=> $this->handler->getUniqueCode('deepLink', 'users'),
+				':firstName' 	=> $user->firstName, // need to make this work = ORCID CLASS?
+				':surname'	=> $user->surname, // need to make this work = ORCID CLASS?
+				':orcid'	=> $user->orcid,
+				':accessLevel'	=> 'user',
+			));	
+		} else {
+			die("A user with this email address already exists.");
+		}
 	}
 	
-	public function getUser($secretCode) {
-		$query = $this->handler->query("SELECT * FROM users WHERE secretCode = '$secretCode'");
+	public function getUser($field, $search) {
+		$query = $this->handler->query("SELECT * FROM users WHERE $field = '$search'");
 		$r = $query->fetch(PDO::FETCH_OBJ);
 		return $r;
 	}

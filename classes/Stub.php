@@ -87,7 +87,7 @@
 				'interestedEmails' => $this->interestedEmails
 				);
 
-			PC::debug($array);
+			
 			return $array;
 		}
 	}

@@ -4,16 +4,15 @@ require('core/init.php');
 include('layout/head.php');
 include('layout/header.php');
 include('orcid/OrcidHandler.php');
-require_once('lib/php-console-master/src/PhpConsole/__autoload.php');
-PhpConsole\Helper::register();
-
-session_start();
 
 $orcid = Input::get('orcid');
-$_SESSION['password']= Input::get('password');
 
+//session_start();
+
+$_SESSION['password'] = Input::get('password');
+//PC::debug($_SESSION['password']);
 $user = getUser($orcid);
-PC::debug($user);
+
 
 ?>
 <script src='lib/mustache.js'></script>
