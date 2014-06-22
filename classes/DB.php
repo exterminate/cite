@@ -141,7 +141,7 @@ class DB {
 		$query = $this->handler->query("SELECT * FROM users WHERE email = '$email'");
 		if($query->rowCount() == 1) { // check user exists
 			// Success user exists, is password ok?
-			if($r->accessLevel == "unverified"){
+			if($r->accessLevel != "unverified"){
 			
 				$r = $query->fetch(PDO::FETCH_OBJ);
 				if($r->password == md5($password)) { 
@@ -164,7 +164,7 @@ class DB {
 				}
 				
 			} else {
-				die("");
+				die("You need to verify your account, please check you email for a verification link.");
 			}
 
 
@@ -173,7 +173,7 @@ class DB {
 		}
 	}
 	
-	public function registerUser($user) {
+	public function registerUser($user, $password) {
 		// validate email, orcid and password before it comes here
 		$sql = "INSERT INTO user (email, lastLogin, password, deepLink, firstName, surname, orcid, accessLevel) 
 		 VALUES (:email, NOW(), :password, :deepLink, :firstName, :surname,  :orcid, :accessLevel)";
@@ -181,7 +181,7 @@ class DB {
 		$query = $this->handler->prepare($sql);
 		$query->execute(array(
 			':email' 	=> $user->email,
-			':password'	=> md5($user->password),
+			':password'	=> md5($password),
 			':deepLink'	=> $this->handler->getUniqueCode('deepLink', 'users'),
 			':firstName' 	=> $user->firstName, // need to make this work = ORCID CLASS?
 			':surname'	=> $user->surname, // need to make this work = ORCID CLASS?
