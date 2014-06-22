@@ -6,6 +6,7 @@ header('Content-type: application/json');
 
 $updatedStub = new Stub($_POST['input']);
 
+/*
 //check that the user is logged in
 
 //write the updated stub to the database
@@ -17,6 +18,7 @@ echo json_encode(array("editSuccessful" => "true"));
 echo json_encode(array("editSuccessful" => "false", "errorMsg" => "reason for update failure here"));
 
 
+*/
 
 
 
@@ -27,22 +29,21 @@ echo json_encode(array("editSuccessful" => "false", "errorMsg" => "reason for up
 
 
 
-/*
 $validate = new Validate();
 
-if(isset($_POST['inputEmail']) && isset(Input::get('code'))){ //email and code passed
+if(isset(Input::get('inputEmail')) && isset(Input::get('code'))){ //email and code passed
 	
 	// validate input
 	$validate->check($_POST, array(  
 		'inputEmail' => array(
-			'required' 	=> true,
-			'max' => 80,
-			'email' => true			
+			'required'  => true,
+			'max'       => 80,
+			'email'     => true			
 			),
 		'code' => array(
-			'required' 	=> true,
-			'min' => 12,
-			'max' => 12	
+			'required'  => true,
+			'min'       => 12,
+			'max'       => 12	
 			)
 		)
 	);

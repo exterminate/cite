@@ -32,6 +32,10 @@ class Author {
             }
         }   
     }
+    
+    public function register() {
+        
+    }
 }
 
 ?>

@@ -1,15 +1,37 @@
 <?php
 session_start();
+    require_once('lib/php-console-master/src/PhpConsole/__autoload.php');
+    PhpConsole\Helper::register();
 require 'core/init.php';
 
 
 if(Input::exists()) {
 
-	$user = new User($dbHandler, Input::get('username'), Input::get('password'));
-	$user->login();	
+	$user = new User($dbHandler);
+	$validate = new Validate();
+	$validate->check($_POST, array( 
+		'email' => array(
+			'required' 	=> true,
+			'max' 		=> 60,
+			'email' 	=> true			
+			),
+		'password' => array(
+			'required' 	=> true,
+			'min' 		=> 6,
+			'max' 		=> 20	
+			)
+		)
+	);
+	
+	if($validate->passed()) {
+		//ian.coates@gmail.com
+		echo Input::get('email')." ". Input::get('password');
+		$user->login(Input::get('email'), Input::get('password'));
+		echo "ian.coates@gmail.com";
+	}
 } 
-
-if(isset($_SESSION['username'])) {
+PC::debug($_SESSION['name']);
+if(isset($_SESSION['name'])) {
 	
 	// delete stub
 	if(Input::get('delete')) {
@@ -83,8 +105,8 @@ if(isset($_SESSION['username'])) {
 <form action="" method="post">
 	<table>
 		<tr>
-			<td><label for="username">Name</label></td>
-			<td><input type="text" name="username" id="username" value="<?php echo Input::get('username'); ?>" autocomplete="off"></td>
+			<td><label for="email">E-mail</label></td>
+			<td><input type="email" name="email" id="email" value="<?php echo Input::get('email'); ?>" autocomplete="off"></td>
 		</tr>
 		<tr>
 			<td><label for="password">Password</label></td>
