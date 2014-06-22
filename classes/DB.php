@@ -36,7 +36,7 @@ class DB {
 			
 			$stubs = array();
 			foreach($r as $stub){
-				array_push($stubs, new Stub($stub));
+				array_push($stubs, new Stub($stub));				
 			}		
 			
 			return $stubs;

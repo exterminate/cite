@@ -19,6 +19,7 @@ session_destroy();
 <script src='lib/mustache.js'></script>
 
 <script>
+    var user = $.parseJSON('<?php echo json_encode($user) ?>');
     $.get('templates/accountCreatedConfirmation.mustache.html', function(template){
        $('#content').html(Mustache.to_html(template, user)); 
     });

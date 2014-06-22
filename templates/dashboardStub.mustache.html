@@ -1,0 +1,27 @@
+<table class='table' width='100%'>
+    <tr>
+        <th>stubId</th>
+        <th>firstName</th>
+        <th>surname</th>
+        <th>email</th>
+        <th>orcid</th>
+        <th>datesubmitted</th>
+        <th>delete</th>
+        <th>edit</th>
+        <th>view</th>
+    </tr>
+    
+    {{#stubs}}
+        <tr>
+            <td>{{stubId}}</td>
+            <td>{{firstName}}</td>
+            <td>{{surname}}</td>
+            <td>{{email}}</td>
+            <td>{{orcid}}</td>
+            <td>{{datesubmitted}}</td>
+            <td><a href='delete/{{stubId}}'>Delete</a></td>
+            <td><a href='edit/{{edit}}'>Edit</a></td>
+            <td><a href='../{{stubId}}'>View</a></td>            
+        </tr>        
+    {{/stubs}}
+</table>
