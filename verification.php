@@ -1,24 +1,32 @@
 <?php
-require 'core/init.php';
+session_start();
+require('core/init.php');
+
 
 $validate = new Validate();
 	$validate->check($_GET, array( 
-		Input::get('em') => array(
+		'em' => array(
 			'required' 	=> true,
 			'max' 		=> 60,
 			'email' 	=> true			
 			),
-		Input::get('dl') => array(
+		'dl' => array(
 			'required' 	=> true,
-			'min' 		=> 6,
-			'max' 		=> 20	
+			'min' 		=> 12,
+			'max' 		=> 12	
 			)
 		)
 	);
-	
+        
+include('layout/head.php');
+include('layout/header.php');
+
 if($validate->passed()) {
-        $dbHandler->login(Input::get('email'), Input::get('password'));
+        $dbHandler->verifyUser(Input::get('em'), Input::get('dl'));
+        echo $_SESSION['name']." you are now logged in.";
 }
 
+
+include 'layout/footer.php';
 ?>
 

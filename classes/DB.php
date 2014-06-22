@@ -191,7 +191,7 @@ class DB {
 				':firstName' 	=> $user->firstName, // need to make this work = ORCID CLASS?
 				':surname'	=> $user->surname, // need to make this work = ORCID CLASS?
 				':orcid'	=> $user->orcid,
-				':accessLevel'	=> 'user',
+				':accessLevel'	=> 'unverified',
 			));
 			
 			// if ok, send email with deep link
@@ -199,8 +199,8 @@ class DB {
 			$emailHandler->sendEmail(
 			$user->email,
 			"Thank you for registering with Cite",
-			"Thank you for registering with Cite\n\nPlease click on the link below to verify your account\n\n".$this->rootURL."?dl=".$uniqueCode."&em=".$user->email."\n\nYou can then submit a stub."
-			);
+			"Thank you for registering with Cite\n\nPlease click on the link below to verify your account\n\n".$this->rootURL."verification.php?dl=".$uniqueCode."&em=".$user->email."\n\nYou can then submit a stub."
+			);//http://localhost/git/cite/verification.php?dl=ySkfrsq1X7Xy&em=ian.coates@gmail.com
 		} else {
 			die("A user with this email address already exists.");
 		}
@@ -212,17 +212,30 @@ class DB {
 		return $r;
 	}
 	
-	public function verifyUser() {
-		$sql = "UPDATE users SET lastLogin = NOW() AND secretCode = ? WHERE email = ?";
-		$query = $this->handler->prepare($sql);
-		$query->execute(array($secretCode, $this->email));
-		$secretCode = md5(date('Y-m-d H:i:s')).md5($email);
-		session_start();
-		$_SESSION['name'] = $r->firstName." ".$r->surname;
-		$_SESSION['secretCode'] = $secretCode;
-		$_SESSION['email'] = $r->email;
+	public function verifyUser($email, $deepLink) {
+		$user = $this->getUser('email', $email);
+		if($user != null){
+			if($user->deepLink == $deepLink) {
+				if($user->accessLevel != 'user') {
+					$sql = "UPDATE users SET lastLogin = NOW(), secretCode = ?, accessLevel = ? WHERE email = ?";
+					$query = $this->handler->prepare($sql);
+					$secretCode = md5(date('Y-m-d H:i:s')).md5($email);
+					$query->execute(array($secretCode, 'user', $email));
+					$_SESSION['name'] = $user->firstName." ".$user->surname;
+					$_SESSION['secretCode'] = $secretCode;
+					$_SESSION['email'] = $user->email;
+				} else {
+					die("You have already validated this account");
+				}
+			} else {
+				die("I'm afraid your details don't match with out records. Please check the URL we sent you.");
+			}
+		} else {
+			die("This user does not exist.");
+		}
 	}
 }
+
 
 
 ?>

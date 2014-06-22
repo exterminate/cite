@@ -41,7 +41,7 @@ if(isset($_SESSION['name'])) {
 	$stubs = $dbHandler->getStubs('links', 'email', '=', $_SESSION['email']);
 		
 		
-		echo "<p>" . $dbHandler->count('links', 'email', '=', '%') . " stubs have been created</p>";
+		echo "<p>You have created " . $dbHandler->count('links', 'email', '=', $_SESSION['email']) . " stubs.</p>";
 
 		echo "<table class='table' width='100%'>";
 		echo "<tr>";
