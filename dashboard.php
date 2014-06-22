@@ -52,8 +52,7 @@ if(isset($_SESSION['name'])) {
 	<div id='content'></div>
 	
 <?php
-<<<<<<< HEAD
-=======
+
 	$user = $dbHandler->getUser('secretCode', $_SESSION['secretCode']);
 	$stubs = $dbHandler->getStubs('links', 'email', '=', $_SESSION['email']);
 		
@@ -85,7 +84,7 @@ if(isset($_SESSION['name'])) {
 		}
 		echo "</table>";
 
->>>>>>> origin/master
+
 	
 } else {
 	include 'layout/header.php'; 
