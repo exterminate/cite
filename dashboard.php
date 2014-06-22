@@ -5,13 +5,8 @@ session_start();
 require 'core/init.php';
 include 'layout/head.php';
 
-require 'lib/php-console-master/src/PhpConsole/__autoload.php';
-PhpConsole\Helper::register();
-
-
 if(Input::exists()) {
 
-	//$user = new User($dbHandler);
 	$validate = new Validate();
 	$validate->check($_POST, array( 
 		'email' => array(
@@ -59,7 +54,7 @@ if(isset($_SESSION['name'])) {
 		
 		echo "<p>You have created " . $dbHandler->count('links', 'email', '=', $_SESSION['email']) . " stubs.</p>";
 
-		echo "<table class='table' width='100%'>";
+	/*	echo "<table class='table' width='100%'>";
 		echo "<tr>";
 			echo "<th>stubId</th>";
 			echo "<th>firstName</th>";
@@ -83,7 +78,7 @@ if(isset($_SESSION['name'])) {
 			echo "</tr>";
 		}
 		echo "</table>";
-
+	*/
 
 	
 } else {

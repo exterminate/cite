@@ -8,12 +8,30 @@ include('orcid/OrcidHandler.php');
 
 $orcid = Input::get('orcid');
 
+if(Input::exists()) {
 
+	$validate = new Validate();
+	$validate->check($_POST, array( 
+                'orcid' => array(
+			'required' 	=> true,
+			'orcid' 	=> true			
+			),
+		'password' => array(
+			'required' 	=> true,
+			'min' 		=> 6,
+			'max' 		=> 20	
+			)
+		)
+	);
+	
+	if($validate->passed()) {
+		
+ 
 
-$_SESSION['password'] = Input::get('password');
-//PC::debug($_SESSION['password']);
-$user = getUser($orcid);
-
+            $_SESSION['password'] = Input::get('password');
+            //PC::debug($_SESSION['password']);
+            $user = getUser($orcid);
+        
 
 ?>
 <script src='lib/mustache.js'></script>
@@ -30,3 +48,14 @@ $user = getUser($orcid);
     
 </script>
 <div id='content'></div>
+
+
+<?php
+        } else {
+            foreach($validate->errors() as $error) {
+		echo $error . "<br>";
+	    }
+        }
+}
+include('layout/footer.php');
+?>
