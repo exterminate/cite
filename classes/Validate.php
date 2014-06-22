@@ -39,7 +39,7 @@ class Validate {
 							}
 						case 'doi':
 							// Validate DOI
-							$pattern = '\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'<>])\S)+)\b';
+							$pattern = '$\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'<>])\S)+)\b$';
 							if(preg_match($pattern, $value)) {
 								$this->addError("{$value} is not a valid DOI.");
 							}	

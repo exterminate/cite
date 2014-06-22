@@ -37,8 +37,8 @@ if(isset($_SESSION['name'])) {
 	<p><?= $_SESSION['name']?> is logged in.</p>
 	
 <?php
-	$user = new User($dbHandler->getUser($_SESSION['secretCode']));
-	$stubs = $dbHandler->getStubs('links', 'email', '=', '%');
+	$user = $dbHandler->getUser('secretCode', $_SESSION['secretCode']);
+	$stubs = $dbHandler->getStubs('links', 'email', '=', $_SESSION['email']);
 		
 		
 		echo "<p>" . $dbHandler->count('links', 'email', '=', '%') . " stubs have been created</p>";
