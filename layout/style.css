@@ -157,6 +157,16 @@ p {
 	padding-bottom: 10px;
 }
 
+.loginForm {
+	text-align:right;
+	float:right;
+	//margin-top: 40px;
+}
+
+.loginForm input {
+	padding: 1px;
+}
+
 .error{
 	opacity: 0;
 	display: inline-block;
@@ -290,6 +300,8 @@ ol.circles-list > li:before {
 }
 
 ul{list-style-type:none}
+
+
 
 
 /*

@@ -7,7 +7,7 @@ require 'core/init.php';
 
 if(Input::exists()) {
 
-	//$user = new User($dbHandler);
+	
 	$validate = new Validate();
 	$validate->check($_POST, array( 
 		'email' => array(
