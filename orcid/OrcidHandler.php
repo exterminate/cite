@@ -1,6 +1,5 @@
 <?php
-    require 'lib/php-console-master/src/PhpConsole/__autoload.php';
-PhpConsole\Helper::register();
+
 
     function getUser($id){
         $host = 'http://pub.orcid.org/v1.1/';
@@ -14,7 +13,6 @@ PhpConsole\Helper::register();
        
         $array = json_decode($data,true);
         
-        PC::debug($array);
         
         //no OrcID found with this ID, return an empty user
         if(array_key_exists('error-desc', $array)){

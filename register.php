@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require('core/init.php');
 include('layout/head.php');
@@ -7,7 +8,7 @@ include('orcid/OrcidHandler.php');
 
 $orcid = Input::get('orcid');
 
-//session_start();
+
 
 $_SESSION['password'] = Input::get('password');
 //PC::debug($_SESSION['password']);

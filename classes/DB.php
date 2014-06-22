@@ -1,5 +1,6 @@
 <?php
 class DB {
+	private $rootURL = "http://localhost/git/cite/";
 	private $handler;
 	public function __construct($handler) { 
 		$this->handler = $handler;
@@ -198,7 +199,7 @@ class DB {
 			$emailHandler->sendEmail(
 			$user->email,
 			"Thank you for registering with Cite",
-			"Thank you for registering with Cite\n\nPlease click on the link below to verify your account\n\n".$rootURL."?dl=".$uniqueCode."&em=".$user->email."\n\nYou can then submit a stub."
+			"Thank you for registering with Cite\n\nPlease click on the link below to verify your account\n\n".$this->rootURL."?dl=".$uniqueCode."&em=".$user->email."\n\nYou can then submit a stub."
 			);
 		} else {
 			die("A user with this email address already exists.");
@@ -219,6 +220,7 @@ class DB {
 		session_start();
 		$_SESSION['name'] = $r->firstName." ".$r->surname;
 		$_SESSION['secretCode'] = $secretCode;
+		$_SESSION['email'] = $r->email;
 	}
 }
 

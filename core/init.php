@@ -1,4 +1,6 @@
 <?php
+
+$rootURL = "http://localhost/git/cite/";
 /*
 require 'classes/User.php';
 require 'classes/DB.php';
@@ -7,13 +9,13 @@ require 'classes/Input.php';
 require 'includes/functions.php';
 require 'classes/Validate.php';
 */
-require 'includes/functions.php';
+
 foreach(glob("classes/*.php") as $filename) {
 	require $filename;	
 }
-
+require 'includes/functions.php';
 // modify to get links to work
-$rootURL = "http://localhost/git/cite/";
+
 
 try {
 	$handler = new PDO('mysql:host=127.0.0.1;dbname=cite', 'root', 'root');
