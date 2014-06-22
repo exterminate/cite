@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require('core/init.php');
 
 $user = new User(
@@ -12,7 +12,7 @@ $user = new User(
 
 
 
-$dbHandler->registerUser($user, Input::get('password'));
+$dbHandler->registerUser($user, $_SESSION['password']);
 
-
+session_destroy();
 ?>

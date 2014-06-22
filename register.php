@@ -5,10 +5,12 @@ include('layout/head.php');
 include('layout/header.php');
 include('orcid/OrcidHandler.php');
 require_once('lib/php-console-master/src/PhpConsole/__autoload.php');
-PhpConsole\Helper::register();  
+PhpConsole\Helper::register();
+
+session_start();
 
 $orcid = Input::get('orcid');
-$password = Input::get('password');
+$_SESSION['password']= Input::get('password');
 
 $user = getUser($orcid);
 PC::debug($user);
