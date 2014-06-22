@@ -174,21 +174,31 @@ class DB {
 	}
 	
 	public function registerUser($user, $password) {
-		if(getUser('email', $user->email) == null){
+		if($this->getUser('email', $user->email) == null){
 			// validate email, orcid and password before it comes here
-			$sql = "INSERT INTO user (email, lastLogin, password, deepLink, firstName, surname, orcid, accessLevel) 
+			$sql = "INSERT INTO users (email, lastLogin, password, deepLink, firstName, surname, orcid, accessLevel) 
 			 VALUES (:email, NOW(), :password, :deepLink, :firstName, :surname,  :orcid, :accessLevel)";
 	
 			$query = $this->handler->prepare($sql);
+			$uniqueCode = $this->getUniqueCode('deepLink', 'users');
+			
 			$query->execute(array(
 				':email' 	=> $user->email,
 				':password'	=> md5($password),
-				':deepLink'	=> $this->handler->getUniqueCode('deepLink', 'users'),
+				':deepLink'	=> $uniqueCode,
 				':firstName' 	=> $user->firstName, // need to make this work = ORCID CLASS?
 				':surname'	=> $user->surname, // need to make this work = ORCID CLASS?
 				':orcid'	=> $user->orcid,
 				':accessLevel'	=> 'user',
-			));	
+			));
+			
+			// if ok, send email with deep link
+			$emailHandler = new EmailHandler();
+			$emailHandler->sendEmail(
+			$user->email,
+			"Thank you for registering with Cite",
+			"Thank you for registering with Cite\n\nPlease click on the link below to verify your account\n\n".$rootURL."?dl=".$uniqueCode."&em=".$user->email."\n\nYou can then submit a stub."
+			);
 		} else {
 			die("A user with this email address already exists.");
 		}
@@ -198,6 +208,16 @@ class DB {
 		$query = $this->handler->query("SELECT * FROM users WHERE $field = '$search'");
 		$r = $query->fetch(PDO::FETCH_OBJ);
 		return $r;
+	}
+	
+	public function verifyUser() {
+		$sql = "UPDATE users SET lastLogin = NOW() AND secretCode = ? WHERE email = ?";
+		$query = $this->handler->prepare($sql);
+		$query->execute(array($secretCode, $this->email));
+		$secretCode = md5(date('Y-m-d H:i:s')).md5($email);
+		session_start();
+		$_SESSION['name'] = $r->firstName." ".$r->surname;
+		$_SESSION['secretCode'] = $secretCode;
 	}
 }
 
