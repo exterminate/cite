@@ -24,7 +24,7 @@ if(isset($_SESSION['name']) && !isset(Input::get('orcid'))) {
 		)
 	);
 	if($validate->passed()) {
-		$user = $dbHandler->getUser('orcid', Input::get('orcid'));
+		$user = $dbHandler->getUser('orcid', Input::get('orcid')); // if this method works then reconsider for index.php
 		echo "<strong>Profile: </strong>".$_SESSION['name']."<br>\n";
 		echo "<strong>E-mail: </strong>".$user->email."<br>\n";
 		echo "<p>You have ".count($table, $field, $operator, $code)." stubs";
