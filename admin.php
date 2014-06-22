@@ -7,7 +7,7 @@ require 'core/init.php';
 
 if(Input::exists()) {
 
-	$user = new User($dbHandler);
+	//$user = new User($dbHandler);
 	$validate = new Validate();
 	$validate->check($_POST, array( 
 		'email' => array(
@@ -24,10 +24,7 @@ if(Input::exists()) {
 	);
 	
 	if($validate->passed()) {
-		//ian.coates@gmail.com
-		echo Input::get('email')." ". Input::get('password');
-		$user->login(Input::get('email'), Input::get('password'));
-		echo "ian.coates@gmail.com";
+		$dbHandler->login(Input::get('email'), Input::get('password'));
 	}
 } 
 PC::debug($_SESSION['name']);
@@ -58,7 +55,7 @@ if(isset($_SESSION['name'])) {
 	} else {	
 	
 	
-		echo "<p>" . $_SESSION['username'] . " is logged in - <a href='" . $rootURL . "logout.php'>Logout</a></p>";
+		echo "<p>" . $_SESSION['name'] . " is logged in - <a href='" . $rootURL . "logout.php'>Logout</a></p>";
 
 		$stubs = $dbHandler->getStubs('links', 'stubId', 'LIKE', '%');
 		
@@ -100,7 +97,7 @@ if(isset($_SESSION['name'])) {
 ?>
 
 
-<p>Quick form to text validation and User class</p>
+<h1>Log in</h1>
 
 <form action="" method="post">
 	<table>

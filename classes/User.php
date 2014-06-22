@@ -2,15 +2,19 @@
 
 class User {
 	
-	public function __construct($handler) {
-		$this->handler = $handler;
+	public $dbhandler;
+	
+	public function __construct($dbhandler) {
+		$this->dbhandler = $dbhandler;
 	}
 
-	public function login($email, $password) {
+	public function login($email, $password, $db_handler) {
 		// Validate before login                  
+		$s_q_l = "SELECT * FROM users WHERE email = '$email'";
+		echo $s_q_l;
+		$query = $this->db_handler->query($s_q_l);
+		     
 		die("yay");
-		$query = $this->handler->query("SELECT * FROM users WHERE email = '$email'");
-		
 		if($query->rowCount() == 1) { // check user exists
 			// Success user exists, is password ok?
 			$r = $query->fetch(PDO::FETCH_OBJ);
@@ -20,7 +24,7 @@ class User {
 				if($r->password == md5($password)) { 
 					//great let's start the session
 					$sql = "UPDATE users SET lastLogin = NOW() WHERE email = ?";
-					$query = $this->handler->prepare($sql);
+					$query = $this->dbhandler->prepare($sql);
 					$query->execute(array($this->email));
 					echo $r->firstName." ".$r->surname;
 					session_start();

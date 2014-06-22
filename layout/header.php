@@ -11,6 +11,15 @@
 			    <a href="<?php echo $rootURL; ?>search/">Search</a>
 			    <a href="<?php echo $rootURL; ?>faq/">FAQ</a>
 			</nav>
+			<div class="loginForm" style="background:white">
+				<form action="">
+					<label for="email">E-mail: </label>
+					<input type="email" name="email">
+					<label for="password">Password</label>
+					<input type="password" name="password">
+					<input type="submit" name="submit" value="login">
+				</form>
+			</div>
 		</div>
 	</header>
 
