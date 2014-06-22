@@ -6,9 +6,9 @@
 			?>
 			<div class="loginForm">
 				<form action="dashboard/" method="post">
-					<label for="email">E-mail: </label>
+					<label for="email">E-mail: </label><br>
 					<input type="email" name="email"><br>
-					<label for="password">Password: </label>
+					<label for="password">Password: </label><br>
 					<input type="password" name="password"><br>
 					<input type="submit" name="submit" value="login">
 				</form>

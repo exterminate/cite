@@ -52,6 +52,40 @@ if(isset($_SESSION['name'])) {
 	<div id='content'></div>
 	
 <?php
+<<<<<<< HEAD
+=======
+	$user = $dbHandler->getUser('secretCode', $_SESSION['secretCode']);
+	$stubs = $dbHandler->getStubs('links', 'email', '=', $_SESSION['email']);
+		
+		
+		echo "<p>You have created " . $dbHandler->count('links', 'email', '=', $_SESSION['email']) . " stubs.</p>";
+
+		echo "<table class='table' width='100%'>";
+		echo "<tr>";
+			echo "<th>stubId</th>";
+			echo "<th>firstName</th>";
+			echo "<th>surname</th>";
+			echo "<th>email</th>";
+			echo "<th>orcid</th>";
+			echo "<th>datesubmitted</th>";
+			echo "<th>delete</th>";
+			echo "<th>edit</th>";
+		echo "</tr>";	
+		foreach($stubs as $stub) {
+			echo "<tr>";
+			echo "<td>" . $stub->stubId . "</td>";
+			echo "<td>" . $stub->firstName . "</td>";
+			echo "<td>" . $stub->surname . "</td>";
+			echo "<td>" . $stub->email . "</td>";
+			echo "<td>" . $stub->orcid . "</td>";
+			echo "<td>" . $stub->datesubmitted . "</td>";
+			echo "<td><a href='?delete=" . $stub->stubId ."'>X</a></td>";
+			echo "<td><a href='?edit=" . $stub->stubId ."'>X</a></td>";
+			echo "</tr>";
+		}
+		echo "</table>";
+
+>>>>>>> origin/master
 	
 } else {
 	include 'layout/header.php'; 

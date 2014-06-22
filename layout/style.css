@@ -11,7 +11,7 @@ body {
 }
 
 .headerwrap, header {
-	height: 140px;
+	height: 180px;
 }
 
 header, th {
@@ -66,16 +66,13 @@ nav {
 }
 
 .wrapper:after {
-	height: -140px;
+	height: -180px;
 }
 
 h1 {
 	font-weight: 300;
 }	
 
-header h1 {
-	color: white;
-}
 
 a {
 	text-decoration: none;
@@ -88,6 +85,7 @@ a {
 header h1 {
 	padding: 20px 0;
 	font-size: 300%;
+	color: white;
 }
 
 table, td, tr, label {
@@ -125,10 +123,12 @@ input[type="submit"], button {
 	padding: 10px 20px;
 	border: 0;
 	font-size: 100%;
+	border-bottom: 5px solid #730329;
 }
 
 input[type="submit"]:hover {
-	background: #730329;
+	opacity: 0.8;
+	
 }
 
 textarea {
