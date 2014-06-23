@@ -9,10 +9,7 @@ class Validate {
 
 	public function check($source, $items = array()) {
 		foreach($items as $item => $rules) {
-		
-			if($item == "orcid"){
-				//validate orcid here
-			}
+
 			
 		
 			foreach($rules as $rule => $rule_value) {
@@ -46,8 +43,9 @@ class Validate {
 						break;
 						case 'orcid':
 							// Validate ORCID
-							$pattern = "/[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}/";
-							if(preg_match($pattern, $value)) {
+							$pattern = '/[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9X]{4}/';
+							
+							if(preg_match($pattern, $value, $matches)) {
 								$this->addError("{$value} is not a valid ORCID.");
 							}	
 						break;
