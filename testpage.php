@@ -1,6 +1,15 @@
 <?php
 
 echo date('Y-m-d H:i:s');
+
+echo "<br>";
+
+$value = "0000-0003-3540-6353";
+$pattern = '/[0-9]\{4,4}\-[0-9]{4,4}\-[0-9]{4,4}\-[0-9X]{4,4}/';
+							
+if(preg_match($pattern, $value)) {
+        echo " not a valid ORCID.";
+}
 /*
 // test page // delete later
 
