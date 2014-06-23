@@ -27,15 +27,50 @@
 			console.log("Failed to load Mustache template, " + a.responseText);
 		});
 		
-		$('#orcid').mask("9999-9999-9999-9999", {placeholder : "."});
+		$('#orcid').mask("9999-9999-9999-9999",{placeholder : "."});
 		
+		var validOrcid = false, validPass1 = false, validPass2 = false;
+		$('#orcid').blur(function(){
+			if($(this).val() != ""){
+				$('#orcidLbl').find('.err').html('&#10003');
+				validOrcid = true;
+			} else{
+				$('#orcidLbl').find('.err').html('Please enter a 16 digit OrcID');
+				validOrcid = false;
+			}			
+		});
 		
+		$('#password1').blur(function(){			
+			if($(this).val().length < 6){
+				$('#pass1Lbl').find('.err').html("Password must be at least 6 characters long!");
+				validPass1= false;
+			} else{
+				$('#pass1Lbl').find('.err').html('&#10003');
+				validPass1 = true;
+			}
+		});
 		
-		$('#getStartedButton').click(function(evt){
-			var pass = $('#password1').val();
+		$('#password2').blur(function(){
+			if ($('#password1').val().length < 6) {
+				$('#pass1Lbl').find('.err').html("Password must be at least 6 characters long!");
+				validPass1 = false;
+			} else{
+				if ($('#password1').val() != $('#password2').val()) {				
+					$('#pass2Lbl').find('.err').html("Passwords don't match!");
+					validPass2 = false;
+				} else{
+					$('#pass2Lbl').find('.err').html('&#10003');
+					$('#pass1Lbl').find('.err').html('&#10003');
+					validPass1 = true;
+					validPass2 = true;
+				}				
+			}
+		});		
 		
-			if (pass != $('#password2').val()) {			
-				alert("Passwords do not match!");
+		$('#getStartedButton').click(function(evt){				
+			
+			if (!(validOrcid && validPass1 && validPass2)) {			
+				alert("Error");
 				evt.preventDefault();
 			}			
 		});
@@ -61,16 +96,19 @@
 	
 	
 	<form action='register.php' method='post'>
-		<label>Enter your OrcID
-			<input id='orcid' name='orcid' type='text'>
-				Don't have and OrcID? <a href='http://orcid.org'>Get one here!</a>
+		<label id='orcidLbl'>Enter your OrcID
+			<input id='orcid' name='orcid' type='text'>				
+			<span class='err'></span>
+			Don't have and OrcID? <a href='http://orcid.org'>Get one here!</a>
 		</label><br>		
-		<label>Create a password:
+		<label id='pass1Lbl'>Create a password:
 			<input id='password1' name='password' type='password'>
+			<span class='err'></span>
 		</label><br>
-		<label>
+		<label id='pass2Lbl'>
 			Re-type your password:
 			<input id='password2' type='password'>
+			<span class='err'></span>
 		</label><br>
 		<input id='getStartedButton' type='submit' value='Get started!'>
 	</form>
