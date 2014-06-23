@@ -5,15 +5,18 @@ require 'core/init.php';
 include 'layout/head.php';
 include 'layout/header.php';
 
-if(isset($_SESSION['name']) && !isset(Input::get('orcid'))) {
-	// see your profile	
-	$user = $dbHandler->getUser('secretCode', $_SESSION['secretCode']);
-	echo "<strong>Profile: </strong>".$_SESSION['name']."<br>\n";
-	echo "<strong>E-mail: </strong>".$user->email."<br>\n";
-	echo "<p>You have ".count($table, $field, $operator, $code)." stubs";
+if(isset($_SESSION['name']) && !isset($_GET['orcid'])) {
+	// see your profile
+	
+	$user = $dbHandler->getUser('email', $_SESSION['email']);
+	
+	echo "<p><strong>Profile: </strong>".$_SESSION['name']."</p>\n";
+	echo "<p><strong>OrcID</strong>" . $user->orcid . "</p>";
+	echo "<p><strong>E-mail: </strong>".$user->email."</p>\n";
+	echo "<p>You have ".$dbHandler->count('links', 'email', '=', $user->email)." stubs</p>";
 	// what else do we want to display?
 	
-} elseif(isset(Input::get('orcid'))) {
+} elseif(isset($_GET['orcid'])) {
 	// see someone else's profile
 	$validate = new Validate();
 	$validate->check($_GET, array( 
@@ -25,13 +28,17 @@ if(isset($_SESSION['name']) && !isset(Input::get('orcid'))) {
 	);
 	if($validate->passed()) {
 		$user = $dbHandler->getUser('orcid', Input::get('orcid')); // if this method works then reconsider for index.php
-		echo "<strong>Profile: </strong>".$user->firstName." ". $user->surname ."<br>\n";
-		echo "<p>" . $user->orcid . "</p>";
-		echo "<p>" . $user->firstName . " " . $user->surname . " has ".count($table, $field, $operator, $code)." stubs";
 		
-		// loop over stubs
+		if($user != null){
+			
+			echo "<p><strong>Profile: </strong>".$user->firstName." ". $user->surname ."</p>\n";
+			echo "<p><strong>OrcID: </strong>" . $user->orcid . "</p>";
+			echo "<p>" . $user->firstName . " " . $user->surname . " has ".$dbHandler->count('links', 'email', '=', $user->email)." stubs</p>";
+		} else {
+			
+			echo "<p>There are no matching stubs with the OrcID ". Input::get('orcid') ."</p>";
+		}
 		
-		// here
 	} else {
 		echo "You have not entered a valid OrcID.";
 	}

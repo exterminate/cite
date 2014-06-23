@@ -157,6 +157,10 @@ p {
 	padding-bottom: 10px;
 }
 
+strong {
+	font-weight: 700;
+}
+
 .loginForm {
 	text-align:right;
 	float:right;

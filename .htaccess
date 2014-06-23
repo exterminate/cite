@@ -1,10 +1,12 @@
 RewriteEngine On
 RewriteRule ^([a-zA-Z0-9]+)$ index.php?stub=$1
-RewriteRule ^update/$ update.php
-RewriteRule ^update/([a-zA-Z0-9]+)$ update.php?stub=$1
+RewriteRule ^profile/$ profile.php
+#RewriteRule ^profile/([a-zA-Z0-9\-]+)$ profile.php?orcid=$1
+RewriteRule ^profile/([0-9]+\-[0-9]+\-[0-9]+\-[0-9X]+)$ profile.php?orcid=$1
 RewriteRule ^submit/$ submit.php
 RewriteRule ^search/$ search.php
 RewriteRule ^edit/$ edit.php
 RewriteRule ^about/$ about.php
 RewriteRule ^faq/$ faq.php
 RewriteRule ^dashboard/$ dashboard.php
+

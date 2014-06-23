@@ -31,6 +31,7 @@
 				<a href="<?php echo $rootURL; ?>faq/">FAQ</a>
 			<?php
 			if(isset($_SESSION['name'])) {
+				echo '<a href="'.$rootURL.'dashboard/">Dashboard</a>';
 				echo '<a href="'.$rootURL.'logout.php">Logout</a>';
 			}
 			?>
