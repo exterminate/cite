@@ -25,9 +25,13 @@ if(isset($_SESSION['name']) && !isset(Input::get('orcid'))) {
 	);
 	if($validate->passed()) {
 		$user = $dbHandler->getUser('orcid', Input::get('orcid')); // if this method works then reconsider for index.php
-		echo "<strong>Profile: </strong>".$_SESSION['name']."<br>\n";
-		echo "<strong>E-mail: </strong>".$user->email."<br>\n";
-		echo "<p>You have ".count($table, $field, $operator, $code)." stubs";
+		echo "<strong>Profile: </strong>".$user->firstName." ". $user->surname ."<br>\n";
+		echo "<p>" . $user->orcid . "</p>";
+		echo "<p>" . $user->firstName . " " . $user->surname . " has ".count($table, $field, $operator, $code)." stubs";
+		
+		// loop over stubs
+		
+		// here
 	} else {
 		echo "You have not entered a valid OrcID.";
 	}
@@ -37,4 +41,4 @@ if(isset($_SESSION['name']) && !isset(Input::get('orcid'))) {
 
 include 'layout/footer.php';
 
-?>?>
+?>
