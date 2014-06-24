@@ -29,13 +29,13 @@ if(Input::exists()) {
         $stub = $dbHandler->getStub("stubId", $stubId);
         
         // unserialize the email array
-        $array = unserialize($stub->emailUpdate);
+        $array = unserialize($stub->interestedEmails);
         
         //append the interested email to the stub
         array_push($array, $interestedEmail);
         
         //write the stub back to the database
-        $stub->update('links', 'emailUpdate', serialize($array));
+        $stub->update('links', 'interestedEmails', serialize($array));
         
         //if db write is successful
         echo json_encode(array("interestRegistered" => true));
