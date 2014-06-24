@@ -66,10 +66,10 @@
 			}
 			
 			if(array_key_exists("interestedEmails", $array)){				
-				$this->interestedEmails = explode($array['interestedEmails'], ",");
+				$this->interestedEmails = explode(",", $array['interestedEmails']);
 			}
 		}
-
+		/*
 		function toArray(){
 
 			$array = array(
@@ -90,6 +90,7 @@
 			
 			return $array;
 		}
+		*/
 	}
 ?>
 

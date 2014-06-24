@@ -63,7 +63,12 @@ class DB {
 
 	public function update($table, $field, $stub) {
 		$sql = "UPDATE $table SET $field = ? WHERE stubId = ?";
-		$query = $this->handler->prepare($sql);		
+		$query = $this->handler->prepare($sql);
+		
+		//interestedEmails is an array so we need to turn it into a string first
+		if($field = "interestedEmails"){
+			$stub->interestedEmails = implode(",", $stub->interestedEmails);
+		}
 		$query->execute(array($stub->$field,$stub->stubId));
 	}
 

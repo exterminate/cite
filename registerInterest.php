@@ -26,16 +26,13 @@ if(Input::exists()) {
         $interestedEmail = Input::get('interestedEmail');
 
         //get the appropriate stub from the database using the stubId posted in
-        $stub = $dbHandler->getStub("stubId", $stubId);
-        
-        // unserialize the email array
-        $array = unserialize($stub->emailUpdate);
-        
+        $stub = $dbHandler->getStub("stubId", $stubId);        
+          
         //append the interested email to the stub
-        array_push($array, $interestedEmail);
+        array_push($stub->interestedEmails, $interestedEmail);
         
         //write the stub back to the database
-        $stub->update('links', 'emailUpdate', serialize($array));
+        $dbHandler->update('links', 'interestedEmails', $stub);
         
         //if db write is successful
         echo json_encode(array("interestRegistered" => true));

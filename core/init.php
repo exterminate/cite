@@ -1,6 +1,6 @@
 <?php
 
-$rootURL = "http://localhost/git/cite/";
+$rootURL = "http://localhost/cite/";
 /*
 require 'classes/User.php';
 require 'classes/DB.php';
@@ -18,7 +18,7 @@ require 'includes/functions.php';
 
 
 try {
-	$handler = new PDO('mysql:host=127.0.0.1;dbname=cite', 'root', 'root');
+	$handler = new PDO('mysql:host=127.0.0.1;dbname=cite', 'root', '');
 	$handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
 	echo $e->getMessage();
