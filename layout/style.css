@@ -57,7 +57,7 @@ nav {
 
 
 .wrapper {
-	padding-top: 20px;
+	padding: 20px 5px 50px 5px;
 }
 
 .wrapper:after {
@@ -273,49 +273,49 @@ ol.circles-list > li:before {
 
 
 
-.stub li{
-	vertical-align: center;
-    color:white
+.dashboard li{
+	vertical-align: right;
+	
+    //color:white
 	
 }
 
-.stub li:before{
-	color:white;
+.dashboard li:before{
+	text-shadow: 0 1px 0 #fff;
 	font-weight: bold;
-	width:25%;
+	width:20%;
 	display: inline-block;
-	text-align:center;
+	text-align: right;
 	padding-right: 10px;
 }
 
-.stub li.name:before {	
-	content: "Name: ";
-	
+.dashboard li.name:before {	
+	content: "Name: ";	
 }
 
-.stub li.orcid:before {
+.dashboard li.orcid:before {
 	content: "Orcid: ";
 }
 
-.stub li.stubId:before {
+.dashboard li.stubId:before {
 	content: "Stub ID: ";
 }
 
-.stub li.description:before {
+.dashboard li.description:before {
 	content: "Description: ";
 }
 
-.stub li.datesubmitted:before {
+.dashboard li.datesubmitted:before {
 	content: "Date Submitted: ";
 	
 }
 
-.stub li.doi:before{
+.dashboard li.doi:before{
 	content: "DOI: ";
 }
 
 
-.stub li.datedoi:before{
+.dashboard li.datedoi:before{
 	content: "Date Completed: ";
 }
 
