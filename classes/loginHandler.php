@@ -34,7 +34,7 @@ class LoginHandler {
 		
 	}
 	
-	public function isLoggedIn() {
+	public static function isLoggedIn() {
 		if(isset($sessionName) && isset($sessionSecretCode) && isset($sessionEmail))
 			return true;
 		else
