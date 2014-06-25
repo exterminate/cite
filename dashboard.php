@@ -33,11 +33,11 @@ if(Input::exists()) {
 *     if(LoginHandler::isLoggedIn()) { etc....................... }
 */
 
-
+$loginHandler = new LoginHandler();
 if(isset($_SESSION['name'])) { 
 	include 'layout/header.php';
-	$user = $dbHandler->getUser('secretCode', $_SESSION['secretCode']);
-	$stubs = $dbHandler->getStubs('links', 'email', '=', $_SESSION['email']);	
+	$user = $dbHandler->getUser('secretCode', $loginHandler->sessionSecretCode);
+	$stubs = $dbHandler->getStubs('links', 'email', '=', $loginHandler->sessionEmail);	
 		
 ?>
 	
@@ -51,15 +51,15 @@ if(isset($_SESSION['name'])) {
 		});
 	</script>
 	
-	<p><?= $_SESSION['name']?> is logged in.</p>
+	<p><?= $loginHandler->sessionName?> is logged in.</p>
 	<div id='content'></div>
 	
 <?php
 
-	$user = $dbHandler->getUser('secretCode', $_SESSION['secretCode']);
-	$stubs = $dbHandler->getStubs('links', 'email', '=', $_SESSION['email']);
+	$user = $dbHandler->getUser('secretCode', $loginHandler->sessionSecretCode);
+	$stubs = $dbHandler->getStubs('links', 'email', '=', $loginHandler->sessionEmail);
 		
-	echo "<p>You have created " . $dbHandler->count('links', 'email', '=', $_SESSION['email']) . " stubs.</p>";
+	echo "<p>You have created " . $dbHandler->count('links', 'email', '=', $loginHandler->sessionEmail) . " stubs.</p>";
 	
 } else {
 	include 'layout/header.php'; 
