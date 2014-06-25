@@ -30,7 +30,7 @@ if(Input::exists()) {
 
 /*
 *    with new loginHandler try $loginHandler = new LoginHandler();
-*     if($loginHandler->isLoggedIn()) { etc....................... }
+*     if(LoginHandler::isLoggedIn()) { etc....................... }
 */
 
 
