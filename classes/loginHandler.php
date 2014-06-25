@@ -1,5 +1,5 @@
 <?php
-class loginHandler {
+class LoginHandler {
 	public function login($email, $password) {
 		// Validate before login                  		
 		$query = $this->handler->query("SELECT * FROM users WHERE email = '$email'");
