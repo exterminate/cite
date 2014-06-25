@@ -66,7 +66,7 @@
 			}
 			
 			if(array_key_exists("interestedEmails", $array)){				
-				$this->interestedEmails = explode(",", $array['interestedEmails']);
+				$this->interestedEmails = unserialize($array['interestedEmails']);
 			}
 		}
 		/*

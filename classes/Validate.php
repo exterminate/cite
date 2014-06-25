@@ -72,16 +72,6 @@ class Validate {
 	public function passed() {
 		return $this->_passed;
 	}
-	/* delete
-	public function checkDB($handler, $deeplink) { //delete?
-		//GETTING ROW COUNT
-		$query = $handler->query("SELECT deeplink FROM links WHERE deeplink = '$deeplink'");
-		
-		while($query->rowCount() == 0) {
-			return $deeplink;
-		}
-
-	}
-	*/
+	
 
 }

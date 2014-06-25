@@ -1,8 +1,7 @@
 <?php
 session_start();
-unset($_SESSION["name"]);
-unset($_SESSION["secretCode"]);
-unset($_SESSION["email"]);
-header("Location: index.php");
-exit();
+//require 'core/init.php';
+require 'classes/loginHandler.php';
+$loginHandler = new LoginHandler();
+$loginHandler->logOut();
 ?>

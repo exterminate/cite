@@ -1,10 +1,13 @@
 <?php
 session_start();
+require 'core/init.php';
+include 'layout/head.php';
+include 'layout/header.php';
 
-//core + layout
 
-if(isset($_SESSION['name'])) {
-	
-	
+if($loginHandler->isLoggedIn()) {
+    
 }
+
+include 'layout/footer.php';
 ?>

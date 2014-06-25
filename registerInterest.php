@@ -1,5 +1,5 @@
 <?php
-    
+session_start();    
 require 'core/init.php';
 
 header('Content-type: application/json');

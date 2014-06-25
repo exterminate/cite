@@ -1,4 +1,5 @@
 <?php
+session_start();
 // search page
 // Should probably add this to the index page <= I'll just get it working first :Ian
 

@@ -1,4 +1,5 @@
 <?php
+session_start();
 /*
 	session_start();
 	if(strtotime("now") > $SESSION['time']) {
@@ -117,7 +118,6 @@
 		include 'layout/head.php';
 		include 'layout/header.php';
 		include 'layout/homepage.php';
-		echo '<a href="submit/">Submit</a>';
 	}
 
 	include 'layout/footer.php';

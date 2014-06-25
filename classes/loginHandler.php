@@ -1,6 +1,7 @@
 <?php
 class LoginHandler {
 	
+	//these are useless
 	public $sessionName, $sessionSecretCode, $sessionEmail;
 	
 	public function login($email, $password, $dbHandler) {
@@ -16,11 +17,11 @@ class LoginHandler {
 					
 					// ok, let's start a session
 					$_SESSION['name'] = $user->firstName." ".$user->surname;
-					$sessionName = $_SESSION['name'];
+					$this->sessionName = $_SESSION['name'];
 					$_SESSION['secretCode'] = md5(date('Y-m-d H:i:s')).md5($email);
-					$sessionSecretCode = $_SESSION['secretCode'];
+					$this->sessionSecretCode = $_SESSION['secretCode'];
 					$_SESSION['email'] = $email;
-					$sessionEmail = $_SESSION['email'];
+					$this->sessionEmail = $_SESSION['email'];
 				} else {
 					die("You need to verify your account, please check you email for a verification link.");
 				}
@@ -34,11 +35,21 @@ class LoginHandler {
 		
 	}
 	
-	public static function isLoggedIn() {
-		if(isset($sessionName) && isset($sessionSecretCode) && isset($sessionEmail))
-			return true;
+	public function isLoggedIn() {
+		// we need to have these as sessions otherwise when you go to another page it unsets the variables we create on line 4
+		if(isset($_SESSION['name']) && isset($_SESSION['secretCode']) && isset($_SESSION['email']))
+			return True;
 		else
-			return false;
+			return False;
+	}
+	
+	public function logOut() {
+		unset($this->sessionName);
+		unset($this->sessionSecretCode);
+		unset($this->sessionEmail);
+		session_destroy();
+		header("Location: index.php");
+		exit();
 	}
 	
 	

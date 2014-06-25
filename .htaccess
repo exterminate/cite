@@ -1,12 +1,27 @@
 RewriteEngine On
+RewriteRule ^profile$ profile.php
+RewriteRule ^submit$ submit.php
+RewriteRule ^register$ register.php
+RewriteRule ^createAccount$ createAccount.php
+RewriteRule ^search$ search.php
+RewriteRule ^edit$ edit.php
+RewriteRule ^about$ about.php
+RewriteRule ^faq$ faq.php
+RewriteRule ^dashboard$ dashboard.php
+RewriteRule ^logout$ logout.php
 RewriteRule ^([a-zA-Z0-9]+)$ index.php?stub=$1
-RewriteRule ^profile/$ profile.php
-#RewriteRule ^profile/([a-zA-Z0-9\-]+)$ profile.php?orcid=$1
 RewriteRule ^profile/([0-9]+\-[0-9]+\-[0-9]+\-[0-9X]+)$ profile.php?orcid=$1
-RewriteRule ^submit/$ submit.php
-RewriteRule ^search/$ search.php
-RewriteRule ^edit/$ edit.php
-RewriteRule ^about/$ about.php
-RewriteRule ^faq/$ faq.php
-RewriteRule ^dashboard/$ dashboard.php
 
+
+# old shit, the new shit above is better
+#RewriteEngine On
+#RewriteRule ^([a-zA-Z0-9]+)$ index.php?stub=$1
+#RewriteRule ^profile/$ profile.php
+##RewriteRule ^profile/([a-zA-Z0-9\-]+)$ profile.php?orcid=$1
+#RewriteRule ^profile/([0-9]+\-[0-9]+\-[0-9]+\-[0-9X]+)$ profile.php?orcid=$1
+#RewriteRule ^submit/$ submit.php
+#RewriteRule ^search/$ search.php
+#RewriteRule ^edit/$ edit.php
+#RewriteRule ^about/$ about.php
+#RewriteRule ^faq/$ faq.php
+#RewriteRule ^dashboard/$ dashboard.php

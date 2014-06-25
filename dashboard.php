@@ -1,44 +1,15 @@
 <?php
 session_start();
-// search page
-
 require 'core/init.php';
 include 'layout/head.php';
 
-if(Input::exists()) {
 
-	$validate = new Validate();
-	$validate->check($_POST, array( 
-		'email' => array(
-			'required' 	=> true,
-			'max' 		=> 60,
-			'email' 	=> true			
-			),
-		'password' => array(
-			'required' 	=> true,
-			'min' 		=> 6,
-			'max' 		=> 20	
-			)
-		)
-	);
-	
-	if($validate->passed()) {
-		$dbHandler->login(Input::get('email'), Input::get('password'));
-	}
-} 
+if($loginHandler->isLoggedIn()) { 
 
-
-/*
-*    with new loginHandler try $loginHandler = new LoginHandler();
-*     if(LoginHandler::isLoggedIn()) { etc....................... }
-*/
-
-$loginHandler = new LoginHandler();
-if(LoginHandler::isLoggedIn()) { 
 	include 'layout/header.php';
-	$user = $dbHandler->getUser('secretCode', $loginHandler->sessionSecretCode);
-	$stubs = $dbHandler->getStubs('links', 'email', '=', $loginHandler->sessionEmail);	
-		
+	$user = $dbHandler->getUser('secretCode', $_SESSION['secretCode']);
+	$stubs = $dbHandler->getStubs('links', 'email', '=', $_SESSION['email']);	
+	echo "<p>You have created " . $dbHandler->count('links', 'email', '=', $_SESSION['email']) . " stubs.</p>";	
 ?>
 	
 	<script src='../lib/mustache.js'></script>
@@ -51,24 +22,17 @@ if(LoginHandler::isLoggedIn()) {
 		});
 	</script>
 	
-	<p><?= $loginHandler->sessionName?> is logged in.</p>
+	<p><?php echo $_SESSION['name']; ?> is logged in.</p>
 	<div id='content'></div>
 	
-<?php
-
-	$user = $dbHandler->getUser('secretCode', $loginHandler->sessionSecretCode);
-	$stubs = $dbHandler->getStubs('links', 'email', '=', $loginHandler->sessionEmail);
-		
-	echo "<p>You have created " . $dbHandler->count('links', 'email', '=', $loginHandler->sessionEmail) . " stubs.</p>";
+<?php	
 	
 } else {
 	include 'layout/header.php'; 
-	echo "<h1>You are not logged in.</h1>";
-	
+	echo "<h1>You are not logged in.</h1>";	
 }
 
-
-	include 'layout/footer.php';
+include 'layout/footer.php';
 
 ?>
 
