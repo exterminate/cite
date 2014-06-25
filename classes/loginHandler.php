@@ -1,6 +1,6 @@
 <?php
 class loginHandler {
-public function login($email, $password) {
+	public function login($email, $password) {
 		// Validate before login                  		
 		$query = $this->handler->query("SELECT * FROM users WHERE email = '$email'");
 		if($query->rowCount() == 1) { // check user exists
@@ -37,9 +37,9 @@ public function login($email, $password) {
 			die("This user doesn't exist!");
 		}
 		
-		}
+	}
 		
 	
-	}
+}
 
 ?>
