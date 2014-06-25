@@ -34,7 +34,7 @@ if(Input::exists()) {
 */
 
 $loginHandler = new LoginHandler();
-if(isset($_SESSION['name'])) { 
+if(LoginHandler::isLoggedIn()) { 
 	include 'layout/header.php';
 	$user = $dbHandler->getUser('secretCode', $loginHandler->sessionSecretCode);
 	$stubs = $dbHandler->getStubs('links', 'email', '=', $loginHandler->sessionEmail);	
