@@ -66,9 +66,21 @@ class DB {
 		
 		//interestedEmails is an array so we need to turn it into a string first
 		if($field = "interestedEmails"){
-			$stub->interestedEmails = implode(",", $stub->interestedEmails);
+			$stub->interestedEmails = serialize($stub->interestedEmails);
 		}
 		$query->execute(array($stub->$field,$stub->stubId));
+	}
+	
+	public function updateNew($table, $field1, $input1, $field2, $input2) {
+		
+		$sql = "UPDATE $table SET $field1 = ? WHERE $field2 = ?";
+		$query = $this->handler->prepare($sql);
+		
+		//interestedEmails is an array so we need to turn it into a string first
+		if($field = "interestedEmails"){
+			$stub->interestedEmails = serialize($stub->interestedEmails);
+		}
+		$query->execute(array($input1,$input2));		
 	}
 
 	/*
