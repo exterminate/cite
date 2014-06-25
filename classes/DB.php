@@ -9,8 +9,8 @@ class DB {
 
 	public function put($table, $stub) {
 
-		 $sql = "INSERT INTO links (stubId, stubTitle, firstName, surname, email, orcid, description, datesubmitted, deepLink) 
-		 VALUES (:stubId, :stubTitle, :firstName, :surname, :email, :orcid, :description, :datesubmitted, :deepLink)";
+		 $sql = "INSERT INTO links (stubId, stubTitle, firstName, surname, email, orcid, description, datesubmitted, stubTitle) 
+		 VALUES (:stubId, :stubTitle, :firstName, :surname, :email, :orcid, :description, :datesubmitted, :stubTitle)";
 
 		$query = $this->handler->prepare($sql);
 		$query->execute(array(
@@ -21,8 +21,7 @@ class DB {
 			':email' 		=> $stub->email,
 			':orcid'		=> $stub->orcid,
 			':description' 	=> $stub->description,
-			':datesubmitted'=> $stub->datesubmitted,
-			':deepLink'		=> $stub->deepLink
+			':datesubmitted'=> $stub->datesubmitted
 		));	
 	}
 
