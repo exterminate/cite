@@ -27,7 +27,14 @@ if(Input::exists()) {
 	}
 } 
 
-if(isset($_SESSION['name'])) {
+
+/*
+*    with new loginHandler try $loginHandler = new LoginHandler();
+*     if($loginHandler->isLoggedIn()) { etc....................... }
+*/
+
+
+if(isset($_SESSION['name'])) { 
 	include 'layout/header.php';
 	$user = $dbHandler->getUser('secretCode', $_SESSION['secretCode']);
 	$stubs = $dbHandler->getStubs('links', 'email', '=', $_SESSION['email']);	
