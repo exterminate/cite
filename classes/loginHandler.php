@@ -1,44 +1,46 @@
 <?php
 class LoginHandler {
-	public function login($email, $password) {
+	
+	public $sessionName, $sessionSecretCode, $sessionEmail;
+	
+	public function login($email, $password, $dbHandler) {
 		// Validate before login                  		
-		$query = $this->handler->query("SELECT * FROM users WHERE email = '$email'");
-		if($query->rowCount() == 1) { // check user exists
+		$user = $dbHandler->getUser('email', $email);
+		if($dbHandler->count('users', 'email', '=', $email) == 1) { // check user exists
 			// Success user exists, is password ok?
-			$r = $query->fetch(PDO::FETCH_OBJ);
-			if($r->accessLevel != "unverified"){
-
-				if($r->password == md5($password)) { 
-					//password ok
-
-					if($r->password == md5($password)) { 
-						//great let's start the session
-						$sql = "UPDATE users SET lastLogin = NOW() AND secretCode = ? WHERE email = ?";
-						$query = $this->handler->prepare($sql);
-						$secretCode = md5(date('Y-m-d H:i:s')).md5($email);
-						$query->execute(array($secretCode, $email));
-
-						//session_start();
-						$_SESSION['name'] = $r->firstName." ".$r->surname;
-						$_SESSION['secretCode'] = $secretCode;
-						$_SESSION['email'] = $email;
-					}
+			if($user->password == md5($password)) {
+				// has the user verified their account?
+				if($user->accessLevel != "unverified"){
+					// let's add the time they last logged in i.e., now
+					$dbHandler->updateNew('users', 'lastLogin', date('Y-m-d H:i:s'), 'email', $email); //check lastLoning camel case
+					
+					// ok, let's start a session
+					$_SESSION['name'] = $user->firstName." ".$user->surname;
+					$sessionName = $_SESSION['name'];
+					$_SESSION['secretCode'] = md5(date('Y-m-d H:i:s')).md5($email);
+					$sessionSecretCode = $_SESSION['secretCode'];
+					$_SESSION['email'] = $email;
+					$sessionEmail = $_SESSION['email'];
 				} else {
-					//password fail
-					die("This user exists but you got the wrong password!");
+					die("You need to verify your account, please check you email for a verification link.");
 				}
-
 			} else {
-				die("You need to verify your account, please check you email for a verification link.");
+				//password fail
+				die("This user exists but you got the wrong password!");
 			}
-
-
 		} else { // user doesn't exist
 			die("This user doesn't exist!");
 		}
 		
 	}
-		
+	
+	public function isLoggedIn() {
+		if(isset($sessionName) && isset($sessionSecretCode) && isset($sessionEmail))
+			return true;
+		else
+			return false;
+	}
+	
 	
 }
 
