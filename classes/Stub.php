@@ -15,6 +15,7 @@
 		public $deepLink = "";
 		public $views = "";
 		public $interestedEmails = array();
+		public $fields = array('stubId','stubTitle', 'firstName','surname','email', 'orcid', 'description', 'datesubmitted', 'stubTitle');
 
 		function __construct($array){
 			if(array_key_exists("stubId", $array)){
@@ -69,7 +70,27 @@
 				$this->interestedEmails = unserialize($array['interestedEmails']);
 			}
 		}
+		
+		/* don't think we need this, we can just have an array
+		public function prepareFields() {
+			$this->fields = array(
+			'stubId',
+			'stubTitle', 
+			'firstName', 
+			'surname', 
+			'email', 
+			'orcid', 
+			'description', 
+			'datesubmitted', 
+			'stubTitle'
+			);
+			return $this->fields;
+		}
+		
+		*/
 		/*
+		
+		
 		function toArray(){
 
 			$array = array(
