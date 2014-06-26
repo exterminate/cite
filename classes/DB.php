@@ -21,6 +21,15 @@ class DB {
 		$sql .= ")";
 
 		$query = $this->handler->prepare($sql);
+		
+		$execArray = array();
+		foreach($stub->fields as $field) {
+			$execArray[':'.$field] = $stub->$field;
+		}
+		
+		$query->execute(array($execArray));
+		
+		/* old
 		$query->execute(array(
 			':stubId' 	=> $stub->stubId,
 			':stubTitle'	=> $stub->stubTitle,
@@ -30,7 +39,7 @@ class DB {
 			':orcid'	=> $stub->orcid,
 			':description' 	=> $stub->description,
 			':datesubmitted'=> $stub->datesubmitted
-		));	
+		));*/	
 	}
 
 	/* 
