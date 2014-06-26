@@ -6,20 +6,28 @@ class DB {
 		$this->handler = $handler;
 	}	
 
-
 	public function put($table, $stub) {
+		
+		//delete next two lines if it works
+		//$sql = "INSERT INTO links (stubId, stubTitle, firstName, surname, email, orcid, description, datesubmitted, stubTitle) 
+		//VALUES (:stubId, :stubTitle, :firstName, :surname, :email, :orcid, :description, :datesubmitted, :stubTitle)";
 
-		 $sql = "INSERT INTO links (stubId, stubTitle, firstName, surname, email, orcid, description, datesubmitted, stubTitle) 
-		 VALUES (:stubId, :stubTitle, :firstName, :surname, :email, :orcid, :description, :datesubmitted, :stubTitle)";
+		$sql = "INSERT INTO " . $table . "(";
+		foreach($stub->fields as $field) 
+			$sql .= $field . ",";
+		$sql .= ") VALUES (";
+		foreach($stub->fields as $field) 
+			$sql .= ":" . $field . ",";
+		$sql .= ")";
 
 		$query = $this->handler->prepare($sql);
 		$query->execute(array(
-			':stubId' 		=> $stub->stubId,
+			':stubId' 	=> $stub->stubId,
 			':stubTitle'	=> $stub->stubTitle,
 			':firstName' 	=> $stub->firstName,
-			':surname' 		=> $stub->surname,
-			':email' 		=> $stub->email,
-			':orcid'		=> $stub->orcid,
+			':surname' 	=> $stub->surname,
+			':email' 	=> $stub->email,
+			':orcid'	=> $stub->orcid,
 			':description' 	=> $stub->description,
 			':datesubmitted'=> $stub->datesubmitted
 		));	
