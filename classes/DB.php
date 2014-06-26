@@ -6,7 +6,7 @@ class DB {
 		$this->handler = $handler;
 	}	
 
-	public function put($table, $stub) {
+	public function put($table, $stub) { // use get_class_vars
 		
 		//delete next two lines if it works
 		//$sql = "INSERT INTO links (stubId, stubTitle, firstName, surname, email, orcid, description, datesubmitted, stubTitle) 
