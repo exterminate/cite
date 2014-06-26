@@ -15,7 +15,7 @@
 		public $deepLink = "";
 		public $views = "";
 		public $interestedEmails = array();
-		public $fields = array('stubId','stubTitle', 'firstName','surname','email', 'orcid', 'description', 'datesubmitted', 'stubTitle');
+		//public $fields = array('stubId','stubTitle', 'firstName','surname','email', 'orcid', 'description', 'datesubmitted', 'stubTitle');
 
 		function __construct($array){
 			if(array_key_exists("stubId", $array)){
