@@ -87,7 +87,7 @@ session_start();
 					if (data.interestRegistered) {
 						console.log("Interest Registered!")
 					} else{
-						console.log(data.errorMsg);
+						console.log(data.errorMsg);//data.errorMsg
 					}
 					
 				});
