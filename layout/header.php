@@ -1,23 +1,27 @@
 <div class="ultimatewrap">
 	<header>
 		<div class="headerwrap">
-			<?php 
-				if($loginHandler->isLoggedIn() == false) {
-			?>
-					<div class="loginForm">
-						<form action="" method="post">
-							<label for="email">E-mail: </label><br>
-							<input type="email" name="email"><br>
-							<label for="password">Password: </label><br>
-							<input type="password" name="password"><br>
-							<input type="submit" name="submit" value="login">
-						</form>
-					</div>
 			
 			<?php
+				echo '<div class="loginForm">';
+				if($loginHandler->isLoggedIn()) {
+					//we are logged in, so show a message and the logout button					
+					echo '<a href="'.$rootURL.'logout">Logout</a>';
 				} else {
+					//we are not logged in so display the login fields
+			?>
 					
+					<form action="" method="post">
+						<label for="email">E-mail: </label><br>
+						<input type="email" name="email"><br>
+						<label for="password">Password: </label><br>
+						<input type="password" name="password"><br>
+						<input type="submit" name="submit" value="login">
+					</form>				
+			
+			<?php
 				}
+				echo '</div>';
 			?>
 					<a href="<?php echo $rootURL; ?>">
 						<h1 class="header">Cite</h1>
@@ -26,17 +30,18 @@
 					<nav>
 						<a href="<?php echo $rootURL; ?>">Home</a>
 						<a href="<?php echo $rootURL; ?>about">About</a>
-						<a href="<?php echo $rootURL; ?>submit">Submit stub</a>
+						
 						<a href="<?php echo $rootURL; ?>search">Search</a>
 						<a href="<?php echo $rootURL; ?>faq">FAQ</a>
 			<?php
 				if($loginHandler->isLoggedIn()) {
-					echo '<a href="'.$rootURL.'dashboard">Dashboard</a>';
-					echo '<a href="'.$rootURL.'logout">Logout</a>';
+			?>
+						<a href="<?php echo $rootURL ?>dashboard">Dashboard</a>				
+						<a href="<?php echo $rootURL ?>submit">Submit stub</a>
+			<?php
 				}
 			?>
-			</nav>
-			
+					</nav>			
 		</div>
 	</header>
 

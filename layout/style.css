@@ -49,6 +49,19 @@ nav {
 	right: 0;
 }
 
+nav a {
+	color: white;
+	font-weight: 300;	
+}
+
+nav a:nth-child(n+2)::before { 
+	content: " | ";
+}
+
+nav a:hover {
+	color: #730329;
+}
+
 .wrapper, .headerwrap {
 	max-width: 960px;
 	margin: 0 auto;
@@ -138,19 +151,6 @@ textarea {
 
 ul {
 	list-style-type: none;
-}
-
-nav a {
-	color: white;
-	font-weight: 300;
-}
-
-nav a:nth-child(n+2)::before { 
-	content: " | ";
-}
-
-nav a:hover {
-	color: #730329;
 }
 
 p {
@@ -321,7 +321,9 @@ ol.circles-list > li:before {
 
 ul{list-style-type:none}
 
-
+.loginForm a{
+	color: white;
+}
 
 
 /*
