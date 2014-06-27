@@ -71,23 +71,7 @@
 			}
 		}
 		
-		/* don't think we need this, we can just have an array
-		public function prepareFields() {
-			$this->fields = array(
-			'stubId',
-			'stubTitle', 
-			'firstName', 
-			'surname', 
-			'email', 
-			'orcid', 
-			'description', 
-			'datesubmitted', 
-			'stubTitle'
-			);
-			return $this->fields;
-		}
 		
-		*/
 		/*
 		
 		

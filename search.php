@@ -9,8 +9,8 @@ include 'layout/header.php';
 
 ?>
 
-	<script src="../lib/jquery.maskedinput.js" type="text/javascript"></script>
-	<script src='../lib/mustache.js'></script>
+	<script src="lib/jquery.maskedinput.js" type="text/javascript"></script>
+	<script src='lib/mustache.js'></script>
 	<script>
 		$(document).ready(function(){
 			$('#typeSelect').change(function(){
@@ -37,7 +37,7 @@ include 'layout/header.php';
 			$('#output').on('click', '.stub', function(){
 				
 				console.log($(this).find('.stubId').text());
-				$(location).attr('href', "../" + $(this).find('.stubId').text());
+				$(location).attr('href', "" + $(this).find('.stubId').text());
 			});
 		});
 
@@ -45,7 +45,7 @@ include 'layout/header.php';
 			/*
 				Note this only finds exact matches at present
 			*/
-			$.post("../searchSQL.php", {query : query, type : type}, function(data){
+			$.post("searchSQL.php", {query : query, type : type}, function(data){
 				console.log(data);
 				$('#output').empty();
 				printJSONToTable(data, $('#output'));	
@@ -64,7 +64,7 @@ include 'layout/header.php';
 			} else {
 				var length = Object.keys(data).length;
 
-				$.get("../templates/stub.mustache.html", function(template){			
+				$.get("templates/stub.mustache.html", function(template){			
 					for(var i = 0; i < length; i++){
 						$(outputElement).append(Mustache.to_html(template, data[i]));
 					}
@@ -112,7 +112,7 @@ include 'layout/header.php';
 	</script>
 
 	<div>
-		<form>			
+		<form method="POST" action="">			
 			<label for='searchQuery'>Search for:
 				<input type='text' name='searchQuery' id='searchQuery'>
 				<button id='searchButton' type='button'>Search</button>
