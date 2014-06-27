@@ -20,6 +20,8 @@ include 'layout/header.php';
 	<h2>Do you offer any premium services?</h2>
 	<p>Currently not. We will be adding features over time some of which may or may not be paid services. This will not affect the way authors submit Stubs.</p>
 	
+	<h2>Why do I need and ORCID?</h2>
+	<p>Getting an ORCID is easy (get yours <a href="http://orcid.org/" title="ORCID">here</a>). ORCID provides a persistent digital identifier that distinguishes you from every other researcher. You can search for other users using their ORCID and see what work they have in the pipeline, if they have submitted a Stub.</p>
 </div>
 
 <?php

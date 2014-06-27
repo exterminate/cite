@@ -238,7 +238,11 @@ class DB {
 	
 	public function getUser($field, $search) {
 		$query = $this->handler->query("SELECT * FROM users WHERE $field = '$search'");
+		
 		$r = $query->fetch(PDO::FETCH_OBJ);
+		
+		var_dump($query);
+		echo "<br>";
 		return $r;
 	}
 	
