@@ -1,16 +1,15 @@
 <?php
-session_start();    
+session_start();
+header('Content-type: application/json');  
 require 'core/init.php';
 
-header('Content-type: application/json');
-
 $user = Input::get('user');
-var_dump($user);
+
 $stubInput = (array) $user;
+
 $stubInput['stubTitle'] = Input::get('title');
 $stubInput['description'] = Input::get('description');
 $stubInput['datesubmitted'] = date('Y-m-d H:i:s');
-
 
 $stub = new Stub($stubInput);    
 

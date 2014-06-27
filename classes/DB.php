@@ -13,23 +13,27 @@ class DB {
 		//VALUES (:stubId, :stubTitle, :firstName, :surname, :email, :orcid, :description, :datesubmitted, :stubTitle)";
 		
 		$stubClassVars = get_class_vars(get_class($stub));
-		
+
 		$sql = "INSERT INTO " . $table . "(";
 		foreach($stubClassVars as $k=>$field) 
-			$sql .= $k . ",";
+			$sql .= $k .= ",";
+		// remove trainling comma
+		$sql = rtrim($sql,",");
 		$sql .= ") VALUES (";
 		foreach($stubClassVars as $k=>$field) 
 			$sql .= ":" . $k . ",";
+		// remove trainling comma
+		$sql = rtrim($sql,",");	
 		$sql .= ")";
-
 		$query = $this->handler->prepare($sql);
-		
 		$execArray = array();
-		foreach($stubClassVars as $field) {
+		foreach($stubClassVars as $k=>$field) {
+			if(is_array($stub->$k))
+				$stub->$k = serialize($stub->$k);
 			$execArray[':'.$k] = $stub->$k;
 		}
-		var_dump($execArray);
-		$query->execute(array($execArray));
+
+		$query->execute($execArray);
 		
 		/* old
 		$query->execute(array(
