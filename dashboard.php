@@ -17,7 +17,8 @@ if($_SESSION['login']->isLoggedIn()) {
 	<script>
 		//display the users stubs as loaded from the database
 		function displayStubs(){
-		var stubs = $.parseJSON('<?php echo json_encode($stubs); ?>');		
+		var stubs = $.parseJSON('<?php echo json_encode($stubs); ?>');
+		console.log("Stubs:");
 		console.log(stubs);
 			
 		
@@ -30,6 +31,7 @@ if($_SESSION['login']->isLoggedIn()) {
 	</script>
 	<script>
 		var user = $.parseJSON('<?php echo json_encode($user); ?>');
+		console.log("user: ");
 		console.log(user);
 		$(document).ready(function(){
 			$('#createNewStubButton').click(function(){			
