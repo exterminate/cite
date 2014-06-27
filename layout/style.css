@@ -11,7 +11,7 @@ body {
 }
 
 /* color: #730329  */
-.getStarted h2, .welcome h1, a, nav a:hover, #getStartedButton {
+.getStarted h2, .welcome h1, a, nav a:hover, #getStartedButton, .faqs h2 {
 	color: #730329;
 }
 
@@ -225,6 +225,17 @@ strong {
 
 #getStartedButton {
 	background: white;
+}
+
+.faqs h2 {
+	padding-top: 10px;	
+}
+
+.faqs p {
+	line-height: 160%;
+	border-bottom: 1px solid #ddd;
+	padding: 10px 0;
+	margin-bottom: 10px;
 }
 
 
