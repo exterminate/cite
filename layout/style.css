@@ -10,6 +10,7 @@ body {
 	text-align: left;
 }
 
+<<<<<<< HEAD
 /* color: #730329  */
 .getStarted h2, .welcome h1, a, nav a:hover, #getStartedButton, .faqs h2 {
 	color: #730329;
@@ -21,12 +22,15 @@ body {
 	color: white;
 }
 
+=======
+>>>>>>> FETCH_HEAD
 .headerwrap, header {
 	height: 180px;
 }
 
 header, th {
 	background: #730329;
+	color: white;
 }
 
 .mainContent{
@@ -41,6 +45,7 @@ header, th {
 footer {
 	background-color: #730329;
 	height: 40px;
+	color: white;
 	text-align: center;
 	font-weight: 300;
 }
@@ -56,6 +61,19 @@ nav {
 	bottom: 0;
 	left: 0;
 	right: 0;
+}
+
+nav a {
+	color: white;
+	font-weight: 300;	
+}
+
+nav a:nth-child(n+2)::before { 
+	content: " | ";
+}
+
+nav a:hover {
+	color: #730329;
 }
 
 .wrapper, .headerwrap {
@@ -87,11 +105,14 @@ a {
 	text-decoration: none;
 }
 
-
+.welcome h1 {
+	color: #730329;
+}
 
 header h1 {
 	padding: 20px 0;
 	font-size: 400%;
+	color: white;
 }
 
 table, td, tr, label {
@@ -125,7 +146,8 @@ input[type="text"], input[type="password"], input[type="email"], textarea {
 
 input[type="submit"], button {
 	background: #b52936;
-	padding:5px 20px;
+	color: white;
+	padding: 10px 20px;
 	border: 0;
 	font-size: 100%;
 	border-bottom: 5px solid #730329;
@@ -136,12 +158,6 @@ input[type="submit"]:hover {
 	
 }
 
-#typeSelect {
-	font-size: 100%;
-	padding:5px 20px;
-	border: 1px solid #ccc;
-}
-
 textarea {
 	width: 500px;
 	height: 300px;
@@ -150,15 +166,6 @@ textarea {
 ul {
 	list-style-type: none;
 }
-
-nav a {
-	font-weight: 300;
-}
-
-nav a:nth-child(n+2)::before { 
-	content: " | ";
-}
-
 
 p {
 	padding-bottom: 10px;
@@ -171,6 +178,7 @@ strong {
 .loginForm {
 	text-align:right;
 	float:right;
+	//margin-top: 40px;
 }
 
 .loginForm input {
@@ -202,6 +210,7 @@ strong {
 	color:#730329
 }
 
+<<<<<<< HEAD
 .getStarted {
 	background: #b52936;
 	padding: 10px;
@@ -239,6 +248,8 @@ strong {
 }
 
 
+=======
+>>>>>>> FETCH_HEAD
 /****************************************************
 	Display numbered list bullets inside nice circles
 ****************************************************/
@@ -332,10 +343,6 @@ ol.circles-list > li:before {
 	padding-right: 10px;
 }
 
-.dashboard li.stubTitle:before {	
-	content: "Title: ";	
-}
-
 .dashboard li.name:before {	
 	content: "Name: ";	
 }
@@ -368,7 +375,9 @@ ol.circles-list > li:before {
 
 ul{list-style-type:none}
 
-
+.loginForm a{
+	color: white;
+}
 
 
 /*

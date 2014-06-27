@@ -11,9 +11,8 @@
 		public $description = "";
 		public $datesubmitted = "";
 		public $doi = "";
-		public $datedoi = "";
-		public $deepLink = "";
-		public $views = "";
+		public $datedoi = "";	
+		public $views = "0";
 		public $interestedEmails = array();
 		//public $fields = array('stubId','stubTitle', 'firstName','surname','email', 'orcid', 'description', 'datesubmitted', 'stubTitle');
 
@@ -56,10 +55,6 @@
 
 			if(array_key_exists("datedoi", $array)){
 				$this->datedoi = $array['datedoi'];
-			}
-
-			if(array_key_exists("deepLink", $array)){
-				$this->deepLink = $array['deepLink'];
 			}
 
 			if(array_key_exists("views", $array)){
