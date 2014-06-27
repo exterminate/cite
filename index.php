@@ -104,7 +104,7 @@ session_start();
 	<button type='button' id='showInterestedFormButton' hidden>This idea looks like it has potential!</button>
 	<form id='registerInterestForm' hidden>
 		<label>Get notified via email when the final article is published
-			<input type='email' id='interestedInput' placeholder='Stick your email address in here'>
+			<input type='email' id='interestedInput' placeholder='Enter your email address'>
 			<button type='button' id='registerInterestButton'>Alert me!</button>
 		</label>						
 	</form>
