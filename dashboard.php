@@ -16,23 +16,27 @@ if($_SESSION['login']->isLoggedIn()) {
 	<script src='lib/mustache.js'></script>
 	<script>
 		//display the users stubs as loaded from the database
-		function displayStubs(){
-		var stubs = $.parseJSON('<?php echo json_encode($stubs); ?>');
-		console.log("Stubs:");
-		console.log(stubs);
-			
 		
-			$.get('templates/dashboardStub.mustache.html', function(template){
-				$('#content').html(Mustache.to_html(template, {stubs: stubs}));	
+		var user = $.parseJSON('<?php echo json_encode($user); ?>');
+		console.log("user: ");
+		console.log(user);	
+		
+		function displayStubs(){			
+			//var stubs = $.parseJSON('<?php echo json_encode($stubs); ?>');
+			
+			var post = $.post('searchSQL.php', {query : user.email, type : 'email'});
+			post.done(function(stubs){
+				stubs = stubs.reverse();
+				console.log(stubs);
+				$.get('templates/dashboardStub.mustache.html', function(template){
+					$('#content').html(Mustache.to_html(template, {stubs: stubs}));	
+				});
+				console.log('display stubs');				
 			});
 		}
 		
-		displayStubs();
-	</script>
-	<script>
-		var user = $.parseJSON('<?php echo json_encode($user); ?>');
-		console.log("user: ");
-		console.log(user);
+		displayStubs();		
+		
 		$(document).ready(function(){
 			$('#createNewStubButton').click(function(){			
 				$('#newStub').fadeIn(500);
@@ -50,23 +54,36 @@ if($_SESSION['login']->isLoggedIn()) {
 				
 				post.done(function(data){
 					console.log(data.message);
+					$('#newStub').fadeOut(500);
+					$('#createNewStubButton').fadeIn(500);
+					setTimeout(displayStubs, 1000);					
 				});
 				post.fail(function(jqXhr){
 					console.log(jqXhr.responseText);
 				});
 			});
+			
+			$('#cancelButton').click(function(){
+				clearForm();
+				$('#newStub').fadeOut(500);
+			});
 		});
+		
+		function clearForm() {
+			$('.input').val("");
+		}
 			
 		
 	</script>
 	<p><?php echo $_SESSION['name']; ?> is logged in.</p>
 	<button id='createNewStubButton'>Create New</button>
 	<div id='newStub' class='dashboard' hidden>
-		<p><label>Title: </label><input id='title' type='text'></p>
+		<p><label>Title: </label><input id='title' class='input' type='text'></p>
 		<p><label>Description: </label>
-			<textarea id='description'></textarea>
+			<textarea id='description' class='input'></textarea>
 		</p>
 		<button id='submitStubButton'>Submit</button>
+		<button id='cancelButton'>Cancel</button>
 	</div>
 	
 	<div id='content'></div>

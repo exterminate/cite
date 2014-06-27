@@ -17,5 +17,5 @@
 	}
 	
 	
-	echo json_encode($stubs, JSON_FORCE_OBJECT);		  	
+	echo json_encode($stubs);		  	
 ?>
