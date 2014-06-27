@@ -13,7 +13,7 @@
 		public $doi = "";
 		public $datedoi = "";	
 		public $views = "0";
-		public $interestedEmails = array();
+		public $interestedEmails = "";
 		//public $fields = array('stubId','stubTitle', 'firstName','surname','email', 'orcid', 'description', 'datesubmitted', 'stubTitle');
 
 		function __construct($array){
@@ -62,7 +62,7 @@
 			}
 			
 			if(array_key_exists("interestedEmails", $array)){				
-				$this->interestedEmails = unserialize($array['interestedEmails']);
+				$this->interestedEmails = $array['interestedEmails'];
 			}
 		}
 		

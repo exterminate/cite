@@ -15,20 +15,20 @@ class DB {
 		$stubClassVars = get_class_vars(get_class($stub));
 		
 		$sql = "INSERT INTO " . $table . "(";
-		foreach($stubClassVars as $field) 
-			$sql .= $field . ",";
+		foreach($stubClassVars as $k=>$field) 
+			$sql .= $k . ",";
 		$sql .= ") VALUES (";
-		foreach($stubClassVars as $field) 
-			$sql .= ":" . $field . ",";
+		foreach($stubClassVars as $k=>$field) 
+			$sql .= ":" . $k . ",";
 		$sql .= ")";
 
 		$query = $this->handler->prepare($sql);
 		
 		$execArray = array();
 		foreach($stubClassVars as $field) {
-			$execArray[':'.$field] = $stub->$field;
+			$execArray[':'.$k] = $stub->$k;
 		}
-		
+		var_dump($execArray);
 		$query->execute(array($execArray));
 		
 		/* old
