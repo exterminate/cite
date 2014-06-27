@@ -6,14 +6,9 @@ include 'layout/head.php';
 
 if($_SESSION['login']->isLoggedIn()) { 
 
-<<<<<<< HEAD
-	include 'layout/header.php';
-	$user = $dbHandler->getUser('email', $_SESSION['email']);
-	var_dump($user);
-=======
+
 	include 'layout/header.php';	
 	$user = $dbHandler->getUser('email', $_SESSION['email']);	
->>>>>>> FETCH_HEAD
 	$stubs = $dbHandler->getStubs('links', 'email', '=', $_SESSION['email']);	
 	echo "<p>You have created " . $dbHandler->count('links', 'email', '=', $_SESSION['email']) . " stubs.</p>";	
 ?>

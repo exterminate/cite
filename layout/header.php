@@ -4,7 +4,7 @@
 			
 			<?php
 				echo '<div class="loginForm">';
-				if($loginHandler->isLoggedIn()) {
+				if($_SESSION['login']->isLoggedIn()) {
 					//we are logged in, so show a message and the logout button					
 					echo '<a href="'.$rootURL.'logout">Logout</a>';
 				} else {
@@ -34,10 +34,11 @@
 						<a href="<?php echo $rootURL; ?>search">Search</a>
 						<a href="<?php echo $rootURL; ?>faq">FAQ</a>
 			<?php
-				if($loginHandler->isLoggedIn()) {
+				if($_SESSION['login']->isLoggedIn()) {
 			?>
 						<a href="<?php echo $rootURL ?>dashboard">Dashboard</a>				
 						<a href="<?php echo $rootURL ?>submit">Submit stub</a>
+						<a href="<?php echo $rootURL ?>logout" class="logout">Logout</a>
 			<?php
 				}
 			?>

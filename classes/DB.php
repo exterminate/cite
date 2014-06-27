@@ -237,15 +237,10 @@ class DB {
 	}
 	
 	public function getUser($field, $search) {
-		$query = $this->handler->query("SELECT * FROM users WHERE $field = '$search'");
-		
+		$query = $this->handler->query("SELECT * FROM users WHERE $field = '$search'");		
 		$r = $query->fetch(PDO::FETCH_OBJ);
-<<<<<<< HEAD
-		
-		var_dump($query);
-		echo "<br>";
 		return $r;
-=======
+
 		$user = new User(
 				$r->firstName,
 				$r->surname,
@@ -254,7 +249,7 @@ class DB {
 				$r->email
 				 );
 		return $user;
->>>>>>> FETCH_HEAD
+
 	}
 	
 	public function verifyUser($email, $deepLink) {

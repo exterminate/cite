@@ -10,7 +10,7 @@ body {
 	text-align: left;
 }
 
-<<<<<<< HEAD
+
 /* color: #730329  */
 .getStarted h2, .welcome h1, a, nav a:hover, #getStartedButton, .faqs h2 {
 	color: #730329;
@@ -22,8 +22,7 @@ body {
 	color: white;
 }
 
-=======
->>>>>>> FETCH_HEAD
+
 .headerwrap, header {
 	height: 180px;
 }
@@ -144,10 +143,10 @@ input[type="text"], input[type="password"], input[type="email"], textarea {
 	font-size: 100%;
 }
 
-input[type="submit"], button {
+input[type="submit"], button, .button {
 	background: #b52936;
 	color: white;
-	padding: 10px 20px;
+	padding: 6px 20px;
 	border: 0;
 	font-size: 100%;
 	border-bottom: 5px solid #730329;
@@ -185,6 +184,14 @@ strong {
 	padding: 1px;
 }
 
+.logout {
+	float: right;
+}
+
+nav a.logout:before {
+	content: " ";
+}
+
 .error{
 	opacity: 0;
 	display: inline-block;
@@ -210,7 +217,7 @@ strong {
 	color:#730329
 }
 
-<<<<<<< HEAD
+
 .getStarted {
 	background: #b52936;
 	padding: 10px;
@@ -248,8 +255,7 @@ strong {
 }
 
 
-=======
->>>>>>> FETCH_HEAD
+
 /****************************************************
 	Display numbered list bullets inside nice circles
 ****************************************************/

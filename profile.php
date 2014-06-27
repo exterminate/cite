@@ -35,7 +35,7 @@ if(isset($_SESSION['name']) && !isset($_GET['orcid'])) {
 			echo "<p><strong>Profile: </strong>".$user->firstName." ". $user->surname ."</p>\n";
 			echo "<p><strong>OrcID: </strong>" . $user->orcid . "</p>";
 			echo "<p>" . $user->firstName . " " . $user->surname . " has ".$dbHandler->count('links', 'email', '=', $user->email)." stubs</p>";
-			echo '<input type="button" value="Back" onclick="history.back(-1)" />';
+			echo '<input class="button" type="button" value="Back" onclick="history.back(-1)" />';
 		} else {
 			
 			echo "<p>There are no matching stubs with the OrcID ". Input::get('orcid') ."</p>";
