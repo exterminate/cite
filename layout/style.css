@@ -10,13 +10,23 @@ body {
 	text-align: left;
 }
 
+/* color: #730329  */
+.getStarted h2, .welcome h1, a, nav a:hover, #getStartedButton {
+	color: #730329;
+}
+
+
+/* color: white */
+.getStarted, .getStarted a:hover, header, th, footer, header h1, input[type="submit"], button, nav a {
+	color: white;
+}
+
 .headerwrap, header {
 	height: 180px;
 }
 
 header, th {
 	background: #730329;
-	color: white;
 }
 
 .mainContent{
@@ -31,7 +41,6 @@ header, th {
 footer {
 	background-color: #730329;
 	height: 40px;
-	color: white;
 	text-align: center;
 	font-weight: 300;
 }
@@ -78,14 +87,11 @@ a {
 	text-decoration: none;
 }
 
-.welcome h1 {
-	color: #730329;
-}
+
 
 header h1 {
 	padding: 20px 0;
 	font-size: 400%;
-	color: white;
 }
 
 table, td, tr, label {
@@ -119,7 +125,6 @@ input[type="text"], input[type="password"], input[type="email"], textarea {
 
 input[type="submit"], button {
 	background: #b52936;
-	color: white;
 	padding:5px 20px;
 	border: 0;
 	font-size: 100%;
@@ -147,7 +152,6 @@ ul {
 }
 
 nav a {
-	color: white;
 	font-weight: 300;
 }
 
@@ -155,9 +159,6 @@ nav a:nth-child(n+2)::before {
 	content: " | ";
 }
 
-nav a:hover {
-	color: #730329;
-}
 
 p {
 	padding-bottom: 10px;
@@ -170,7 +171,6 @@ strong {
 .loginForm {
 	text-align:right;
 	float:right;
-	//margin-top: 40px;
 }
 
 .loginForm input {
@@ -201,6 +201,32 @@ strong {
 .dashboard a{
 	color:#730329
 }
+
+.getStarted {
+	background: #b52936;
+	padding: 10px;
+	margin-bottom: 20px;
+	line-height: 150%;
+}
+
+.getStarted h2 {
+	font-size: 180%;
+	padding-bottom: 10px;
+}
+
+.getStarted label span:nth-child(1) {
+	width:200px;
+	float:left;
+}
+/*
+.getStarted input[type='text'],.getStarted input[type='password'] {
+	margin-left: 160px;
+}*/
+
+#getStartedButton {
+	background: white;
+}
+
 
 /****************************************************
 	Display numbered list bullets inside nice circles

@@ -35,7 +35,7 @@
 				$('#orcidLbl').find('.err').html('&#10003');
 				validOrcid = true;
 			} else{
-				$('#orcidLbl').find('.err').html('Please enter a 16 digit OrcID');
+				$('#orcidLbl').find('.err').html('Please enter a 16 digit OrcID.');
 				validOrcid = false;
 			}			
 		});
@@ -85,34 +85,34 @@
 
 <div class="bodytext">
 	<p>Want to reference a work that you haven't quite put the finishing touches on yet? Or that seminal paper you will write in five years time after years of groundbreaking research? You can do it easily using Cite.pub!</p>
+	<br>
 	<ol class='circles-list'>
 	  	<li><a href='submit/'>Create a stub</a> on Cite.pub using your Orcid ID</li>
 		<li>Cite the unique URL in your publication</li>
 	  	<li>Publish your seminal work</li>
 	  	<li>Complete your stub with the DOI of the new paper. The original URL will forward readers straight through!</li>
 	</ol>
-	<br>
-	Get started now!
 	
-	
-	<form action='register.php' method='post'>
-		<label id='orcidLbl'>Enter your OrcID
-			<input id='orcid' name='orcid' type='text'>				
-			<span class='err'></span>
-			Don't have and OrcID? <a href='http://orcid.org'>Get one here!</a>
-		</label><br>		
-		<label id='pass1Lbl'>Create a password:
-			<input id='password1' name='password' type='password'>
-			<span class='err'></span>
-		</label><br>
-		<label id='pass2Lbl'>
-			Re-type your password:
-			<input id='password2' type='password'>
-			<span class='err'></span>
-		</label><br>
-		<input id='getStartedButton' type='submit' value='Get started!'>
-	</form>
-	<br>
+	<div class='getStarted'>
+	<h2>Get started now!</h2>
+		<form action='register.php' method='post'>
+			<label id='orcidLbl'><span>Enter your OrcID:</span>
+				<input id='orcid' name='orcid' type='text'>				
+				<span class='err'></span>
+				Don't have and OrcID? <a href='http://orcid.org'>Get one here!</a>
+			</label><br><br>	
+			<label id='pass1Lbl'><span>Create a password:</span>
+				<input id='password1' name='password' type='password'>
+				<span class='err'></span>
+			</label><br><br>
+			<label id='pass2Lbl'>
+				<span>Re-type your password:</span>
+				<input id='password2' type='password'>
+				<span class='err'></span>
+			</label><br><br>
+			<input id='getStartedButton' type='submit' value='Get started!'>
+		</form>
+	</div>
 </div>
 <div id='recentStubs'>
 	Recently Submitted:<br>
