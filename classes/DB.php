@@ -11,19 +11,21 @@ class DB {
 		//delete next two lines if it works
 		//$sql = "INSERT INTO links (stubId, stubTitle, firstName, surname, email, orcid, description, datesubmitted, stubTitle) 
 		//VALUES (:stubId, :stubTitle, :firstName, :surname, :email, :orcid, :description, :datesubmitted, :stubTitle)";
-
+		
+		$stubClassVars = get_class_vars(get_class($stub));
+		
 		$sql = "INSERT INTO " . $table . "(";
-		foreach($stub->fields as $field) 
+		foreach($stubClassVars as $field) 
 			$sql .= $field . ",";
 		$sql .= ") VALUES (";
-		foreach($stub->fields as $field) 
+		foreach($stubClassVars as $field) 
 			$sql .= ":" . $field . ",";
 		$sql .= ")";
 
 		$query = $this->handler->prepare($sql);
 		
 		$execArray = array();
-		foreach($stub->fields as $field) {
+		foreach($stubClassVars as $field) {
 			$execArray[':'.$field] = $stub->$field;
 		}
 		
@@ -228,7 +230,7 @@ class DB {
 			$user->email,
 			"Thank you for registering with Cite",
 			"Thank you for registering with Cite\n\nPlease click on the link below to verify your account\n\n".$this->rootURL."verification.php?dl=".$uniqueCode."&em=".$user->email."\n\nYou can then submit a stub."
-			);//http://localhost/git/cite/verification.php?dl=ySkfrsq1X7Xy&em=ian.coates@gmail.com
+			);
 		} else {
 			die("A user with this email address already exists.");
 		}

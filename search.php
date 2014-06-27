@@ -37,7 +37,7 @@ include 'layout/header.php';
 			$('#output').on('click', '.stub', function(){
 				
 				console.log($(this).find('.stubId').text());
-				$(location).attr('href', "../" + $(this).find('.stubId').text());
+				$(location).attr('href', "" + $(this).find('.stubId').text());
 			});
 		});
 
@@ -112,7 +112,7 @@ include 'layout/header.php';
 	</script>
 
 	<div>
-		<form>			
+		<form method="POST" action="">			
 			<label for='searchQuery'>Search for:
 				<input type='text' name='searchQuery' id='searchQuery'>
 				<button id='searchButton' type='button'>Search</button>
