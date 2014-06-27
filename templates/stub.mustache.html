@@ -1,13 +1,13 @@
 	<div class='dashboard'>
 		<ul>								
-			<li class='stubTitle'>{{stubTitle}}</li>
-			<li class='name'>{{firstName}} {{surname}}</li>
-			<li class='orcid'>{{orcid}}</li>
-			<li class='stubId'>{{stubId}}</li>
-			<li class='description'>{{description}}</li>
-			<li class='datesubmitted'>{{datesubmitted}}</li>
-			{{#doi}}<li class='doi'>{{doi}}</li>{{/doi}}
-			{{#datedoi}}<li class='datedoi'>{{datedoi}}</li>{{/datedoi}}
+			<li class='stubTitle' title="Stub title" alt="Stub title">{{stubTitle}}</li>
+			<li class='name' title="Name" alt="Name">{{firstName}} {{surname}} - <a href='profile/{{orcid}}' title="Profile" alt="Profile">Profile</a></li>
+			<li class='orcid' title="OrcID" alt="OrcID">{{OrcIDorcid}}</li>
+			<li class='stubId' title="Stub ID" alt="Stub ID">{{stubId}}</li>
+			<li class='description' title="Description" alt="Description">{{description}}</li>
+			<li class='datesubmitted' title="Date submitted" alt="Date submitted">{{datesubmitted}}</li>
+			{{#doi}}<li class='doi' title="DOI" alt="DOI">{{doi}}</li>{{/doi}}
+			{{#datedoi}}<li class='datedoi' title="Date the DOI was submitted" alt="Date the DOI was submitted">{{datedoi}}</li>{{/datedoi}}
 		</ul>
 	</div>
 	
