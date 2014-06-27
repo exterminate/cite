@@ -28,7 +28,7 @@ try {
 $dbHandler = new DB($handler);
 
 // login script
-$loginHandler = new LoginHandler();
+$_SESSION['login'] = new LoginHandler();
 if(Input::exists() && Input::get('submit') == 'login') {
 	
 	$validate = new Validate();
@@ -47,7 +47,7 @@ if(Input::exists() && Input::get('submit') == 'login') {
 	);
 	
 	if($validate->passed()) {
-		$loginHandler->login(Input::get('email'), Input::get('password'), $dbHandler);
+		$_SESSION['login']->login(Input::get('email'), Input::get('password'), $dbHandler);
 		
 	}
 }

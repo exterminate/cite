@@ -4,7 +4,7 @@ require 'core/init.php';
 include 'layout/head.php';
 
 
-if($loginHandler->isLoggedIn()) { 
+if($_SESSION['login']->isLoggedIn()) { 
 
 	include 'layout/header.php';
 	$user = $dbHandler->getUser('secretCode', $_SESSION['secretCode']);

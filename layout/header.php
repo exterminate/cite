@@ -2,7 +2,7 @@
 	<header>
 		<div class="headerwrap">
 			<?php 
-				if($loginHandler->isLoggedIn() == false) {
+				if($_SESSION['login']->isLoggedIn() == false) {
 			?>
 					<div class="loginForm">
 						<form action="" method="post">
@@ -30,7 +30,7 @@
 						<a href="<?php echo $rootURL; ?>search">Search</a>
 						<a href="<?php echo $rootURL; ?>faq">FAQ</a>
 			<?php
-				if($loginHandler->isLoggedIn()) {
+				if($_SESSION['login']->isLoggedIn()) {
 					echo '<a href="'.$rootURL.'dashboard">Dashboard</a>';
 					echo '<a href="'.$rootURL.'logout">Logout</a>';
 				}

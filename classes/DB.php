@@ -230,7 +230,7 @@ class DB {
 			$user->email,
 			"Thank you for registering with Cite",
 			"Thank you for registering with Cite\n\nPlease click on the link below to verify your account\n\n".$this->rootURL."verification.php?dl=".$uniqueCode."&em=".$user->email."\n\nYou can then submit a stub."
-			);//http://localhost/git/cite/verification.php?dl=ySkfrsq1X7Xy&em=ian.coates@gmail.com
+			);
 		} else {
 			die("A user with this email address already exists.");
 		}
