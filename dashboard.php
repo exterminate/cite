@@ -7,7 +7,8 @@ include 'layout/head.php';
 if($_SESSION['login']->isLoggedIn()) { 
 
 	include 'layout/header.php';
-	$user = $dbHandler->getUser('secretCode', $_SESSION['secretCode']);
+	$user = $dbHandler->getUser('email', $_SESSION['email']);
+	var_dump($user);
 	$stubs = $dbHandler->getStubs('links', 'email', '=', $_SESSION['email']);	
 	echo "<p>You have created " . $dbHandler->count('links', 'email', '=', $_SESSION['email']) . " stubs.</p>";	
 ?>
