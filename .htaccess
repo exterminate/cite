@@ -7,6 +7,7 @@ RewriteRule ^search$ search.php
 RewriteRule ^edit$ edit.php
 RewriteRule ^about$ about.php
 RewriteRule ^faq$ faq.php
+RewriteRule ^contact$ contact.php
 RewriteRule ^dashboard$ dashboard.php
 RewriteRule ^logout$ logout.php
 RewriteRule ^([a-zA-Z0-9]+)$ index.php?stub=$1
