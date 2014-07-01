@@ -33,6 +33,7 @@
 						
 						<a href="<?php echo $rootURL; ?>search">Search</a>
 						<a href="<?php echo $rootURL; ?>faq">FAQ</a>
+						<a href="<?php echo $rootURL; ?>contact">Contact us</a>
 			<?php
 				if($_SESSION['login']->isLoggedIn()) {
 			?>
