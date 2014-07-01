@@ -4,6 +4,7 @@ RewriteRule ^submit$ submit.php
 RewriteRule ^register$ register.php
 RewriteRule ^createAccount$ createAccount.php
 RewriteRule ^search$ search.php
+RewriteRule ^passreset$ passreset.php
 RewriteRule ^edit$ edit.php
 RewriteRule ^about$ about.php
 RewriteRule ^faq$ faq.php

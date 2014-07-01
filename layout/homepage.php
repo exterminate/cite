@@ -93,7 +93,7 @@
 	  	<li>Complete your stub with the DOI of the new paper. The original URL will forward readers straight through!</li>
 	</ol>
 	
-	<div class='getStarted'>
+	<div id="register" class='getStarted'>
 	<h2>Get started now!</h2>
 		<form action='register.php' method='post'>
 			<label id='orcidLbl'><span>Enter your OrcID:</span>
