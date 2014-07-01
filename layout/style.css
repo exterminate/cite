@@ -336,7 +336,7 @@ ol.circles-list > li:before {
 .dashboard li{
 	vertical-align: right;
 	
-    //color:white
+
 	
 }
 
@@ -347,6 +347,11 @@ ol.circles-list > li:before {
 	display: inline-block;
 	text-align: right;
 	padding-right: 10px;
+}
+
+
+.dashboard li.stubTitle:before {	
+	content: "Title: ";	
 }
 
 .dashboard li.name:before {	

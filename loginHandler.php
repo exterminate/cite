@@ -24,5 +24,3 @@ if(isset($email) && isset($code)){
 	//if email fails for any reason
 	echo json_encode(array("emailSent" => "false"));
 }
-
-?>

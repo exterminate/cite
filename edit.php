@@ -1,102 +1,68 @@
 <?php	
-
+session_start();
 require 'core/init.php';
-require 'classes/author.php';
+
 header('Content-type: application/json');
 
-$updatedStub = new Stub($_POST['input']);
-
-/*
-//check that the user is logged in
-
-//write the updated stub to the database
-
-//if written successfully
-echo json_encode(array("editSuccessful" => "true"));
-
-//if update fails
-echo json_encode(array("editSuccessful" => "false", "errorMsg" => "reason for update failure here"));
-
-
-*/
-
-
-
-
-
-
-
-
-
+//$updatedStub = new Stub($_POST['input']);
 
 $validate = new Validate();
+$email = Input::get('email');
+$doi = Input::get('doi');
 
-if(isset(Input::get('inputEmail')) && isset(Input::get('code'))){ //email and code passed
-	
-	// validate input
-	$validate->check($_POST, array(  
-		'inputEmail' => array(
-			'required'  => true,
-			'max'       => 80,
-			'email'     => true			
-			),
-		'code' => array(
-			'required'  => true,
-			'min'       => 12,
-			'max'       => 12	
-			)
-		)
-	);
 
-	if($validate->passed()) {
-		
-		$author = new Author($dbHandler);
-		$authorDetails = $author->getAuthorDetails(Input::get('email'), Input::get('deepLink'));
-		if($authorDetails != null) {
-			if($authorDetails->time > strtotime("now")) {
-				// start session
-				session_start();
-			        $_SESSION['authorEmail'] = $authorDetails->email;
-			        $_SESSION['time'] = $authorDetails->time;
-				echo json_encode(array('emailValid' => 'true')); // Hey, we got the email
-			}
-		} else
-			echo json_encode(array('emailValid' => 'false')); // Uh oh, we don't got the email	
-	} else
-		echo json_encode(array('emailValid' => 'false')); // Uh oh, we don't got the email
-	
-}elseif(isset(Input::get('inputEmail')) && !isset(Input::get('code'))){ // send email and get code
-	$validate->check($_POST, array(  
-	'inputEmail' => array(
-		'required' => true,
-		'max' => 80,
-		'email' => true			
-	)));
-	if($validate->passed()) {
-		// let's create a deeplink for the author
-		$author = new Author($dbHandler);
-		$author->createLoginSession(escape(trim($_POST['inputEmail'])), $dbHandler->getUniqueCode('deepLink','authors'));
-			
-		
-		$email = new EmailHandler();
-		$email->sendMail(
-			Input::get('email'),
-			"Code to edit your stub",
-			"Go back to the stub and use the code " . $author->deepLink . ". "
-		);
-		echo json_encode(array('login' => 'true'));
-	} else 
-		echo json_encode(array('login' => 'false'));
 
+if($_SESSION['login']->isLoggedIn()) { 
+
+    $stub = $dbHandler->getStub('stubId', Input::get('stubId'));
+
+    if(Input::get('Save')){ //email and code passed
+            
+        // validate input
+        $validate->check($_POST, array(  
+                'stubTitle' => array(
+                        'required'  => true,
+                        'max'       => 300,
+                        'min'     => 2			
+                        ),
+                'description' => array(
+                        'required'  => true,
+                        'max'       => 5000		
+                        ),
+                'doi' => array(
+                        'doi'       => true
+                        )
+                )
+        );
+
+        if($validate->passed()) {
+            //update table
+            $dbHandler->updateNew('links', 'stubTitle', Input::get('stubTitle'), 'StubId', Input::get('StubId'));
+            $dbHandler->updateNew('links', 'description', Input::get('description'), 'StubId', Input::get('StubId'));
+            $dbHandler->updateNew('links', 'doi', Input::get('doi'), 'StubId', Input::get('StubId'));    
+            
+            
+            
+            //email watchers
+            if(!empty($doi)) {
+                $emailHandler = new EmailHandler();
+                $emailHandler->sendMail(
+// change the email - hard coded temporarily                        
+                    'ian.coates@gmail.com',
+                    'A paper you were watching has been published',
+                    $_SESSION['name'] . "has just published " . $stub->stubTitle . ".\nGo to " . $rootURL.$stub->stubId . " to see the article." // add "Why not submit your stub now!"
+                );
+                
+// do we unset all those emails now??
+            }
+            // success, do this or start a session message
+            echo json_encode(array('emailValid' => 'false')); // Uh oh, we don't got the email	
+        } else {
+            //validation failed.   
+            echo json_encode(array('emailValid' => 'false')); // Uh oh, we don't got the email
+        }
+    }
 }
-
-
-// code for inserting into index.php << added
-/*
-if(strtotime("now") > $SESSION['time']) {
-	// perhaps we need a html (or JS) 60 min refresh
-	session_destroy(); // ends session, the author has had 60 mins
-}*/
 
 
 ?>

@@ -78,12 +78,15 @@ if($_SESSION['login']->isLoggedIn()) {
 	<p><?php echo $_SESSION['name']; ?> is logged in.</p>
 	<button id='createNewStubButton'>Create New</button>
 	<div id='newStub' class='dashboard' hidden>
-		<p><label>Title: </label><input id='title' class='input' type='text'></p>
-		<p><label>Description: </label>
-			<textarea id='description' class='input'></textarea>
-		</p>
-		<button id='submitStubButton'>Submit</button>
-		<button id='cancelButton'>Cancel</button>
+		<form method="POST">
+			<label>Title: </label><br>
+			<input id='title' class='input' type='text'><br>
+			<label>Description: </label><br>
+			<textarea id='description' class='input'></textarea><br>
+			
+			<button id='submitStubButton'>Submit</button>
+			<button id='cancelButton'>Cancel</button>
+		</form>
 	</div>
 	
 	<div id='content'></div>
