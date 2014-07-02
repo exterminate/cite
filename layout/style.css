@@ -112,6 +112,7 @@ header h1 {
 	padding: 20px 0;
 	font-size: 400%;
 	color: white;
+	float: left;
 }
 
 table, td, tr, label {
@@ -217,6 +218,9 @@ nav a.logout:before {
 	color:#730329
 }
 
+.dashboard textarea, .dashboard input {
+	width:90%;
+}
 
 .getStarted {
 	background: #b52936;
@@ -394,3 +398,29 @@ ul{list-style-type:none}
 /*
 	End of Mustache template stub class styling
 */
+
+/*
+ * Responsiveness below :)
+ */
+
+@media all and (max-width: 699px) and (min-width: 521px) {
+	
+}
+
+@media all and (max-width: 520px) {
+.headerwrap, header {
+	height: 100%;
+}
+header h1{float:none;padding: 5px;}
+.loginForm:before{
+content: "Login";
+font-size: 150%;
+font-weight:400;
+}
+.loginForm {
+float:none;
+	text-align:left;
+padding: 5px 5px 15px 5px;	
+}
+
+}

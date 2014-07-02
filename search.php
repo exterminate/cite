@@ -113,7 +113,7 @@ include 'layout/header.php';
 
 	<div>
 		<form method="POST" action="">			
-			<label for='searchQuery'>Search for:
+			<label for='searchQuery'>Search for:<br>
 				<input type='text' name='searchQuery' id='searchQuery'>
 				<button id='searchButton' type='button'>Search</button>
 				<select id='typeSelect'>

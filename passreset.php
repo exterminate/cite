@@ -13,7 +13,7 @@ if(Input::exists()) {
 			)
 		)
 	);
-	if($vaidate->>passed()) {
+	if($vaidate->passed()) {
 		// does this user exist?
 		// no
 		$dbHandler->getUser('email', Input::get('email'));
@@ -51,7 +51,7 @@ if(isset($_SESSION['error'])) {
 	<label for="email">Enter e-mail address:</label><br>
 	<input type="email" name="email"><br>
 	<label for="human">What is 3 + 2?</label><br>
-	<input type="text" name="human"><br>
+	<input type="text" name="human" size="2"><br>
 	<input type="submit" name="reset" value="Reset"><br>
 </form>	
 

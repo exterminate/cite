@@ -1,7 +1,9 @@
 <div class="ultimatewrap">
 	<header>
 		<div class="headerwrap">
-			
+			<a href="<?php echo $rootURL; ?>">
+				<h1 class="header">Cite</h1>
+			</a>
 			<?php
 				echo '<div class="loginForm">';
 				if($_SESSION['login']->isLoggedIn()) {
@@ -25,9 +27,7 @@
 				}
 				echo '</div>';
 			?>
-					<a href="<?php echo $rootURL; ?>">
-						<h1 class="header">Cite</h1>
-					</a>
+					
 					
 					<nav>
 						<a href="<?php echo $rootURL; ?>">Home</a>
