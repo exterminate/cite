@@ -35,13 +35,11 @@ if(Input::exists()) {
         $dbHandler->update('links', 'interestedEmails', $stub);
         
         //if db write is successful
-        echo json_encode(array("interestRegistered" => true));
-        
-        //if db write fails
-        //echo json_encode(array("interestRegistered" => false, "errorMsg" => "Failed to write email to database"));
+        echo JsonFactory::success(true, "Interest successfully registered!");       
+      
     
     } else {
-        echo json_encode(array("interestRegistered" => false, "errorMsg" => "Failed to write email to database"));
+        echo JsonFactory::success(false, "Failed to register interest!");
     }
 }
 

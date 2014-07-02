@@ -26,13 +26,11 @@ session_start();
 	<script src='lib/mustache.js'></script>
 	<script>
 		$(document).ready(function(){
-			var stub = $.parseJSON('<?php echo json_encode($stub, JSON_FORCE_OBJECT); ?>');
+			var stub = $.parseJSON('<?php echo json_encode($stub); ?>');
 			console.log(stub);
 
 			var doiURL = "http://dx.doi.org/" + stub.doi;
-
 			
-
 			if(stub.doi !== ""){
 				/*
 					There is a DOI associated with this stub, so we will wait 5 secs then redirect
@@ -84,12 +82,14 @@ session_start();
 			$('#registerInterestButton').click(function(){
 				var registerInterest = $.post('registerInterest.php', {stubId : stub.stubId, interestedEmail: $('#interestedInput').val()});
 				registerInterest.done(function(data){
-					if (data.interestRegistered) {
-						console.log("Interest Registered!")
+					/*
+					 * See JsonFactory::success() for the correct JSON form
+					 */
+					if (data.success) {
+						console.log(data.message)
 					} else{
-						console.log(data.errorMsg);//data.errorMsg
-					}
-					
+						console.log(data.message);//data.errorMsg
+					}					
 				});
 				registerInterest.fail(function(jqXhr){
 					console.log("Error contacting server: " + jqXhr.responseText);

@@ -19,6 +19,6 @@ PC::debug($stub);
 
 $dbHandler->put('links', $stub);
 
-echo json_encode(array("message" => "Stub added successfully"));
+echo JsonFactory::message("Stub added successfully");
 
 ?>

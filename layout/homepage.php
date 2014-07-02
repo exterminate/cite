@@ -1,31 +1,7 @@
 <script src='lib/mustache.js'></script>
-<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/jquery.slick/1.3.6/slick.css"/>
-<script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.slick/1.3.6/slick.min.js"/></script>
 <script src="<?php echo $rootURL; ?>lib/jquery.maskedinput.js" type="text/javascript"></script>
 <script>
 	$(document).ready(function(){
-		var json = $.parseJSON('<?php echo json_encode($dbHandler->getRecentStubs("links", 10), JSON_FORCE_OBJECT); ?>');
-
-		length = Object.keys(json).length;
-		var outputElement = $('#recentStubs');
-
-		$.get("templates/stub.mustache.html", function(template){			
-			for(var i = 0; i < length; i++){
-				$(outputElement).append(Mustache.to_html(template, json[i]));
-			}
-			$('#recentStubs').slick({
-				dots: true,
-				arrows: true,
-				speed: 500,
-				autoplay: true,
- 				autoplaySpeed: 5000,
- 				slidesToShow: 3
-			});
-
-		})
-		.fail(function(a,b,c){
-			console.log("Failed to load Mustache template, " + a.responseText);
-		});
 		
 		$('#orcid').mask("9999-9999-9999-9999",{placeholder : "."});
 		
@@ -77,7 +53,6 @@
 	});	
 </script>
 
-
 <div class="welcome">
 	<h1>Welcome to Cite</h1>
 	<h2>Never lose the opportunity to share your work</h2>
@@ -113,7 +88,4 @@
 			<input id='getStartedButton' type='submit' value='Get started!'>
 		</form>
 	</div>
-</div>
-<div id='recentStubs'>
-	Recently Submitted:<br>
 </div>

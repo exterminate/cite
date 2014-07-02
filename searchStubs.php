@@ -13,9 +13,8 @@
 	$stubs = $dbHandler->getStubs('links', $type, "=", $query);
 	
 	if($stubs == null){  
-	    $stubs = array("error" => "No results found matching ".$type." = ".$query);
-	}
-	
-	
-	echo json_encode($stubs);		  	
+		echo JsonFactory::message("No results found matching ".$type." = ".$query);
+	} else{
+		echo json_encode($stubs);	
+	}	  	
 ?>

@@ -8,7 +8,6 @@ include 'layout/head.php';
 include 'layout/header.php';
 
 ?>
-
 	<script src="lib/jquery.maskedinput.js" type="text/javascript"></script>
 	<script src='lib/mustache.js'></script>
 	<script>
@@ -34,8 +33,7 @@ include 'layout/header.php';
 				This needs unusual syntax because the content is added dynamically
 				We have to bind the on click handler to the content after the page is created
 			*/
-			$('#output').on('click', '.stub', function(){
-				
+			$('#output').on('click', '.stub', function(){				
 				console.log($(this).find('.stubId').text());
 				$(location).attr('href', "" + $(this).find('.stubId').text());
 			});
@@ -45,7 +43,7 @@ include 'layout/header.php';
 			/*
 				Note this only finds exact matches at present
 			*/
-			$.post("searchSQL.php", {query : query, type : type}, function(data){
+			$.post("searchStubs.php", {query : query, type : type}, function(data){
 				console.log(data);
 				$('#output').empty();
 				printJSONToTable(data, $('#output'));	
@@ -55,12 +53,9 @@ include 'layout/header.php';
 			});
 		}
 
-		function printJSONToTable(data, outputElement){
-
-			
-
-			if(data.error != null){
-				$(outputElement).append("Error: " + data.error);
+		function printJSONToTable(data, outputElement){	
+			if(data.message != null){
+				$(outputElement).append(data.message);
 			} else {
 				var length = Object.keys(data).length;
 
@@ -68,44 +63,10 @@ include 'layout/header.php';
 					for(var i = 0; i < length; i++){
 						$(outputElement).append(Mustache.to_html(template, data[i]));
 					}
-
 				})
 				.fail(function(a,b,c){
 					console.log("Failed to load Mustache template, " + a.responseText);
-				});
-								
-
-				/*	
-					Obsolete table rendering code,
-					Kept cos its worked, might be good for admin stuff
-				*/
-			/************************************************
-
-				var table = $('<table>').attr("class", "table").attr("id", "resultsTable");
-				
-				//populate the header row
-				var headerRow = $("<tr>");
-				$.each(data[0], function(key, val){				
-					$(headerRow).append($("<th>").text(key));
-				})
-
-				$(table).append($(headerRow));
-
-				//populate the body rows
-				for(var i = 0; i < length; i++){
-					var row = $("<tr>");
-
-					$.each(data[i], function(key, val){
-						var cell = $("<td>").text(val);
-						$(row).append($(cell));
-					});				
-
-					$(table).append($(row))
-				}
-
-
-				$(outputElement).append($(table));
-			**************************************************/		
+				});									
 			}
 		}
 			

@@ -21,23 +21,37 @@ if($_SESSION['login']->isLoggedIn()) {
 		console.log("user: ");
 		console.log(user);	
 		
-		function displayStubs(){			
-			//var stubs = $.parseJSON('<?php echo json_encode($stubs); ?>');
-			
-			var post = $.post('searchSQL.php', {query : user.email, type : 'email'});
+		function displayStubs(){
+			var post = $.post('searchStubs.php', {query : user.email, type : 'email'});
 			post.done(function(stubs){
-				stubs = stubs.reverse();
-				console.log(stubs);
-				$.get('templates/dashboardStub.mustache.html', function(template){
-					$('#content').html(Mustache.to_html(template, {stubs: stubs}));	
-				});
-				console.log('display stubs');				
+				
+				if (stubs.message == null) {
+					/*
+					 *	We've found some stubs for this user, lets display them
+					 */
+					stubs = stubs.reverse();
+					console.log(stubs);
+					$.get('templates/dashboardStub.mustache.html', function(template){
+						$('#content').html(Mustache.to_html(template, {stubs: stubs}));	
+					});
+				} else{
+					/*
+					 *	This poor user has no stubs yet, lets point them in the right direction
+					 */
+					$('#content').html("You haven't created any stubs yet. Why not <a id='getStartedLink' href='#'>get started?</a>");
+				}				
+											
 			});
 		}
 		
 		displayStubs();		
 		
 		$(document).ready(function(){
+			
+			$('#content').on('click', '#getStartedLink', function(){
+				$('#createNewStubButton').trigger('click');	
+			});
+			
 			$('#createNewStubButton').click(function(){			
 				$('#newStub').fadeIn(500);
 				$(this).fadeOut(500);
@@ -45,12 +59,11 @@ if($_SESSION['login']->isLoggedIn()) {
 			
 			$('#submitStubButton').click(function(){				
 				var post = $.post('submit.php',
-						{
-							title: $('#title').val(),
-							description: $('#description').val(),
-							user: user
-						}
-				);
+					{
+						title: $('#title').val(),
+						description: $('#description').val(),
+						user: user
+					});
 				
 				post.done(function(data){
 					console.log(data.message);
@@ -58,6 +71,7 @@ if($_SESSION['login']->isLoggedIn()) {
 					$('#createNewStubButton').fadeIn(500);
 					setTimeout(displayStubs, 1000);					
 				});
+				
 				post.fail(function(jqXhr){
 					console.log(jqXhr.responseText);
 				});
@@ -84,8 +98,8 @@ if($_SESSION['login']->isLoggedIn()) {
 			<label>Description: </label><br>
 			<textarea id='description' class='input'></textarea><br>
 			
-			<button id='submitStubButton'>Submit</button>
-			<button id='cancelButton'>Cancel</button>
+			<button type='button' id='submitStubButton'>Submit</button>
+			<button type='button' id='cancelButton'>Cancel</button>
 		</form>
 	</div>
 	

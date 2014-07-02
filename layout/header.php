@@ -21,8 +21,7 @@
 						<input type="submit" name="submit" value="login">
 						<a href='#register'>Register</a><br>
 						<a href='passreset'>Can't remember password?</a>	
-					</form>				
-			
+					</form>		
 			<?php
 				}
 				echo '</div>';
