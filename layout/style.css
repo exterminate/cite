@@ -338,53 +338,6 @@ ol.circles-list > li:before {
 
 .dashboard li{
 	vertical-align: right;
-	
-
-	
-}
-
-.dashboard li:before{
-	text-shadow: 0 1px 0 #fff;
-	font-weight: bold;
-	width:20%;
-	display: inline-block;
-	text-align: right;
-	padding-right: 10px;
-}
-
-
-.dashboard li.stubTitle:before {	
-	content: "Title: ";	
-}
-
-.dashboard li.name:before {	
-	content: "Name: ";	
-}
-
-.dashboard li.orcid:before {
-	content: "Orcid: ";
-}
-
-.dashboard li.stubId:before {
-	content: "Stub ID: ";
-}
-
-.dashboard li.description:before {
-	content: "Description: ";
-}
-
-.dashboard li.datesubmitted:before {
-	content: "Date Submitted: ";
-	
-}
-
-.dashboard li.doi:before{
-	content: "DOI: ";
-}
-
-
-.dashboard li.datedoi:before{
-	content: "Date Completed: ";
 }
 
 ul{list-style-type:none}

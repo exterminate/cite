@@ -76,6 +76,7 @@ class DB {
 		while ($r = $query->fetchAll(PDO::FETCH_ASSOC)) {
 			
 			if($r[0] != null){
+				$r[0]['interestedEmails'] = unserialize($r[0]['interestedEmails']);
 				return new Stub($r[0]);			
 			} else{
 				return null;
@@ -88,14 +89,16 @@ class DB {
 		$query = $this->handler->prepare($sql);
 		
 		//interestedEmails is an array so we need to turn it into a string first
-		if($field = "interestedEmails"){
+		if($field == "interestedEmails"){
 			$stub->interestedEmails = serialize($stub->interestedEmails);
 		}
 		$query->execute(array($stub->$field,$stub->stubId));
 	}
 	
 	public function updateNew($table, $field1, $input1, $field2, $input2) {
-		
+		if($field1 == "interestedEmails"){
+			$input1 = serialize($input1);
+		}
 		$sql = "UPDATE $table SET $field1 = ? WHERE $field2 = ?";
 		$query = $this->handler->prepare($sql);
 		$query->execute(array($input1,$input2));		

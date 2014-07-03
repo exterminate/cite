@@ -22,17 +22,15 @@ if(Input::exists()) {
     
     if($validate->passed()) {
         
-        $stubId = Input::get('stubId');
-        $interestedEmail = Input::get('interestedEmail');
-
         //get the appropriate stub from the database using the stubId posted in
-        $stub = $dbHandler->getStub("stubId", $stubId);        
+        $stub = $dbHandler->getStub("stubId", Input::get('stubId'));
           
         //append the interested email to the stub
-        array_push($stub->interestedEmails, $interestedEmail);
+        $stubArray = array_push($stub->interestedEmails, Input::get('interestedEmail'));
         
         //write the stub back to the database
-        $dbHandler->update('links', 'interestedEmails', $stub);
+        $dbHandler->updateNew('links', 'interestedEmails', Input::get('interestedEmail'), 'stubId', Input::get('stubId'));
+        //$dbHandler->update('links', 'interestedEmails', $stub->interestedEmails);
         
         //if db write is successful
         echo JsonFactory::success(true, "Interest successfully registered!");       
