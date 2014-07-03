@@ -45,12 +45,15 @@ if(isset($_SESSION['error'])) {
 	unset($_SESSION['error']);
 }
 
+$num1 = rand(1,4);
+$num2 = rand(1,4);
+$_SESSION['sum'] = $num1 + $num2;
 ?>
 
 <form action="" method="POST">
 	<label for="email">Enter e-mail address:</label><br>
 	<input type="email" name="email"><br>
-	<label for="human">What is 3 + 2?</label><br>
+	<label for="human">What is <?=$num1?> + <?=$num1?>?</label><br>
 	<input type="text" name="human" size="2"><br>
 	<input type="submit" name="reset" value="Reset"><br>
 </form>	

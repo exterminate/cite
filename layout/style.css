@@ -203,12 +203,19 @@ nav a.logout:before {
 
 .dashboard {
 	background: #eee;
-	background: -moz-linear-gradient(top,#eee,#ccc);
+	/*background: -moz-linear-gradient(top,#eee,#ccc);
 	background: -webkit-linear-gradient(top,#eee,#ccc);
-	background: linear-gradient(top,#eee,#ccc);
+	background: linear-gradient(top,#eee,#ccc);*/
 	padding: 5px 10px;
 	margin: 10px 0;
+	box-shadow: 0 0 5px #aaa;
+	transition: all 0.3s;
 }
+
+.dashboard:hover {
+	box-shadow: 0 0 5px #777;
+}
+
 .dashboard label{
 	font-weight: 700;
 	text-shadow: 0 1px 0 #fff;
