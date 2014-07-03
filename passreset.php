@@ -13,7 +13,9 @@ if(Input::exists()) {
 			)
 		)
 	);
-	if($vaidate->passed()) {
+	if($vaidate->passed() && $_SESSION['sum'] == Input::get('human')) {
+                unset($_SESSION['sum']);
+                
 		// does this user exist?
 		// no
 		$dbHandler->getUser('email', Input::get('email'));
