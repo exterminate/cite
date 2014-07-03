@@ -26,11 +26,10 @@ if(Input::exists()) {
         $stub = $dbHandler->getStub("stubId", Input::get('stubId'));
           
         //append the interested email to the stub
-        $stubArray = array_push($stub->interestedEmails, Input::get('interestedEmail'));
-        
+        array_push($stub->interestedEmails, Input::get('interestedEmail'));
+     
         //write the stub back to the database
-        $dbHandler->updateNew('links', 'interestedEmails', Input::get('interestedEmail'), 'stubId', Input::get('stubId'));
-        //$dbHandler->update('links', 'interestedEmails', $stub->interestedEmails);
+        $dbHandler->updateNew('links', 'interestedEmails', $stub->interestedEmails, 'stubId', Input::get('stubId'));
         
         //if db write is successful
         echo JsonFactory::success(true, "Interest successfully registered!");       
