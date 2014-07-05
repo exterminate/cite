@@ -201,6 +201,11 @@ nav a.logout:before {
 	color : DeepSkyBlue;
 }
 
+.errorMessage {
+	color: red;
+}
+	
+
 .dashboard {
 	background: #eee;
 	/*background: -moz-linear-gradient(top,#eee,#ccc);

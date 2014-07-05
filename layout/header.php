@@ -38,8 +38,9 @@
 			<?php
 				if($_SESSION['login']->isLoggedIn()) {
 			?>
-						<a href="<?php echo $rootURL ?>dashboard">My Stubs</a>					
-						<a href="<?php echo $rootURL ?>logout" class="logout">Logout</a>
+						<a href="<?php echo $rootURL ?>dashboard">My Stubs</a>
+						<a href="<?php echo $rootURL ?>logout" class="logout"> | Logout</a>
+						<a href="<?php echo $rootURL ?>passreset" class="logout">Change password</a> 
 			<?php
 				}
 			?>
