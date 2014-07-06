@@ -43,12 +43,12 @@ class LoginHandler {
 			return False;
 	}
 	
-	public function logOut() {
+	public function logOut($rootURL) {
 		unset($this->sessionName);
 		unset($this->sessionSecretCode);
 		unset($this->sessionEmail);
 		session_destroy();
-		header("Location: index.php");
+		header("Location: ". $rootURL);
 		exit();
 	}
 	
