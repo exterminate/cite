@@ -6,10 +6,8 @@
 			</a>
 			<?php
 				echo '<div class="loginForm">';
-				if($_SESSION['login']->isLoggedIn()) {
-					//we are logged in, so show a message and the logout button					
-					echo '<a href="'.$rootURL.'logout">Logout</a>';
-				} else {
+				if(!$_SESSION['login']->isLoggedIn()) {
+				
 					//we are not logged in so display the login fields
 			?>
 					

@@ -1,4 +1,7 @@
 <?php
+
+require_once('lib/php-console-master/src/PhpConsole/__autoload.php');
+
 class DB {
 	private $rootURL = "http://localhost/git/cite/";
 	private $handler;
@@ -247,16 +250,18 @@ class DB {
 		$query = $this->handler->query("SELECT * FROM users WHERE $field = '$search'");		
 		$r = $query->fetch(PDO::FETCH_OBJ);
 		return $r;
-
+	}
+	
+	public function getPublicUser($field, $search){		
+		$r = $this->getUser($field, $search);		
 		$user = new User(
 				$r->firstName,
 				$r->surname,
 				$r->orcid,
 				$r->accessLevel,
 				$r->email
-				 );
+		);		
 		return $user;
-
 	}
 	
 	public function verifyUser($email, $deepLink) {

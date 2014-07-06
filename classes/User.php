@@ -2,8 +2,7 @@
 
 class User {
 	
-	public $firstName, $surname, $orcid, $accessLevel, $email;
-	
+	public $firstName, $surname, $orcid, $accessLevel, $email;	
 	
 	public function __construct($firstName, $surname, $orcid, $accessLevel, $email) {
 		$this->firstName = $firstName;
@@ -12,10 +11,4 @@ class User {
 		$this->accessLevel = $accessLevel;
 		$this->email = $email;
 	}
-	
-	
-
-	
-
-	
 }

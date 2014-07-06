@@ -5,30 +5,37 @@ include 'layout/head.php';
 
 
 if($_SESSION['login']->isLoggedIn()) { 
-
-
-	include 'layout/header.php';	
-	$user = $dbHandler->getUser('email', $_SESSION['email']);	
-	$stubs = $dbHandler->getStubs('links', 'email', '=', $_SESSION['email']);	
-	echo "<p>You have created " . $dbHandler->count('links', 'email', '=', $_SESSION['email']) . " stubs.</p>";	
+	include 'layout/header.php';		
 ?>
 	
 	<script src='lib/mustache.js'></script>
 	<script>
-		//display the users stubs as loaded from the database
+		//display the users stubs as loaded from the database	
 		
-		var user = $.parseJSON('<?php echo json_encode($user); ?>');
-		console.log("user: ");
-		console.log(user);	
+		var userPost = $.post('searchUsers.php', {public : 'true'});
 		
+		var user = "";
+			
+		userPost.done(function(data){				
+			user = data;
+			console.log("user: ");
+			console.log(user);
+			displayStubs();	
+		});
+
 		function displayStubs(){
 			var post = $.post('searchStubs.php', {query : user.email, type : 'email'});
-			post.done(function(stubs){
-				
+			post.done(function(stubs){				
 				if (stubs.message == null) {
 					/*
 					 *	We've found some stubs for this user, lets display them
 					 */
+					var length = Object.keys(stubs).length;
+					var wordEnding = "";
+					if (length > 1) {
+						wordEnding = "s";
+					}
+					$('#count').html("You have created " + length + " stub"+wordEnding);
 					stubs = stubs.reverse();
 					console.log(stubs);
 					$.get('templates/dashboardStub.mustache.html', function(template){
@@ -44,10 +51,8 @@ if($_SESSION['login']->isLoggedIn()) {
 			});
 		}
 		
-		displayStubs();		
-		
-		$(document).ready(function(){
-			
+		$(document).ready(function(){		
+
 			$('#content').on('click', '#getStartedLink', function(){
 				$('#createNewStubButton').trigger('click');	
 			});
@@ -59,7 +64,7 @@ if($_SESSION['login']->isLoggedIn()) {
 			
 			$('#submitStubButton').click(function(){				
 				var post = $.post('submit.php',
-					{
+					{				
 						title: $('#title').val(),
 						description: $('#description').val(),
 						user: user
@@ -78,14 +83,17 @@ if($_SESSION['login']->isLoggedIn()) {
 			});
 			
 			$('#cancelButton').click(function(){
-				clearForm();
-				$('#newStub').fadeOut(500);
+				resetForm();
+				
 			});
 		});
 		
-		function clearForm() {
+		function resetForm() {
 			$('.input').val("");
+			$('#newStub').fadeOut(500);
+			$('#createNewStubButton').fadeIn(500);
 		}
+			
 			
 		
 	</script>
@@ -103,6 +111,7 @@ if($_SESSION['login']->isLoggedIn()) {
 		</form>
 	</div>
 	
+	<div id='count'></div>
 	<div id='content'></div>
 	
 <?php	
