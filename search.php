@@ -43,26 +43,24 @@ include 'layout/header.php';
 			/*
 				Note this only finds exact matches at present
 			*/
-			$.post("searchStubs.php", {query : query, type : type}, function(data){
-				console.log(data);
-				$('#output').empty();
-				printJSONToTable(data, $('#output'));	
-			})
-			.fail(function(a,b,c){
+			var post = $.post("searchStubs.php", {query : query, type : type});
+			post.done(function(data){					
+					$('#output').empty();
+					renderStubs(data, $('#output'));	
+			});
+			post.fail(function(a,b,c){
 				console.log("Error contacting server: " + a.responseText + ", " + b + ", " + c);
 			});
 		}
 
-		function printJSONToTable(data, outputElement){	
-			if(data.message != null){
-				$(outputElement).append(data.message);
+		function renderStubs(stubs, outputElement){	
+			if(stubs.message != null){
+				$(outputElement).append(stubs.message);
 			} else {
-				var length = Object.keys(data).length;
-
-				$.get("templates/stub.mustache.html", function(template){			
-					for(var i = 0; i < length; i++){
-						$(outputElement).append(Mustache.to_html(template, data[i]));
-					}
+				var length = Object.keys(stubs).length;
+					console.log(stubs)
+				$.get('templates/searchStub.mustache.html', function(template){
+						$(outputElement).html(Mustache.to_html(template, {stubs: stubs}));	
 				})
 				.fail(function(a,b,c){
 					console.log("Failed to load Mustache template, " + a.responseText);

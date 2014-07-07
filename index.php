@@ -53,7 +53,7 @@ session_start();
 				/*
 					Bind a click event to the stub for manual redirect
 				*/
-				$('#display').on('click', '.stub', function(){
+				$('#display').click(function(){
 					window.location = doiURL;
 				});
 			} else{
@@ -68,7 +68,7 @@ session_start();
 			/*
 				Get the Mustache template from file and apply it
 			*/
-			$.get("templates/stub.mustache.html", function(template){				
+			$.get("templates/indexStub.mustache.html", function(template){
 					$('#display').append(Mustache.to_html(template, stub));
 			})
 			.fail(function(a,b,c){
