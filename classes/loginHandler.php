@@ -23,14 +23,14 @@ class LoginHandler {
 					$_SESSION['email'] = $email;
 					$this->sessionEmail = $_SESSION['email'];
 				} else {
-					die("You need to verify your account, please check you email for a verification link.");
+					$_SESSION['error'] = "You need to verify your account, please check you email for a verification link.";
 				}
 			} else {
 				//password fail
-				die("This user exists but you got the wrong password!");
+				$_SESSION['error'] = "This user exists but you got the wrong password!";
 			}
 		} else { // user doesn't exist
-			die("This user doesn't exist!");
+			$_SESSION['error'] = "This user doesn't exist!";
 		}
 		
 	}

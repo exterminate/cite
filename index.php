@@ -117,6 +117,10 @@ session_start();
 	else {
 		include 'layout/head.php';
 		include 'layout/header.php';
+		if(isset($_SESSION['error'])) {
+			echo "<p class='errorMessage'>".$_SESSION['error']."</p>";
+			unset($_SESSION['error']);
+		}
 		include 'layout/homepage.php';
 	}
 
