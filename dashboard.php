@@ -7,7 +7,8 @@ include 'layout/head.php';
 if($_SESSION['login']->isLoggedIn()) { 
 	include 'layout/header.php';		
 ?>
-	
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 	<script src='lib/mustache.js'></script>
 	<script>
 		//display the users stubs as loaded from the database	
@@ -86,6 +87,8 @@ if($_SESSION['login']->isLoggedIn()) {
 				resetForm();
 				
 			});
+			
+			
 		});
 		
 		function resetForm() {
@@ -93,7 +96,65 @@ if($_SESSION['login']->isLoggedIn()) {
 			$('#newStub').fadeOut(500);
 			$('#createNewStubButton').fadeIn(500);
 		}
+		
+		var editing = null;
+		function editStub(stubId){				
+			var stub = $('#stub'+stubId);
 			
+			if (editing == null) {
+				
+				console.log("Editing " + stubId);
+				
+				var editButton = stub.find('.control').find('.editButton');
+				editButton.text("Finish  editing and save");
+				
+				var editable = [stub.find('.title').find('span'),
+						stub.find('.doi').find('span'),
+						stub.find('.description').find('span')];
+				
+				$.each(editable.reverse(), function(i, element){
+					$(element)
+						.attr('contenteditable', true)
+						.animate({backgroundColor: '#ffff00'}, 'slow')
+						.animate({backgroundColor: '#ffffff'}, 'slow')
+						.focus();
+				});
+				
+				editing = stubId;
+			} else if(editing == stubId){
+				finishEditing(stub);			
+			} else{
+				console.log("Edit button for " + stubId + "clicked, but already editing stub " + editing + "!");
+				alert("You can only edit one stub at a time!\nFinish editing stub " + editing + " first");	
+			}			
+		}
+		
+		function finishEditing(stub){
+			
+			var stubId = stub.find('.stubId').find('span').text();
+			
+			var editable = [stub.find('.title').find('span'),
+					stub.find('.doi').find('span'),
+					stub.find('.description').find('span')];
+			
+			$.each(editable.reverse(), function(i, element){
+					$(element)
+						.attr('contenteditable', false)						
+						.animate({backgroundColor: '#eee'}, 'slow');
+						
+				});
+			
+			stub.find('.control').find('.editButton').text("Edit");
+			console.log("Finished editing " + stubId);
+			editing = null;
+			
+			
+			/*
+			 *	do writing to database here!
+			 */
+			 
+			 
+		}
 			
 		
 	</script>

@@ -1,16 +1,15 @@
 {{#stubs}}
-    <div class='dashboard'>
-        <p><label>Title: </label>{{stubTitle}}</p>
-        <p><label>Stub ID: </label>{{stubId}}</p>    
-        <p><label>Submitted: </label>{{datesubmitted}}</p>
-        <p><label>DOI: </label>{{doi}}</p>
-        <p><label>Views: </label>{{views}}</p>
-        <p><label>Description: </label>{{description}}</p>
-        <p>
+    <div class='dashboard' id='stub{{stubId}}'>
+        <span class='title'><label>Title: </label><span>{{stubTitle}}</span></span><br>
+        <span class='stubId'><label>Stub ID: </label><span>{{stubId}}</span></span><br>
+        <span class='submitted'><label>Submitted: </label><span>{{datesubmitted}}</span></span><br>
+        <span class='doi'><label>DOI: </label><span>{{doi}}</span></span><br>
+        <span class='views'><label>Views: </label><span>{{views}}</span></span><br>
+        <span class='description'><label>Description: </label><span>{{description}}</span></span><br>
+        <span class='control'>
             <a href='{{stubId}}' title='View'>View</a> | 
-            <a href='edit/{{stubId}}' title='Edit'>Edit</a> <!--|
+            <button class='editButton' type='button' title='Edit' onclick="editStub('{{stubId}}')">Edit</a> <!--|
             <a href='delete/{{stubId}}' title='Delete'>Delete</a>-->
-        </p>  
-        
+        </span>        
     </div>
 {{/stubs}}
