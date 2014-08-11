@@ -4,11 +4,11 @@ require 'core/init.php';
 
 header('Content-type: application/json');
 
-//$updatedStub = new Stub($_POST['input']);
-
 $validate = new Validate();
-$email = Input::get('email');
-$doi = Input::get('doi');
+
+/* don't think I need these two */
+$email = Input::get('email'); 
+$doi = Input::get('doi');  
 
 
 
