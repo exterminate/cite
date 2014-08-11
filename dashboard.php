@@ -137,7 +137,7 @@ if($_SESSION['login']->isLoggedIn()) {
 					stub.find('.doi').find('span'),
 					stub.find('.description').find('span')];
 			
-			$.each(editable.reverse(), function(i, element){
+			$.each(editable, function(i, element){
 					$(element)
 						.attr('contenteditable', false)						
 						.animate({backgroundColor: '#eee'}, 'slow');
@@ -148,11 +148,16 @@ if($_SESSION['login']->isLoggedIn()) {
 			console.log("Finished editing " + stubId);
 			editing = null;
 			
+			var editedTitle = editable[0].text();
+			var editedDoi = editable[1].text();
+			var editedDescription = editable[2].text();
 			
+			console.log("Edited title: " + editedTitle);
+			console.log("Edited DOI: " + editedDoi);
+			console.log("Edited description: " + editedDescription);
 			/*
 			 *	do writing to database here!
-			 */
-			 
+			 */	 
 			 
 		}
 			
