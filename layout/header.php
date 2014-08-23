@@ -10,23 +10,26 @@
 				
 					//we are not logged in so display the login fields
 			?>
-					
+					<h2>Log in</h2>
+					<span id="registerForm" title="close">&times;</span>
 					<form action="" method="post">
 						<label for="email">E-mail: </label><br>
-						<input type="email" name="email"><br>
+						<input type="email" name="email" placeholder=someone@example.com><br>
 						<label for="password">Password: </label><br>
-						<input type="password" name="password"><br>
-						<input type="submit" name="submit" value="login">
-						<a href='#register'>Register</a><br>
+						<input type="password" name="password" placeholder="********"><br>
+						<input type="submit" name="submit" value="Log in">
+						<a href='#register' id="registerForm">Register</a><br>
 						<a href='passreset'>Can't remember password?</a>	
 					</form>		
 			<?php
 				}
 				echo '</div>';
+				
 			?>
-					
+						
 					
 					<nav>
+						 
 						<a href="<?php echo $rootURL; ?>">Home</a>
 						<a href="<?php echo $rootURL; ?>about">About</a>
 						
@@ -38,7 +41,12 @@
 			?>
 						<a href="<?php echo $rootURL ?>dashboard">My Stubs</a>
 						<a href="<?php echo $rootURL ?>logout" class="logout"> | Logout</a>
-						<a href="<?php echo $rootURL ?>passreset" class="logout">Change password</a> 
+						<a href="<?php echo $rootURL ?>passreset" class="logout">Change password</a>
+			<?php
+				} else {
+				
+			?>
+						<a id="loginTrigger" class="logout">Log in</a>
 			<?php
 				}
 			?>

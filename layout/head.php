@@ -9,6 +9,7 @@
 			#wrap { display: table; height: 100% }
 		</style>
 	<![endif]-->
+	<title>Cite</title>
 </head>
 <body>
 	

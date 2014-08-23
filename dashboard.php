@@ -157,12 +157,11 @@ if($_SESSION['login']->isLoggedIn()) {
 			
 			
 			$('.control').on("click", '#saveEdit', function(event){
-				console.log("Clicked!");
 				var post = $.post('edit.php',
 					{
-						title: editedTitle, //$('#title').val(),
-						description: editedDescription, //$('#description').val(),
-						doi: editedDoi, // $('#doi').val()
+						title: editedTitle, 
+						description: editedDescription,
+						doi: editedDoi,
 						stubId: stubId
 					});		
 			});

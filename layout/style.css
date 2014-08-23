@@ -11,15 +11,21 @@ body {
 }
 
 
-/* color: #730329  */
-.getStarted h2, .welcome h1, a, nav a:hover, #getStartedButton, .faqs h2 {
-	color: #730329;
+/*
+ * potential color to use 85102d
+ *
+ */
+
+
+/* color: #730329 */
+.getStarted h2, .welcome h1, a, nav a:hover, #getStartedButton, .faqs h2, .loginForm h2, .loginForm a {
+	color: #730329 !important;
 }
 
 
 /* color: white */
 .getStarted, .getStarted a:hover, header, th, footer, header h1, input[type="submit"], button, nav a {
-	color: white;
+	color: white !important;
 }
 
 
@@ -154,8 +160,7 @@ input[type="submit"], button, .button {
 }
 
 input[type="submit"]:hover {
-	opacity: 0.8;
-	
+	opacity: 0.8;	
 }
 
 textarea {
@@ -176,12 +181,39 @@ strong {
 }
 
 .loginForm {
-	text-align:right;
-	float:right;
+	display: none;
+	color: #000;
+	position: fixed;
+	border: 8px solid #ddd;
+	background: #fff;
+	margin: 0 auto;
+	left: 40%;
+	right: 40%;
+	z-index: 1000;
+	top: 20%;
+}
+
+.loginForm h2 {
+	background: #efefef;
+	border-bottom: 1px solid #ccc;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.loginForm span {
+	cursor: pointer;
+	position: absolute;
+	top: 5px;
+	right: 8px;
 }
 
 .loginForm input {
-	padding: 1px;
+	padding: 5px !important;
+	width: 87%;
+}
+
+.loginForm input,.loginForm a, .loginForm label {
+	margin: 10px 10px;
 }
 
 .logout {
@@ -354,10 +386,6 @@ ol.circles-list > li:before {
 
 ul{list-style-type:none}
 
-.loginForm a{
-	color: white;
-}
-
 
 /*
 	End of Mustache template stub class styling
@@ -367,8 +395,46 @@ ul{list-style-type:none}
  * Responsiveness below :)
  */
 
-@media all and (max-width: 699px) and (min-width: 521px) {
-	
+@media all and (max-width: 1180px) and (min-width: 1001px) {
+	.loginForm {
+		left: 38%;
+		right: 38%;
+	}
+}
+
+@media all and (max-width: 1000px) and (min-width: 801px) {
+	.loginForm {
+		left: 34%;
+		right: 34%;
+	}
+}
+
+@media all and (max-width: 800px) and (min-width: 661px) {
+	.loginForm {
+		left: 30%;
+		right: 30%;
+	}
+}
+
+@media all and (max-width: 660px) and (min-width: 501px) {
+	.loginForm {
+		left: 26%;
+		right: 26%;
+	}
+}
+
+@media all and (max-width: 500px) {
+	.loginForm {
+		left: 0%;
+		right: 0%;
+	}
+}
+
+@media all and (max-height: 400px) {
+	.loginForm {
+		top: 0;
+		bottom: 0;
+	}	
 }
 
 @media all and (max-width: 520px) {
@@ -376,15 +442,5 @@ ul{list-style-type:none}
 	height: 100%;
 }
 header h1{float:none;padding: 5px;}
-.loginForm:before{
-content: "Login";
-font-size: 150%;
-font-weight:400;
-}
-.loginForm {
-float:none;
-	text-align:left;
-padding: 5px 5px 15px 5px;	
-}
 
 }
