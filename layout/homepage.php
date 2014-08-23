@@ -54,19 +54,43 @@
 </script>
 
 <div class="welcome">
-	<h1>Welcome to Cite</h1>
-	<h2>Never lose the opportunity to share your work</h2>
+	<h1>Never lose the opportunity to share your work</h1>
+	<h2>Welcome to Cite</h2>
 </div>
 
 <div class="bodytext">
 	<p>Want to reference a work that you haven't quite put the finishing touches on yet? Or that seminal paper you will write in five years time after years of groundbreaking research? You can do it easily using Cite.pub!</p>
+	<br><br>
+	<hr>
 	<br>
+	<h1>How does it work?</h1>
+	<!--
 	<ol class='circles-list'>
 	  	<li><a href='submit/'>Create a stub</a> on Cite.pub using your Orcid ID</li>
 		<li>Cite the unique URL in your publication</li>
 	  	<li>Publish your seminal work</li>
 	  	<li>Complete your stub with the DOI of the new paper. The original URL will forward readers straight through!</li>
 	</ol>
+	-->
+	
+	<div class="parts">
+		<div class="part">
+			<h3>Create a stub</h3>
+			<p>Just give us a title and a description of the work, if you wish. That's all you need!</p>
+		</div>
+		<div class="part">
+			<h3>Cite the unique URL</h3>
+			<p>Once you have created a stub we will give you a unique <span class="what" title="website address">URL</span> for it. You can add a citation to in any paper you write.</p>
+		</div>
+		<div class="part">
+			<h3>Publish your seminal work</h3>
+			<p>Great, it's finally ready to publish in a top quality journal. We can update other researchers when it's ready.</p>
+		</div>
+		<div class="part">
+			<h3>Complete your stub</h3>
+			<p>Tell us the <span class="what" title="Digital Object Identifier">DOI</span> and we will update the <span class="what" title="website address">URL</span> we gave you so that anyone who sees your original citation will be directed to your published work.</p>
+		</div>		
+	</div>
 	
 	<div id="register" class='getStarted'>
 	<h2>Get started now!</h2>

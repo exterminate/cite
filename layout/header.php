@@ -11,7 +11,7 @@
 					//we are not logged in so display the login fields
 			?>
 					<h2>Log in</h2>
-					<span id="registerForm" title="close">&times;</span>
+					<span id="" title="close">&times;</span>
 					<form action="" method="post">
 						<label for="email">E-mail: </label><br>
 						<input type="email" name="email" placeholder=someone@example.com><br>

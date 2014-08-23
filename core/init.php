@@ -21,7 +21,7 @@ $dbHandler = new DB($handler);
 
 // login script
 $_SESSION['login'] = new LoginHandler();
-if(Input::exists() && Input::get('submit') == 'login') {
+if(Input::exists() && Input::get('submit') == 'Log in') {
 	
 	$validate = new Validate();
 	$validate->check($_POST, array( 
