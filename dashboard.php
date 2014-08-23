@@ -106,7 +106,7 @@ if($_SESSION['login']->isLoggedIn()) {
 				console.log("Editing " + stubId);
 				
 				var editButton = stub.find('.control').find('.editButton');
-				editButton.text("Finish  editing and save");
+				editButton.text("Finish editing and save").attr('id', 'saveEdit');
 				
 				var editable = [stub.find('.title').find('span'),
 						stub.find('.doi').find('span'),
@@ -130,7 +130,6 @@ if($_SESSION['login']->isLoggedIn()) {
 		}
 		
 		function finishEditing(stub){
-			
 			var stubId = stub.find('.stubId').find('span').text();
 			
 			var editable = [stub.find('.title').find('span'),
@@ -139,7 +138,7 @@ if($_SESSION['login']->isLoggedIn()) {
 			
 			$.each(editable, function(i, element){
 					$(element)
-						.attr('contenteditable', false)						
+						.attr('contenteditable', false)	
 						.animate({backgroundColor: '#eee'}, 'slow');
 						
 				});
@@ -155,10 +154,18 @@ if($_SESSION['login']->isLoggedIn()) {
 			console.log("Edited title: " + editedTitle);
 			console.log("Edited DOI: " + editedDoi);
 			console.log("Edited description: " + editedDescription);
-			/*
-			 *	do writing to database here!
-			 */	 
-			 
+			
+			
+			$('.control').on("click", '#saveEdit', function(event){
+				console.log("Clicked!");
+				var post = $.post('edit.php',
+					{
+						title: editedTitle, //$('#title').val(),
+						description: editedDescription, //$('#description').val(),
+						doi: editedDoi, // $('#doi').val()
+						stubId: stubId
+					});		
+			});
 		}
 			
 		
