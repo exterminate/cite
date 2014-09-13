@@ -1,8 +1,8 @@
 <?php
 session_start();
-require('core/init.php');
-include ('layout/head.php');
-include('layout/header.php');
+require 'core/init.php';
+include 'layout/head.php';
+include 'layout/header.php';
 
 $user = new User(
     Input::get('firstName'),
@@ -26,3 +26,7 @@ session_destroy();
 </script>
 
 <div id='content'></div>
+
+<?php
+include 'layout/footer.php';
+?>

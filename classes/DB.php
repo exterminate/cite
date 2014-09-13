@@ -5,9 +5,11 @@ require_once('lib/php-console-master/src/PhpConsole/__autoload.php');
 class DB {
 	private $rootURL = "http://localhost/git/cite/";
 	private $handler;
+	
 	public function __construct($handler) { 
 		$this->handler = $handler;
-	}	
+	}
+	
 
 	public function put($table, $stub) { // use get_class_vars
 		
@@ -55,13 +57,13 @@ class DB {
 	* The get() method limited to just one search field at the moment. 
 	* Perhaps we will need more in the future
 	*/
-	public function getStubs($table, $field, $operator, $code){ 		
+	public function getStubs($table, $field, $operator, $code){ 
 		$query = $this->handler->query("SELECT * FROM $table WHERE $field $operator '$code'");
 		while ($r = $query->fetchAll(PDO::FETCH_ASSOC)) {
 			
 			$stubs = array();
 			foreach($r as $stub){
-				array_push($stubs, new Stub($stub));				
+				array_push($stubs, new Stub($stub));	
 			}		
 			
 			return $stubs;
@@ -199,6 +201,7 @@ class DB {
 						$_SESSION['name'] = $r->firstName." ".$r->surname;
 						$_SESSION['secretCode'] = $secretCode;
 						$_SESSION['email'] = $email;
+						$_SESSION['accessLevel'] = $r->accessLevel;
 					}
 				} else {
 					//password fail

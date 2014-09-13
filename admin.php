@@ -25,11 +25,14 @@ if(Input::exists()) {
 	
 	if($validate->passed()) {
 		$dbHandler->login(Input::get('email'), Input::get('password'));
+		if($_SESSION['accessLevel'] != "super")
+			header("Location: ./");
 	}
 } 
-PC::debug($_SESSION['name']);
+
 if(isset($_SESSION['name'])) {
-	
+	if($_SESSION['accessLevel'] != "super")
+			header("Location: ./");
 	// delete stub
 	if(Input::get('delete')) {
 		$dbHandler->deleteStub(trim(escape(Input::get('delete'))));
@@ -43,7 +46,7 @@ if(isset($_SESSION['name'])) {
 	echo "<p><a href='admin.php'>Admin</a></p>";
 	
 	// edit a stub
-	if(Input::get('edit')) {
+	if(Input::get('edit')) { // DOESN'T WORK
 		$stub = $dbHandler->getStub('stubId', trim(escape(Input::get('edit'))));
 		echo "<p>Editing stub: " . Input::get('edit') . "<br>Created: " . $stub->datesubmitted . "</p>";
 		include 'layout/edit.php';

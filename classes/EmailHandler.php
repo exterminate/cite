@@ -6,7 +6,7 @@ class EmailHandler {
 
 	public function sendEmail($to, $subject, $message) {
 		//commenting this out to prevent accidental spam during development
-		/*
+		$headers = "";
 		$headers.= "MIME-version: 1.0\n";
 		$headers.= "Content-type: text/html; charset= iso-8859-1\n";
 		$headers = "From: $this->email\r\n";
@@ -16,7 +16,7 @@ class EmailHandler {
 		if(!mail($to, $subject, $message, $headers)) {
 		    	echo "Mail fail!";
 		}
-		*/
+		
 	}
 }
 
