@@ -9,6 +9,9 @@
 		$('#loginTrigger').on('click', function(){
 			$(".loginForm").css("display","block");
 		});
+		$('#loginTurnOff').on('click', function(){
+			$(".loginForm").css("display","none");
+		});
 		$("#registerForm").on('click', function(){
 			$(".loginForm").css("display","none");
 		});

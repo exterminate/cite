@@ -11,14 +11,14 @@
 					//we are not logged in so display the login fields
 			?>
 					<h2>Log in</h2>
-					<span id="" title="close">&times;</span>
+					<span id="loginTurnOff" title="close">&times;</span>
 					<form action="" method="post">
 						<label for="email">E-mail: </label><br>
 						<input type="email" name="email" placeholder=someone@example.com><br>
 						<label for="password">Password: </label><br>
 						<input type="password" name="password" placeholder="********"><br>
 						<input type="submit" name="submit" value="Log in">
-						<a href='#register' id="registerForm">Register</a><br>
+						<a href='./#register' id="registerForm">Register</a><br>
 						<a href='passreset'>Can't remember password?</a>	
 					</form>		
 			<?php
@@ -31,7 +31,6 @@
 					<nav>
 						 
 						<a href="<?php echo $rootURL; ?>">Home</a>
-						<a href="<?php echo $rootURL; ?>about">About</a>
 						
 						<a href="<?php echo $rootURL; ?>search">Search</a>
 						<a href="<?php echo $rootURL; ?>faq">FAQ</a>
